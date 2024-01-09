@@ -15,6 +15,6 @@ public class MyApp {
         MyWindow window = new MyWindow("The Window");
         window.setVisible(true);
         System.out.println("Helloe");
-        System.out.println("Hello world!");
+        System.out.println("Hello world! Test 2");
    }  
 }
