@@ -16,5 +16,6 @@ public class MyApp {
         window.setVisible(true);
         System.out.println("Helloe");
         System.out.println("Hello world! Test 2 test");
+        System.out.println("TestTestTest 3");
    }  
 }
