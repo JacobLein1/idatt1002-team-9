@@ -15,6 +15,12 @@ public class MyApp {
         MyWindow window = new MyWindow("The Window");
         window.setVisible(true);
         System.out.println("Helloe");
+<<<<<<< HEAD
         System.out.println("Hello world! Testing");
+=======
+        System.out.println("Hello world! Test 2 test");
+        System.out.println("TestTestTest 3");
+        System.out.println("PUsh Test");
+>>>>>>> origin/main
    }  
 }
