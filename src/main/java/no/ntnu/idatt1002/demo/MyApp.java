@@ -14,6 +14,6 @@ public class MyApp {
     public static void main(String[] args) throws Exception {
         MyWindow window = new MyWindow("The Window");
         window.setVisible(true);
-        System.out.println("FINALTEST1111");
+        System.out.println("FINALTEST2");
    }  
 }
