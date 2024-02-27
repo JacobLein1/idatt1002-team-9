@@ -1,16 +1,17 @@
 package no.ntnu.idatt1005.Grocery;
 
 import no.ntnu.idatt1005.Unit.Unit;
+import no.ntnu.idatt1005.Unit.UnitsE;
 
 public class Grocery {
     private String name;
     private String image;
     private float amount;
     private final String id;
-    private Unit unit;
+    private UnitsE unit;
 
 
-    Grocery(String name, String image, float amount, String id, Unit unit) {
+    Grocery(String name, String image, float amount, String id, UnitsE unit) {
         this.name = name;
         this.image = image;
         this.amount = amount;
@@ -33,7 +34,7 @@ public class Grocery {
         return id;
     }
 
-    public Unit getUnit() {
+    public UnitsE getUnit() {
         return unit;
     }
 
