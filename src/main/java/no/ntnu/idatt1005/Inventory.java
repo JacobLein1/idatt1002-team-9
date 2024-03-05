@@ -29,4 +29,8 @@ public class Inventory extends Grocery {
             grocery.setAmount(amount);
         }
     }
+
+    public HashMap<String, Grocery> getInventory() {
+        return inventory;
+    }
 }
