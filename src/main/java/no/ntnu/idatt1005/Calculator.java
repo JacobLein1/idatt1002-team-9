@@ -53,7 +53,7 @@ public class Calculator {
 
 
     public HashMap<String, Grocery> getInventory(){
-        return inventory;
+        return inventory.getInventory();
     }
 
     
