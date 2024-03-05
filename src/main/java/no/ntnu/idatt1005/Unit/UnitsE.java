@@ -6,7 +6,7 @@ public enum UnitsE {
     WEIGHT("g"),
     VOLUME("ml");
 
-    private String unit;
+    private final String unit;
 
     UnitsE(String unit) {
         this.unit = unit;

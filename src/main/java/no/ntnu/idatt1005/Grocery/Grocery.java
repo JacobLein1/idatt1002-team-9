@@ -38,6 +38,10 @@ public class Grocery {
         return unit;
     }
 
+    public void setUnit(String unit) {
+        this.unit = UnitsE.valueOf(unit);
+    }
+
     public double setAmount(double input) {
         return amount;
     }
