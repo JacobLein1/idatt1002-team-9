@@ -42,8 +42,8 @@ public class Grocery {
         this.unit = UnitsE.valueOf(unit);
     }
 
-    public double setAmount(double input) {
-        return amount;
+    public void setAmount(double input) {
+        this.amount = input;
     }
 
 }
