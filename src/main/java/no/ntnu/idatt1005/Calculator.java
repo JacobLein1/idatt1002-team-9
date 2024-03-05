@@ -5,16 +5,26 @@ import java.util.Map;
 
 public class Calculator {
 
-    private Basket basket;
-    private Inventory inventory;
+    public static HashMap<String, Double> neededGroceries(Recipe recipe, Inventory inventory) {
+        HashMap<String, Double> missingIngredients = new HashMap<>();
 
-    public Calculator(Basket basket, Inventory inventory) {
-        this.basket = basket;
-        this.inventory = inventory;
+        HashMap<String, Grocery> inventoryMap = inventory.getInventory();
+        Map<String, Integer> recipeIngredients = recipe.getIngredients();
+
+        for (Map.Entry<String, Integer> recipeEntry : recipeIngredients.entrySet()) {
+            String grocery = recipeEntry.getKey();
+            double requiredAmount = recipeEntry.getValue();
+
+            if (inventoryMap.containsKey(grocery)) {
+                float inventoryAmount = inventoryMap.get(grocery).getAmount();
+
+                if (inventoryAmount < requiredAmount) {
+                    missingIngredients.put(grocery, requiredAmount - (double) inventoryAmount);
+                }
+            } else {
+                missingIngredients.put(grocery, requiredAmount);
+            }
+        }
+        return missingIngredients;
     }
-
-    public HashMap<String, Double> neededGroceries(Recipe recipe, Inventory inventory) {
-        for (Map.Entry)
-    }
-
 }
