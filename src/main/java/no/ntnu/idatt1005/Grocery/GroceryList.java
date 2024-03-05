@@ -6,7 +6,7 @@ public class GroceryList {
 
     private HashMap<String, Grocery> groceryList;
 
-    GroceryList() {
+    public GroceryList() {
         this.groceryList = new HashMap<>();
     }
 
