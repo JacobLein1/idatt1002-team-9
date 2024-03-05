@@ -11,7 +11,7 @@ public class Grocery {
     private UnitsE unit;
 
 
-    Grocery(String name, String image, double amount, String id, UnitsE unit) {
+    public Grocery(String name, String image, double amount, String id, UnitsE unit) {
         this.name = name;
         this.image = image;
         this.amount = amount;
