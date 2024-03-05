@@ -13,6 +13,9 @@ public class Grocery {
         this.amount = amount;
     }
 
+    public Grocery(String name, int amount) {
+    }
+
     public String getName() {
         return name;
     }
