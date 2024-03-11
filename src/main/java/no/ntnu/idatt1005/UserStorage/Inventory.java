@@ -1,7 +1,5 @@
 package no.ntnu.idatt1005.UserStorage;
 
-import no.ntnu.idatt1005.Grocery.Grocery;
-
 import java.util.HashMap;
 
 public class Inventory {
