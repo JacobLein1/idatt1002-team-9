@@ -1,6 +1,8 @@
 package no.ntnu.idatt1005.Util;
 
+import no.ntnu.idatt1005.Grocery.Grocery;
 import no.ntnu.idatt1005.Recipe.Recipe;
+import no.ntnu.idatt1005.UserStorage.Inventory;
 
 import java.util.HashMap;
 import java.util.Map;
