@@ -9,7 +9,7 @@ import java.util.Map;
 
 public class Calculator {
 
-    public static HashMap<String, Double> neededGroceries(Recipe recipe, Inventory inventory) {
+    /** public HashMap<String, Double> neededGroceries(Recipe recipe, Inventory inventory) {
         HashMap<String, Double> missingIngredients = new HashMap<>();
 
         HashMap<String, Grocery> inventoryMap = inventory.getInventory();
@@ -30,5 +30,5 @@ public class Calculator {
             }
         }
         return missingIngredients;
-    }
+    } **/
 }
