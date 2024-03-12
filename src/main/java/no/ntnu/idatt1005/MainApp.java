@@ -15,6 +15,7 @@ import javafx.stage.Stage;
 
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.io.InputStream;
 
 public class MainApp extends Application {
 
@@ -32,6 +33,26 @@ public class MainApp extends Application {
             Tab tabShoppingCart = new Tab("Shopping cart");
             Tab tabFridge = new Tab("Fridge");
 
+            String logoPath = "/Users/jacoblein/Desktop/Systemutvikling/cookbookLogo.jpeg";
+            //Initialise logo as image, with a format
+
+            //Creating imageObject
+            InputStream stream = new FileInputStream(logoPath);
+            Image logo = new Image(stream);
+
+            //Creating image view
+            ImageView logoView = new ImageView(logo);
+            logoView.setImage(logo);
+
+            //Setting the position of the image, as well as size
+            logoView.setX(50);
+            logoView.setY(50);
+            logoView.setFitWidth(200);
+            logoView.setFitHeight(200);
+            logoView.setPreserveRatio(true);
+
+            HBox logoBox = new HBox(logoView);
+
             // Prevent tabs from closing
             tabRecipe.setClosable(false);
             tabShoppingCart.setClosable(false);
@@ -42,6 +63,7 @@ public class MainApp extends Application {
 
             // Set content for Recipe tab (Placeholder for actual content)
             VBox recipeContent = new VBox(new Label("Recipes Content"));
+            recipeContent.getChildren().add(logoBox);
             tabRecipe.setContent(recipeContent);
 
             // Set content for Shopping Cart tab (Placeholder for actual content)
@@ -60,8 +82,10 @@ public class MainApp extends Application {
             HBox topBar = new HBox(searchField);
             topBar.setStyle("-fx-background-color: #CACACA;"); // Example styling
 
+
+
             // Main layout
-            VBox mainLayout = new VBox(topBar, tabPane);
+            VBox mainLayout = new VBox(topBar, logoBox ,tabPane);
 
             // Create scene with the main layout
             Scene scene = new Scene(mainLayout, 800, 600);
