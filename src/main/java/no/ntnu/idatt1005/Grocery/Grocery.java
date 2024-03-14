@@ -4,17 +4,15 @@ import no.ntnu.idatt1005.Unit.Unit;
 import no.ntnu.idatt1005.Unit.UnitsE;
 
 public class Grocery {
-    private String name;
-    private String image;
-    private double amount;
+    private final String name;
+    private final String image;
     private final String id;
-    private UnitsE unit;
+    private final UnitsE unit;
 
 
-    public Grocery(String name, String image, double amount, String id, UnitsE unit) {
+    public Grocery(String name, String image, String id, UnitsE unit) {
         this.name = name;
         this.image = image;
-        this.amount = amount;
         this.id = id;
         this.unit = unit;
     }
@@ -26,10 +24,6 @@ public class Grocery {
         return image;
     }
 
-    public double getAmount() {
-        return amount;
-    }
-
     public String getId() {
         return id;
     }
@@ -38,12 +32,5 @@ public class Grocery {
         return unit;
     }
 
-    public void setUnit(String unit) {
-        this.unit = UnitsE.valueOf(unit);
-    }
-
-    public void setAmount(double input) {
-        this.amount = input;
-    }
 
 }
