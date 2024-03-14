@@ -17,10 +17,11 @@ public class DBConnectionProvider {
     String filePath = "src/main/resources/applicationDB.db";
     Path path = Paths.get(filePath);
 
-    if (!Files.exists(path)) {
-      //createDatabase();
-    }
     this.url = "jdbc:sqlite:" + filePath;
+
+    if (!Files.exists(path) || path.toFile().length() == 0) {
+      createDatabase();
+    }
   }
 
   public Connection getConnection() throws RuntimeException{
@@ -70,6 +71,32 @@ public class DBConnectionProvider {
   }
 
   private void createDatabase() {
+    //created with help from AI
+
+    String sqlFilePath = "sql/application.sql";
+    StringBuilder sqlScript = new StringBuilder();
+
+    try (BufferedReader reader = new BufferedReader(new FileReader(sqlFilePath))) {
+        String line;
+        while ((line = reader.readLine()) != null) {
+            sqlScript.append(line);
+        }
+    } catch (IOException e) {
+        e.printStackTrace();
+    }
+
+    String[] sqlStatements = sqlScript.toString().split(";");
+
+    try (Connection connection = DriverManager.getConnection(url);
+         Statement statement = connection.createStatement()) {
+        for (String sql : sqlStatements) {
+            if (!sql.trim().isEmpty()) {
+                statement.execute(sql);
+            }
+        }
+    } catch (SQLException e) {
+        e.printStackTrace();
+    }
   }
 }
 
