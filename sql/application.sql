@@ -1,7 +1,29 @@
-CREATE TABLE "GroceryRegister" (groceryId INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,name VARCHAR(64) NOT NULL,image VARCHAR(64) NOT NULL,unit INTEGER NOT NULL);
-CREATE TABLE "Inventory" (groceryId INTEGER NOT NULL,groceryAmount INTEGER NOT NULL,FOREIGN KEY (groceryId) REFERENCES "GroceryRegister"(groceryId));
-CREATE TABLE "RecipeList" (recipeId INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,instructions VARCHAR(128) NOT NULL,numberOfPeople INTEGER NOT NULL);
-CREATE TABLE "RecipeGrocery" (recipeId INTEGER NOT NULL,groceryId INTEGER NOT NULL,amount DOUBLE NOT NULL,FOREIGN KEY (recipeId) REFERENCES "RecipeList"(recipeId),FOREIGN KEY (groceryId) REFERENCES "GroceryRegister"(groceryId));
+CREATE TABLE "GroceryRegister" (
+    groceryId INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
+    name VARCHAR(64) NOT NULL,
+    image VARCHAR(64) NOT NULL,
+    unit INTEGER NOT NULL
+);
+
+CREATE TABLE "Inventory" (
+    groceryId INTEGER NOT NULL,
+    groceryAmount INTEGER NOT NULL,
+    FOREIGN KEY (groceryId) REFERENCES "GroceryRegister"(groceryId)
+);
+
+CREATE TABLE "RecipeList" (
+    recipeId INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
+    instructions VARCHAR(128) NOT NULL,
+    numberOfPeople INTEGER NOT NULL
+);
+
+CREATE TABLE "RecipeGrocery" (
+    recipeId INTEGER NOT NULL,
+    groceryId INTEGER NOT NULL,
+    amount DOUBLE NOT NULL,
+    FOREIGN KEY (recipeId) REFERENCES "RecipeList"(recipeId),
+    FOREIGN KEY (groceryId) REFERENCES "GroceryRegister"(groceryId)
+);
 
 INSERT INTO "GroceryRegister" (name, image, unit) VALUES ('Milk', 'milk.jpg', 1);
 INSERT INTO "GroceryRegister" (name, image, unit) VALUES ('Egg', 'egg.jpg', 12);
