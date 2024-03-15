@@ -2,17 +2,18 @@ CREATE TABLE "GroceryRegister" (
     groceryId INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
     name VARCHAR(64) NOT NULL,
     image VARCHAR(64) NOT NULL,
-    unit INTEGER NOT NULL
+    unit VARCHAR(3) NOT NULL
 );
 
 CREATE TABLE "Inventory" (
     groceryId INTEGER NOT NULL,
-    groceryAmount INTEGER NOT NULL,
+    groceryAmount DOUBLE NOT NULL,
     FOREIGN KEY (groceryId) REFERENCES "GroceryRegister"(groceryId)
 );
 
 CREATE TABLE "RecipeList" (
     recipeId INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
+    recipeName VARCHAR(64) NOT NULL,
     instructions VARCHAR(128) NOT NULL,
     numberOfPeople INTEGER NOT NULL
 );
