@@ -42,11 +42,7 @@ public class InventoryDAO {
         return inventory;
     }
 
-    public void addGrocery(String groceryID, double groceryAmount) throws IllegalArgumentException {
-
-        if (groceryID == null) {
-            throw new IllegalArgumentException("GroceryID cannot be null");
-        }
+    public void addGrocery(int groceryID, double groceryAmount) throws IllegalArgumentException {
 
         Connection connection = null;
         PreparedStatement preparedStatement = null;
@@ -55,7 +51,7 @@ public class InventoryDAO {
         try {
             connection = connectionProvider.getConnection();
             preparedStatement = connection.prepareStatement("INSERT INTO Inventory (groceryId, groceryAmount) VALUES (?, ?)");
-            preparedStatement.setString(1, groceryID);
+            preparedStatement.setInt(1, groceryID);
             preparedStatement.setDouble(2, groceryAmount);
             preparedStatement.executeUpdate();
         } catch (SQLException e) {
@@ -65,11 +61,7 @@ public class InventoryDAO {
         }
     }
 
-    public void updateGrocery(String groceryID, double groceryAmount) throws IllegalArgumentException {
-
-        if (groceryID == null) {
-            throw new IllegalArgumentException("GroceryID cannot be null");
-        }
+    public void updateGrocery(int groceryID, double groceryAmount) throws IllegalArgumentException {
 
         Connection connection = null;
         PreparedStatement preparedStatement = null;
@@ -79,7 +71,7 @@ public class InventoryDAO {
             connection = connectionProvider.getConnection();
             preparedStatement = connection.prepareStatement("UPDATE Inventory SET groceryAmount = ? WHERE groceryId = ?");
             preparedStatement.setDouble(1, groceryAmount);
-            preparedStatement.setString(2, groceryID);
+            preparedStatement.setInt(2, groceryID);
             preparedStatement.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
@@ -88,11 +80,8 @@ public class InventoryDAO {
         }
     }
 
-    public void removeGrocery(String groceryID) throws IllegalArgumentException {
+    public void removeGrocery(int groceryID) throws IllegalArgumentException {
 
-        if (groceryID == null) {
-            throw new IllegalArgumentException("GroceryID cannot be null");
-        }
 
         Connection connection = null;
         PreparedStatement preparedStatement = null;
@@ -101,10 +90,30 @@ public class InventoryDAO {
         try {
             connection = connectionProvider.getConnection();
             preparedStatement = connection.prepareStatement("DELETE FROM Inventory WHERE groceryId = ?");
-            preparedStatement.setString(1, groceryID);
+            preparedStatement.setInt(1, groceryID);
             preparedStatement.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
+        } finally {
+            close(connection, preparedStatement, resultSet);
+        }
+    }
+
+    public double getGroceryAmount(int groceryID) throws IllegalArgumentException {
+        Connection connection = null;
+        PreparedStatement preparedStatement = null;
+        ResultSet resultSet = null;
+
+        try {
+            connection = connectionProvider.getConnection();
+            preparedStatement = connection.prepareStatement("SELECT FROM Inventory WHERE groceryId = ?");
+            preparedStatement.setInt(1, groceryID);
+            resultSet = preparedStatement.executeQuery();
+
+            return resultSet.getDouble("groceryAmount");
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return -1;
         } finally {
             close(connection, preparedStatement, resultSet);
         }
