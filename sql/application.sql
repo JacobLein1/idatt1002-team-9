@@ -45,8 +45,8 @@ INSERT INTO "Inventory" (groceryId, groceryAmount) VALUES (5, 1);
 INSERT INTO "Inventory" (groceryId, groceryAmount) VALUES (6, 1);
 INSERT INTO "Inventory" (groceryId, groceryAmount) VALUES (7, 1);
 
-INSERT INTO "RecipeList" (instructions, numberOfPeople) VALUES ('Just do it', 4);
-INSERT INTO "RecipeList" (instructions, numberOfPeople) VALUES ('Add a thing to the other thing', 2);
+INSERT INTO "RecipeList" (instructions, recipeName, numberOfPeople) VALUES ('Just do it', 'French toast', 4);
+INSERT INTO "RecipeList" (instructions, recipeName, numberOfPeople) VALUES ('Add a thing to the other thing', 'Yoghurt with fruits', 2);
 
 INSERT INTO "RecipeGrocery" (recipeId, groceryId, amount) VALUES (1, 2, 3);
 INSERT INTO "RecipeGrocery" (recipeId, groceryId, amount) VALUES (1, 3, 6);
