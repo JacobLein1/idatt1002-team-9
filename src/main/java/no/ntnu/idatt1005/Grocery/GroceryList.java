@@ -26,8 +26,4 @@ public class GroceryList {
         return this.groceryList.get(id);
     }
 
-    public void setGroceryUnit(String id, String unit) {
-        this.groceryList.get(id).setUnit(unit);
-    }
-
 }
