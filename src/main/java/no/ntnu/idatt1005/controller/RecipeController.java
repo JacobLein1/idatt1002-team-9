@@ -16,4 +16,8 @@ public class RecipeController {
   public List<Recipe> getAllRecipes() {
     return recipeDAO.getRecipes();
   }
+
+  public int getAmountOfRecipes() {
+    return getAllRecipes().size();
+  }
 }
