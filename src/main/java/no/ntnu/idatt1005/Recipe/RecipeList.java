@@ -20,8 +20,8 @@ public class RecipeList {
     if (recipeList.containsKey(id)) {
       throw new IllegalArgumentException("There already exists a recipe with the requested id");
     }
-    Recipe recipe = new Recipe(ingredients, instructions, numberOfPeople);
-    recipeList.put(id, recipe);
+    //Recipe recipe = new Recipe(ingredients, instructions, numberOfPeople);
+    //recipeList.put(id, recipe);
   }
 
   public void removeRecipe(String id) {
