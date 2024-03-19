@@ -28,6 +28,9 @@ public class MainApp extends Application {
             // TabPane for Recipe, Shopping cart, and Fridge tabs
             TabPane tabPane = new TabPane();
 
+            Font titleFont = Font.font("Arial", FontWeight.BOLD, 20);
+            Font underTitleFont = Font.font("Arial", FontWeight.BOLD, 15);
+
             // Create Tabs
             Tab tabRecipe = new Tab("Recipe");
             Tab tabShoppingCart = new Tab("Shopping cart");
@@ -63,6 +66,14 @@ public class MainApp extends Application {
 
             // Set content for Recipe tab (Placeholder for actual content)
             VBox recipeContent = new VBox(new Label("Recipes Content"));
+            Text recipeText = new Text("Recipes");
+            recipeText.setFont(titleFont);
+            Text yourRecipes = new Text("Your Recipes");
+            yourRecipes.setFont(underTitleFont);
+
+            recipeContent.getChildren().addAll(recipeText, yourRecipes);
+
+
             recipeContent.getChildren().add(logoBox);
             tabRecipe.setContent(recipeContent);
 
