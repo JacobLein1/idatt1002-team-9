@@ -1,6 +1,8 @@
 package no.ntnu.idatt1005;
 
 import javafx.application.Application;
+import javafx.beans.property.IntegerProperty;
+import javafx.beans.property.SimpleIntegerProperty;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.Scene;
@@ -30,6 +32,7 @@ public class MainApp extends Application {
 
             Font titleFont = Font.font("Arial", FontWeight.BOLD, 20);
             Font underTitleFont = Font.font("Arial", FontWeight.BOLD, 15);
+            Font descriptionFont = Font.font("Arial", FontWeight.NORMAL, 12);
 
             // Create Tabs
             Tab tabRecipe = new Tab("Recipe");
@@ -80,8 +83,39 @@ public class MainApp extends Application {
             // Set content for Shopping Cart tab (Placeholder for actual content)
             VBox shoppingCartContent = new VBox(new Label("Shopping Cart Content"));
             tabShoppingCart.setContent(shoppingCartContent);
+            Text shoppingCartText = new Text("Shopping Cart");
+            shoppingCartText.setFont(titleFont);
+            Text shoppingCartDescription = new Text("Please click on the desired recipes to add it to your shopping cart. The required goods to buy will be calculated later.");
+            shoppingCartDescription.setFont(descriptionFont);
+            shoppingCartContent.getChildren().addAll(shoppingCartText, shoppingCartDescription);
 
-            // Set content for Fridge tab (Placeholder for actual content)
+
+            VBox yoghurtBox = new VBox();
+            Text yoghurtWFruits = new Text("Yoghurt with fruits");
+
+            IntegerProperty yoghurtAmount = new SimpleIntegerProperty(0);
+            Text counterText = new Text();
+            counterText.textProperty().bind(yoghurtAmount.asString());
+
+            Button increaseYogButton = new Button("+");
+
+            increaseYogButton.setOnAction(e -> yoghurtAmount.set(yoghurtAmount.get() + 1));
+
+            Button decreaseYogButton = new Button("-");
+
+            decreaseYogButton.setOnAction( e -> {
+                if (yoghurtAmount.get() > 0) {
+                    yoghurtAmount.set(yoghurtAmount.get() - 1);
+                }
+            });
+
+            yoghurtBox.getChildren().addAll(yoghurtWFruits, increaseYogButton, counterText, decreaseYogButton);
+
+
+
+
+
+        // Set content for Fridge tab (Placeholder for actual content)
             VBox fridgeContent = new VBox(new Label("Fridge Content"));
             tabFridge.setContent(fridgeContent);
 
