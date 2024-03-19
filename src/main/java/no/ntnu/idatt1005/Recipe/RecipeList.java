@@ -15,12 +15,12 @@ public class RecipeList {
     return recipeList;
   }
 
-  public void addRecipe(String id, Map<String, Double> ingredients, String instructions,
+  public void addRecipe(String id, String recipeName, Map<String, Double> ingredients, String instructions,
                         int numberOfPeople) throws IllegalArgumentException {
     if (recipeList.containsKey(id)) {
       throw new IllegalArgumentException("There already exists a recipe with the requested id");
     }
-    Recipe recipe = new Recipe(ingredients, instructions, numberOfPeople);
+    Recipe recipe = new Recipe(id, recipeName, instructions, numberOfPeople, ingredients);
     recipeList.put(id, recipe);
   }
 
