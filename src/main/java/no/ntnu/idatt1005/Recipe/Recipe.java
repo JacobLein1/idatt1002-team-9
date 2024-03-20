@@ -19,6 +19,9 @@ public class Recipe {
     this.recipeName = recipeName;
   }
 
+  public String getRecipeID() {
+    return recipeID;
+  }
   public Map<String, Double> getIngredients() {
     return ingredients;
   }

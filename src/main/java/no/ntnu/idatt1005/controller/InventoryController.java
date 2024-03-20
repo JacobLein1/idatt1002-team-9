@@ -74,6 +74,17 @@ public class InventoryController {
       // them know something/what went wrong
       System.out.println("Something went wrong");
     }
+  }
 
+  public double getItemAmountById(String id) {
+    try {
+      int parsedId = Integer.parseInt(id);
+      return inventoryDAO.getGroceryAmount(parsedId);
+    } catch (Exception e) {
+      // Instead of using system.out.println, an error message may be sent to the user, letting
+      // them know something/what went wrong
+      System.out.println("Something went wrong");
+      return 0;
+    }
   }
 }
