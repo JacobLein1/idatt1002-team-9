@@ -48,25 +48,25 @@ public class MainApp extends Application {
 
             FridgeTab tabFridge = new FridgeTab();
 
-            String logoPath = "/Users/jacoblein/Desktop/Systemutvikling/cookbookLogo.jpeg";
+            //String logoPath = "/Users/jacoblein/Desktop/Systemutvikling/idatt1002-team-9/src/main/resources";
             //Initialise logo as image, with a format
 
             //Creating imageObject
-            InputStream stream = new FileInputStream(logoPath);
-            Image logo = new Image(stream);
+            //InputStream stream = new FileInputStream(logoPath);
+            //Image logo = new Image(stream);
 
             //Creating image view
-            ImageView logoView = new ImageView(logo);
-            logoView.setImage(logo);
+            //ImageView logoView = new ImageView(logo);
+            //logoView.setImage(logo);
 
             //Setting the position of the image, as well as size
-            logoView.setX(50);
-            logoView.setY(50);
-            logoView.setFitWidth(200);
-            logoView.setFitHeight(200);
-            logoView.setPreserveRatio(true);
+            //logoView.setX(50);
+            //logoView.setY(50);
+            //logoView.setFitWidth(200);
+            //logoView.setFitHeight(200);
+            //logoView.setPreserveRatio(true);
 
-            HBox logoBox = new HBox(logoView);
+            //HBox logoBox = new HBox(logoView);
 
             // Prevent tabs from closing
             tabRecipe.setClosable(false);
@@ -82,14 +82,18 @@ public class MainApp extends Application {
             recipeText.setFont(titleFont);
             Text yourRecipes = new Text("Your Recipes");
             yourRecipes.setFont(underTitleFont);
-
             recipeContent.getChildren().addAll(recipeText, yourRecipes);
 
 
-            recipeContent.getChildren().add(logoBox);
+            //,tabShoppingCart.defaultTabCreation(),tabShoppingCart.allRecipes()
+            //recipeContent.getChildren().addAll(logoBox);
             tabRecipe.setContent(recipeContent);
 
-           tabShoppingCart.defaultTabCreation();
+            HBox tabShoppingCartContent = new HBox();
+            tabShoppingCartContent.getChildren().addAll(tabShoppingCart.defaultTabCreation(),tabShoppingCart.allRecipes());
+            tabShoppingCart.setContent(tabShoppingCartContent);
+
+
 
 
 
@@ -108,7 +112,7 @@ public class MainApp extends Application {
 
 
             // Main layout
-            VBox mainLayout = new VBox(topBar, logoBox ,tabPane);
+            VBox mainLayout = new VBox(topBar,tabPane);
 
             // Create scene with the main layout
             Scene scene = new Scene(mainLayout, 800, 600);
