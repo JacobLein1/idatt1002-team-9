@@ -22,6 +22,9 @@ public class Recipe {
   public String getRecipeID() {
     return recipeID;
   }
+  public String getRecipeName() {
+    return recipeName;
+  }
   public Map<String, Double> getIngredients() {
     return ingredients;
   }
