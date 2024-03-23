@@ -26,7 +26,7 @@ public class RecipeDAO {
         List<Recipe> recipes = new ArrayList<>();
         try {
             connection = connectionProvider.getConnection();
-            preparedStatement = connection.prepareStatement("SELECT * FROM Recipe join RecipeGrocery on Recipe.recipeId = RecipeGrocery.recipeId");
+            preparedStatement = connection.prepareStatement("SELECT * FROM RecipeList join RecipeGrocery on RecipeList.recipeId = RecipeGrocery.recipeId");
             resultSet = preparedStatement.executeQuery();
             while (resultSet.next()) {
                 String recipeID = String.valueOf(resultSet.getInt("recipeId"));
