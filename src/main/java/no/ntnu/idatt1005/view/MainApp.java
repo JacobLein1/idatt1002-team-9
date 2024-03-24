@@ -48,26 +48,6 @@ public class MainApp extends Application {
 
             FridgeTab tabFridge = new FridgeTab();
 
-            String logoPath = "/Users/jacoblein/Desktop/Systemutvikling/cookbookLogo.jpeg";
-            //Initialise logo as image, with a format
-
-            //Creating imageObject
-            InputStream stream = new FileInputStream(logoPath);
-            Image logo = new Image(stream);
-
-            //Creating image view
-            ImageView logoView = new ImageView(logo);
-            logoView.setImage(logo);
-
-            //Setting the position of the image, as well as size
-            logoView.setX(50);
-            logoView.setY(50);
-            logoView.setFitWidth(200);
-            logoView.setFitHeight(200);
-            logoView.setPreserveRatio(true);
-
-            HBox logoBox = new HBox(logoView);
-
             // Prevent tabs from closing
             tabRecipe.setClosable(false);
             tabShoppingCart.setClosable(false);
@@ -85,17 +65,11 @@ public class MainApp extends Application {
 
             recipeContent.getChildren().addAll(recipeText, yourRecipes);
 
-
-            recipeContent.getChildren().add(logoBox);
             tabRecipe.setContent(recipeContent);
 
            tabShoppingCart.defaultTabCreation();
 
 
-
-        // Set content for Fridge tab (Placeholder for actual content)
-            VBox fridgeContent = new VBox(new Label("Fridge Content"));
-            tabFridge.setContent(fridgeContent);
 
             // Search field at the top
             TextField searchField = new TextField();
@@ -108,7 +82,7 @@ public class MainApp extends Application {
 
 
             // Main layout
-            VBox mainLayout = new VBox(topBar, logoBox ,tabPane);
+            VBox mainLayout = new VBox(topBar, tabPane);
 
             // Create scene with the main layout
             Scene scene = new Scene(mainLayout, 800, 600);
