@@ -77,7 +77,7 @@ public class FridgeTab extends SuperTab {
     
 
     private Label createGroceryItem(Grocery grocery) {
-        Label nameLabel = new Label(grocery.getName() + "  " + grocery.getUnit().getUnit() + "  " + grocery.getId());
+        Label nameLabel = new Label(grocery.getName() + "  " + grocery.getUnit().getUnit() + " -  id: " + grocery.getId());
         nameLabel.setFont(Font.font("Arial", FontWeight.BOLD, 18));
         return nameLabel;
     }
