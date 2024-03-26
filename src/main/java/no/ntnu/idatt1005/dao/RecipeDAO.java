@@ -49,4 +49,30 @@ public class RecipeDAO {
         return recipes;
     }
 
+    public List<Recipe> getAllRecipes() {
+        Connection connection = null;
+        PreparedStatement preparedStatement = null;
+        ResultSet resultSet = null;
+        List<Recipe> recipes = new ArrayList<>();
+        try {
+            connection = connectionProvider.getConnection();
+            preparedStatement = connection.prepareStatement("SELECT * FROM RecipeList");
+            resultSet = preparedStatement.executeQuery();
+            while (resultSet.next()) {
+                String recipeID = String.valueOf(resultSet.getInt("recipeId"));
+                String recipeName = resultSet.getString("recipeName");
+                String instructions = resultSet.getString("instructions");
+                int numberOfPeople = resultSet.getInt("numberOfPeople");
+                Map<String, Double> ingredients = new HashMap<>();
+                Recipe recipe = new Recipe(recipeID, recipeName, instructions, numberOfPeople, ingredients);
+                recipes.add(recipe);
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            close(connection, preparedStatement, resultSet);
+        }
+        return recipes;
+    }
 }
