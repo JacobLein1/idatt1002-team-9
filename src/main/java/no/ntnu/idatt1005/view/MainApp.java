@@ -37,36 +37,19 @@ public class MainApp extends Application {
             // TabPane for Recipe, Shopping cart, and Fridge tabs
             TabPane tabPane = new TabPane();
 
-            Font titleFont = Font.font("Arial", FontWeight.BOLD, 20);
-            Font underTitleFont = Font.font("Arial", FontWeight.BOLD, 15);
-            Font descriptionFont = Font.font("Arial", FontWeight.NORMAL, 12);
 
             // Create Tabs
             RecipeTab tabRecipe = new RecipeTab();
-
             ShoppingCartTab tabShoppingCart = new ShoppingCartTab();
-
             FridgeTab tabFridge = new FridgeTab();
 
-            //String logoPath = "/Users/jacoblein/Desktop/Systemutvikling/idatt1002-team-9/src/main/resources";
-            //Initialise logo as image, with a format
+            // Search field at the top
+            TextField searchField = new TextField();
+            searchField.setPromptText("Search");
+            // Layout for the top bar (search field)
+            HBox topBar = new HBox(searchField);
+            topBar.setStyle("-fx-background-color: #CACACA;"); // Example styling
 
-            //Creating imageObject
-            //InputStream stream = new FileInputStream(logoPath);
-            //Image logo = new Image(stream);
-
-            //Creating image view
-            //ImageView logoView = new ImageView(logo);
-            //logoView.setImage(logo);
-
-            //Setting the position of the image, as well as size
-            //logoView.setX(50);
-            //logoView.setY(50);
-            //logoView.setFitWidth(200);
-            //logoView.setFitHeight(200);
-            //logoView.setPreserveRatio(true);
-
-            //HBox logoBox = new HBox(logoView);
 
             // Prevent tabs from closing
             tabRecipe.setClosable(false);
@@ -79,36 +62,26 @@ public class MainApp extends Application {
             // Set content for Recipe tab (Placeholder for actual content)
             VBox recipeContent = new VBox(new Label("Recipes Content"));
             Text recipeText = new Text("Recipes");
-            recipeText.setFont(titleFont);
+            recipeText.setFont(tabRecipe.getTitleFont());
             Text yourRecipes = new Text("Your Recipes");
-            yourRecipes.setFont(underTitleFont);
+            yourRecipes.setFont(tabRecipe.getUnderTitleFont());
             recipeContent.getChildren().addAll(recipeText, yourRecipes);
 
-
-            //,tabShoppingCart.defaultTabCreation(),tabShoppingCart.allRecipes()
-            //recipeContent.getChildren().addAll(logoBox);
-            tabRecipe.setContent(recipeContent);
-
-            HBox tabShoppingCartContent = new HBox();
-            tabShoppingCartContent.getChildren().addAll(tabShoppingCart.defaultTabCreation(),tabShoppingCart.allRecipes());
-            tabShoppingCart.setContent(tabShoppingCartContent);
-
-
-
-
-
-        // Set content for Fridge tab (Placeholder for actual content)
+            // Set content for Fridge tab (Placeholder for actual content)
             VBox fridgeContent = new VBox(new Label("Fridge Content"));
             tabFridge.setContent(fridgeContent);
 
-            // Search field at the top
-            TextField searchField = new TextField();
-            searchField.setPromptText("Search");
 
-            // Layout for the top bar (search field)
-            HBox topBar = new HBox(searchField);
-            topBar.setStyle("-fx-background-color: #CACACA;"); // Example styling
+            tabRecipe.setContent(recipeContent);
 
+
+            VBox tabShoppingCartContent = new VBox();
+            Button finishSHoppingButton = tabShoppingCart.createFinishShoppingButton();
+
+            tabShoppingCartContent.getChildren().addAll(tabShoppingCart.defaultTabCreation(),tabShoppingCart.allRecipes(),finishSHoppingButton);
+
+
+            tabShoppingCart.setContent(tabShoppingCartContent);
 
 
             // Main layout
