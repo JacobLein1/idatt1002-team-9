@@ -23,8 +23,11 @@ public class ShoppingCartTab extends SuperTab {
     private final HBox recipeBox = allRecipes();
     private Map<String,Integer> recipeAmountMap;
 
+
     public ShoppingCartTab() {
+
         super("Shopping Cart");
+        this.recipeAmountMap = new HashMap<>();
     }
     public VBox defaultTabCreation() {
 
@@ -67,16 +70,21 @@ public class ShoppingCartTab extends SuperTab {
             Button increaseButton = new Button("+");
 
             //Add responses to the buttons
+            increaseButton.setOnAction(e -> {
+                int currentAmount = Integer.parseInt(counterText.getText()) + 1;
+                counterText.setText(Integer.toString(currentAmount));
+                recipeAmountMap.put(recipe.getRecipeName(), currentAmount);
+                System.out.println(recipeAmountMap);
+            });
+
             decreaseButton.setOnAction(e -> {
                 int currentAmount = Integer.parseInt(counterText.getText());
                 if (currentAmount > 0) {
-                    counterText.setText(Integer.toString(currentAmount - 1));
+                    currentAmount--;
+                    counterText.setText(Integer.toString(currentAmount));
+                    recipeAmountMap.put(recipe.getRecipeName(), currentAmount);
+                    System.out.println(recipeAmountMap);
                 }
-            });
-
-            increaseButton.setOnAction(e -> {
-                int currentAmount = Integer.parseInt(counterText.getText());
-                counterText.setText(Integer.toString(currentAmount + 1));
             });
 
             HBox counterBox = new HBox(decreaseButton, counterText, increaseButton);
@@ -90,52 +98,68 @@ public class ShoppingCartTab extends SuperTab {
     public Button createFinishShoppingButton(){
         Button finishShoppingButton = new Button("Finish shopping ->");
         finishShoppingButton.setOnAction(e -> {
-            recipeAmountMap = new HashMap<>();
-
-            for (int i = 0; i < recipeBox.getChildren().size(); i++) {
-                if (recipeBox.getChildren().get(i) instanceof VBox){
-                    VBox currentRecipeBox = (VBox) recipeBox.getChildren().get(i);
-
-                    //Finds each recipe box and gets the recipe name and the amount of the recipe
-                    Node recipeNameNode = currentRecipeBox.getChildren().get(0);
-                    Node counterBoxNode = currentRecipeBox.getChildren().get(1);
-
-                    String recipeName = ((Text) recipeNameNode).getText();
-                    //Gets the amount of the recipe
-                    String amount = ((Text) ((HBox) counterBoxNode).getChildren().get(1)).getText();
-                    recipeAmountMap.put(recipeName, Integer.parseInt(amount));
-                }
-            }
-
+            System.out.println(recipeAmountMap);
             StackPane finishShoppingTempPane = createFinishShoppingTempPane();
-
-
             this.setContent(finishShoppingTempPane);
         });
 
         return finishShoppingButton;
     }
 
+    //Lager midlertidig finishShoppingPane som skal vise hva som skal handles og hvilke retter dette kommer fra
     public StackPane createFinishShoppingTempPane(){
+        //Create a new stackpane
         StackPane finishShoppingTempPane = new StackPane();
-
+        //Box only for the text
+        VBox shoppinCartText = new VBox();
+        //Box to hold the shopping list and used recipes
         VBox finishShoppingContent = new VBox();
         Text shoppingListText = new Text("Shopping List:");
-        finishShoppingContent.getChildren().addAll(shoppingCartTitle, shoppingListText);
+        //Box for the shopping list
+        VBox shoppingList = new VBox();
+        //Box for the used recipes
+        VBox usedRecipes = new VBox();
 
-
+        //Iterate through the recipeAmountMap and add the recipes to the basket
         recipeAmountMap.forEach((recipeName, amount) -> {
-            Text recipeText = new Text(recipeName + ": " + amount);
-            finishShoppingContent.getChildren().add(recipeText);
+            if (amount > 0) { //If the amount is greater than 0, add the recipe to the basket
+                Text recipeText = new Text(recipeName + ": " + amount);
+                usedRecipes.getChildren().add(recipeText);
+
+                int finalAmount = amount;
+                //Add the recipe to the basket, as many times as the amount
+                for (int i = 0; i < amount; i++) {
+                    recipeController.getAllRecipes().forEach(recipe -> {
+                        if (recipe.getRecipeName().equals(recipeName)) {
+                            basketController.addRecipeToBasket(recipe);
+                        }
+                    });
+                }
+
+            }
+        });
+        System.out.println(basketController.getBasketOfRecipes().size());
+        basketController.getShoppingListFromBasket().forEach(ingredient -> {
+            Text ingredientText = new Text(ingredient[0] + ": " + ingredient[1]);
+            System.out.println(ingredient[0] + ": " + ingredient[1]);
+            shoppingList.getChildren().add(ingredientText);
         });
 
-        Text counterTextTest1 = new Text();
+        shoppinCartText.getChildren().addAll(shoppingCartTitle,shoppingListText);
+        HBox listBox = new HBox();
+        listBox.getChildren().addAll(shoppingList, usedRecipes);
+        finishShoppingContent.getChildren().addAll(shoppinCartText, listBox);
+
         finishShoppingTempPane.getChildren().add(finishShoppingContent);
         return finishShoppingTempPane;
     }
 
     public Map<String, Integer> getRecipeAmountMap() {
         return recipeAmountMap;
+    }
+    public VBox getNeededGoods(){
+
+        return null;
     }
 
 
