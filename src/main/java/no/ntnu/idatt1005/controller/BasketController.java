@@ -24,7 +24,11 @@ public class BasketController {
   }
 
   public void addRecipeToBasket(Recipe recipe) {
+    System.out.println("Added " + recipe.getRecipeName() + " to basket");
     basketOfRecipes.add(recipe);
+  }
+  public ArrayList<Recipe> getBasketOfRecipes() {
+    return (ArrayList<Recipe>) basketOfRecipes;
   }
 
   public void removeRecipeFromBasket(Recipe recipe) {
@@ -48,7 +52,6 @@ public class BasketController {
       String groceryId = entry.getKey();
       double ingredientAmount = entry.getValue();
       double inventoryAmount = inventoryController.getItemAmountById(groceryId);
-
       double neededAmount = ingredientAmount - inventoryAmount;
 
       if (neededAmount > 0) {
