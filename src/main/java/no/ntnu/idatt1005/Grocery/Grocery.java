@@ -7,10 +7,10 @@ public class Grocery {
     private final String name;
     private final String image;
     private final String id;
-    private final UnitsE unit;
+    private final String unit;
 
 
-    public Grocery(String name, String image, String id, UnitsE unit) {
+    public Grocery(String name, String image, String id, String unit) {
         this.name = name;
         this.image = image;
         this.id = id;
@@ -28,7 +28,7 @@ public class Grocery {
         return id;
     }
 
-    public UnitsE getUnit() {
+    public String getUnit() {
         return unit;
     }
 
