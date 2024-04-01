@@ -57,8 +57,12 @@ public class BasketController {
 
       if (neededAmount > 0) {
         Grocery grocery = groceryController.getGroceryById(groceryId);
-        String foodName = grocery.getName();
-        shoppingList.put(foodName, neededAmount + " " + grocery.getUnit());
+        if (grocery == null) {
+          System.out.println("Something went wrong");
+        } else {
+          String foodName = grocery.getName();
+          shoppingList.put(foodName, neededAmount + " " + grocery.getUnit());
+        }
       }
     }
     return shoppingList;
