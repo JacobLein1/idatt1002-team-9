@@ -86,6 +86,7 @@ public class ShoppingCartTab extends SuperTab {
             currentRecipeBox.getChildren().addAll(recipeName,counterBox);
             recipeBox.getChildren().add(currentRecipeBox);
         }
+        recipeBox.getChildren().add(createFinishShoppingButton());
         return recipeBox;
     }
 
