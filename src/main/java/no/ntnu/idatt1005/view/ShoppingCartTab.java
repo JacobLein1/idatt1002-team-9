@@ -25,6 +25,7 @@ public class ShoppingCartTab extends SuperTab {
 
     public ShoppingCartTab() {
         super("Shopping Cart");
+        recipeAmountMap = new HashMap<>();
     }
     public VBox defaultTabCreation() {
 
@@ -40,7 +41,7 @@ public class ShoppingCartTab extends SuperTab {
 
         shoppingCartContent.getChildren().addAll(shoppingCartTitle, shoppingCartDescription);
         shoppingCartTitle.setFont(this.getTitleFont());
-        basketController.getShoppingListFromBasket();
+        //basketController.getShoppingListFromBasket();
 
 
         return shoppingCartContent;
@@ -61,6 +62,7 @@ public class ShoppingCartTab extends SuperTab {
             //Get recipe name, set font and add to the currentRecipeBox
             Text recipeName = new Text(recipe.getRecipeName());
             recipeName.setFont(this.getUnderTitleFont());
+            recipeName.setId(recipe.getRecipeID());
 
             Text counterText = new Text("0");
             Button decreaseButton = new Button("-");
@@ -101,9 +103,10 @@ public class ShoppingCartTab extends SuperTab {
                     Node counterBoxNode = currentRecipeBox.getChildren().get(1);
 
                     String recipeName = ((Text) recipeNameNode).getText();
+                    String recipeId = recipeNameNode.getId();
                     //Gets the amount of the recipe
                     String amount = ((Text) ((HBox) counterBoxNode).getChildren().get(1)).getText();
-                    recipeAmountMap.put(recipeName, Integer.parseInt(amount));
+                    recipeAmountMap.put(recipeId, Integer.parseInt(amount));
                 }
             }
 
@@ -123,9 +126,11 @@ public class ShoppingCartTab extends SuperTab {
         Text shoppingListText = new Text("Shopping List:");
         finishShoppingContent.getChildren().addAll(shoppingCartTitle, shoppingListText);
 
+        HashMap<String, String> shoppingList = basketController.
+            getShoppingListFromBasket((HashMap<String, Integer>) recipeAmountMap);
 
-        recipeAmountMap.forEach((recipeName, amount) -> {
-            Text recipeText = new Text(recipeName + ": " + amount);
+        shoppingList.forEach((recipeName, amountAndUnit) -> {
+            Text recipeText = new Text(recipeName + ": " + amountAndUnit);
             finishShoppingContent.getChildren().add(recipeText);
         });
 
