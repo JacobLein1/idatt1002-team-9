@@ -26,23 +26,23 @@ CREATE TABLE "RecipeGrocery" (
     FOREIGN KEY (groceryId) REFERENCES "GroceryRegister"(groceryId)
 );
 
-INSERT INTO "GroceryRegister" (name, image, unit) VALUES ('Milk', 'milk.jpg', 1);
-INSERT INTO "GroceryRegister" (name, image, unit) VALUES ('Egg', 'egg.jpg', 12);
-INSERT INTO "GroceryRegister" (name, image, unit) VALUES ('Bread', 'bread.jpg', 1);
-INSERT INTO "GroceryRegister" (name, image, unit) VALUES ('Butter', 'butter.jpg', 1);
-INSERT INTO "GroceryRegister" (name, image, unit) VALUES ('Cheese', 'cheese.jpg', 1);
-INSERT INTO "GroceryRegister" (name, image, unit) VALUES ('Yogurt', 'yogurt.jpg', 1);
-INSERT INTO "GroceryRegister" (name, image, unit) VALUES ('Apple', 'apple.jpg', 1);
-INSERT INTO "GroceryRegister" (name, image, unit) VALUES ('Banana', 'banana.jpg', 1);
-INSERT INTO "GroceryRegister" (name, image, unit) VALUES ('Orange', 'orange.jpg', 1);
-INSERT INTO "GroceryRegister" (name, image, unit) VALUES ('Tomato', 'tomato.jpg', 1);
+INSERT INTO "GroceryRegister" (name, image, unit) VALUES ('Milk', 'milk.jpg', 'ml');
+INSERT INTO "GroceryRegister" (name, image, unit) VALUES ('Egg', 'egg.jpg', 'stk');
+INSERT INTO "GroceryRegister" (name, image, unit) VALUES ('Bread', 'bread.jpg', 'stk');
+INSERT INTO "GroceryRegister" (name, image, unit) VALUES ('Butter', 'butter.jpg', 'g');
+INSERT INTO "GroceryRegister" (name, image, unit) VALUES ('Cheese', 'cheese.jpg', 'g');
+INSERT INTO "GroceryRegister" (name, image, unit) VALUES ('Yogurt', 'yogurt.jpg', 'ml');
+INSERT INTO "GroceryRegister" (name, image, unit) VALUES ('Apple', 'apple.jpg', 'stk');
+INSERT INTO "GroceryRegister" (name, image, unit) VALUES ('Banana', 'banana.jpg', 'stk');
+INSERT INTO "GroceryRegister" (name, image, unit) VALUES ('Orange', 'orange.jpg', 'stk');
+INSERT INTO "GroceryRegister" (name, image, unit) VALUES ('Tomato', 'tomato.jpg', 'stk');
 
 INSERT INTO "Inventory" (groceryId, groceryAmount) VALUES (1, 2);
 INSERT INTO "Inventory" (groceryId, groceryAmount) VALUES (2, 12);
 INSERT INTO "Inventory" (groceryId, groceryAmount) VALUES (3, 1);
 INSERT INTO "Inventory" (groceryId, groceryAmount) VALUES (4, 1);
 INSERT INTO "Inventory" (groceryId, groceryAmount) VALUES (5, 1);
-INSERT INTO "Inventory" (groceryId, groceryAmount) VALUES (6, 1);
+INSERT INTO "Inventory" (groceryId, groceryAmount) VALUES (6, 100);
 INSERT INTO "Inventory" (groceryId, groceryAmount) VALUES (7, 1);
 
 INSERT INTO "RecipeList" (instructions, recipeName, numberOfPeople) VALUES ('Just do it', 'French toast', 4);
