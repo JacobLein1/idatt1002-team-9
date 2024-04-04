@@ -126,7 +126,6 @@ public class ShoppingCartTab extends SuperTab {
                 Text recipeText = new Text(recipeName + ": " + amount);
                 usedRecipes.getChildren().add(recipeText);
 
-                int finalAmount = amount;
                 //Add the recipe to the basket, as many times as the amount
                 for (int i = 0; i < amount; i++) {
                     recipeController.getAllRecipes().forEach(recipe -> {
@@ -135,13 +134,18 @@ public class ShoppingCartTab extends SuperTab {
                         }
                     });
                 }
-
             }
         });
         System.out.println(basketController.getBasketOfRecipes().size());
+        System.out.println("Starter utskrift av handleliste");
         basketController.getShoppingListFromBasket().forEach(ingredient -> {
+            if (ingredient[0] == null || ingredient[1] == null) {
+                System.out.println("Null");
+            } else {
+                System.out.println(ingredient[0] + ": " + ingredient[1]);
+            }
             Text ingredientText = new Text(ingredient[0] + ": " + ingredient[1]);
-            System.out.println(ingredient[0] + ": " + ingredient[1]);
+
             shoppingList.getChildren().add(ingredientText);
         });
 
@@ -161,57 +165,5 @@ public class ShoppingCartTab extends SuperTab {
 
         return null;
     }
-
-
-    /*
-    // Create a recipe box with text and counter
-            VBox yoghurtBox = new VBox();
-            Text yoghurtWFruits = new Text("Yoghurt with fruits");
-            IntegerProperty yoghurtAmount = new SimpleIntegerProperty(0);
-            Text counterText = new Text();
-            counterText.textProperty().bind(yoghurtAmount.asString());
-
-            //Create buttons to increase and decrease the amount of yoghurt
-            Button increaseYogButton = new Button("+");
-            increaseYogButton.setOnAction(e -> yoghurtAmount.set(yoghurtAmount.get() + 1));
-            Button decreaseYogButton = new Button("-");
-            decreaseYogButton.setOnAction( e -> {
-                if (yoghurtAmount.get() > 0) {
-                    yoghurtAmount.set(yoghurtAmount.get() - 1);
-                }
-            });
-
-            //Add buttons to a HBox
-            HBox yogButtonBox = new HBox(decreaseYogButton, counterText, increaseYogButton);
-            yogButtonBox.setSpacing(10);
-            yoghurtBox.setPadding(new Insets(30));
-
-            //Add text and buttons to the yoghurtBox
-            yoghurtBox.getChildren().addAll(yoghurtWFruits, yogButtonBox);
-            shoppingCartContent.getChildren().add(yoghurtBox);
-
-            //Create HBox for the result button
-            HBox resultButtonBox = new HBox();
-            resultButtonBox.setAlignment(Pos.BOTTOM_RIGHT);
-
-
-            //Node originalContent = tabShoppingCart.getContent();
-            //Create a new scene for the shopping cart
-
-
-
-                BasketController basketController = new BasketController();
-
-                //Get the shopping list from the basket as an observable list
-                List<String[]> list = basketController.getShoppingListFromBasket();
-                ObservableList<String> shoppingList = convertListToObservableList(list);
-                ListView<String> shoppingListView = new ListView<>(shoppingList);
-                shoppingCartContent.getChildren().add(shoppingListView);
-
-                primaryStage.setScene(shoppingCartScene);
-
-            });
-
-     */
 
 }
