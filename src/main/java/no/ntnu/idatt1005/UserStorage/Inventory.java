@@ -11,7 +11,7 @@ public class Inventory {
  private int stockSize;
 
  public Inventory() {
-  this.stockSize = 0;
+  this.stockSize = 0; //mest sannsynlig fjerne
   this.inventory = new HashMap<>();
   this.groceryAmount = 0;
  }

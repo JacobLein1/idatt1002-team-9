@@ -7,6 +7,7 @@ import java.util.Map;
 
 import no.ntnu.idatt1005.Grocery.Grocery;
 import no.ntnu.idatt1005.Grocery.GroceryList;
+import no.ntnu.idatt1005.Recipe.Ingredient;
 import no.ntnu.idatt1005.Recipe.Recipe;
 import no.ntnu.idatt1005.Unit.UnitsE;
 
@@ -19,26 +20,22 @@ public class RecipeDAO {
         this.connectionProvider = connectionProvider;
     }
 
-    public List<Recipe> getRecipes(){
+    public List<Ingredient> getIngredientsForRecipe(int id){
         Connection connection = null;
         PreparedStatement preparedStatement = null;
         ResultSet resultSet = null;
-        List<Recipe> recipes = new ArrayList<>();
+        List<Ingredient> ingredients = new ArrayList<>();
         try {
             connection = connectionProvider.getConnection();
-            preparedStatement = connection.prepareStatement("SELECT * FROM RecipeList join RecipeGrocery on RecipeList.recipeId = RecipeGrocery.recipeId");
+            preparedStatement = connection.prepareStatement("SELECT * FROM RecipeGrocery WHERE recipeId=?");
+            preparedStatement.setInt(1, id);
             resultSet = preparedStatement.executeQuery();
             while (resultSet.next()) {
-                String recipeID = String.valueOf(resultSet.getInt("recipeId"));
-                String recipeName = resultSet.getString("recipeName");
-                String instructions = resultSet.getString("instructions");
-                int numberOfPeople = resultSet.getInt("numberOfPeople");
-                String groceryID = String.valueOf(resultSet.getInt("groceryId"));
+                String groceryId = String.valueOf(resultSet.getInt("groceryId"));
                 double amount = resultSet.getDouble("amount");
-                Map<String, Double> ingredients = new HashMap<>();
-                ingredients.put(groceryID, amount);
-                Recipe recipe = new Recipe(recipeID, recipeName, instructions, numberOfPeople, ingredients);
-                recipes.add(recipe);
+
+                Ingredient ingredient = new Ingredient(groceryId, amount);
+                ingredients.add(ingredient);
             }
 
         } catch (SQLException e) {
@@ -46,7 +43,7 @@ public class RecipeDAO {
         } finally {
             close(connection, preparedStatement, resultSet);
         }
-        return recipes;
+        return ingredients;
     }
 
     public List<Recipe> getAllRecipes() {
@@ -63,8 +60,7 @@ public class RecipeDAO {
                 String recipeName = resultSet.getString("recipeName");
                 String instructions = resultSet.getString("instructions");
                 int numberOfPeople = resultSet.getInt("numberOfPeople");
-                Map<String, Double> ingredients = new HashMap<>();
-                Recipe recipe = new Recipe(recipeID, recipeName, instructions, numberOfPeople, ingredients);
+                Recipe recipe = new Recipe(recipeID, recipeName, instructions, numberOfPeople);
                 recipes.add(recipe);
             }
 

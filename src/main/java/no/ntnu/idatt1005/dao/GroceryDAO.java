@@ -6,6 +6,7 @@ import java.util.List;
 
 import no.ntnu.idatt1005.Grocery.Grocery;
 import no.ntnu.idatt1005.Grocery.GroceryList;
+import no.ntnu.idatt1005.Unit.Unit;
 import no.ntnu.idatt1005.Unit.UnitsE;
 
 import static no.ntnu.idatt1005.dao.DBConnectionProvider.close;
@@ -45,16 +46,18 @@ public class GroceryDAO {
           String name = resultSet.getString("name");
           String image = resultSet.getString("image");
           String groceryId = String.valueOf(resultSet.getInt("groceryId"));
-          String unitString = resultSet.getString("unit");
-          UnitsE unit = UnitsE.valueOf(unitString.toLowerCase());
+          String unit = resultSet.getString("unit");
+
           try{
+            //UnitsE unit = UnitsE.valueOf(unitString.toLowerCase());
+            //UnitsE unit = UnitsE.WEIGHT;
             grocery = new Grocery (name, image, groceryId, unit);
           } catch (Exception e){
             e.printStackTrace();
           }
         }
 
-        } catch (SQLException e) {
+    } catch (SQLException e) {
         e.printStackTrace();
     } finally {
       close(null, null, resultSet);

@@ -106,11 +106,14 @@ public class InventoryDAO {
 
         try {
             connection = connectionProvider.getConnection();
-            preparedStatement = connection.prepareStatement("SELECT FROM Inventory WHERE groceryId = ?");
+            preparedStatement = connection.prepareStatement("SELECT * FROM Inventory WHERE groceryId = ?");
             preparedStatement.setInt(1, groceryID);
             resultSet = preparedStatement.executeQuery();
 
-            return resultSet.getDouble("groceryAmount");
+            if (resultSet.next()) {
+                return resultSet.getDouble("groceryAmount");
+            }
+            return -1;
         } catch (SQLException e) {
             e.printStackTrace();
             return -1;
