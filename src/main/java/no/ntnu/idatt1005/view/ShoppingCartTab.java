@@ -138,7 +138,7 @@ public class ShoppingCartTab extends SuperTab {
         });
         System.out.println(basketController.getBasketOfRecipes().size());
         System.out.println("Starter utskrift av handleliste");
-        basketController.getShoppingListFromBasket().forEach(ingredient -> {
+        basketController.getBasketOfRecipes().forEach(ingredient -> {
             if (ingredient[0] == null || ingredient[1] == null) {
                 System.out.println("Null");
             } else {
