@@ -9,6 +9,7 @@ import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 import no.ntnu.idatt1005.Recipe.Recipe;
 import no.ntnu.idatt1005.controller.BasketController;
+import no.ntnu.idatt1005.controller.InventoryController;
 import no.ntnu.idatt1005.controller.RecipeController;
 
 import java.util.HashMap;
@@ -17,9 +18,14 @@ import java.util.Map;
 
 //This class is used to create and update the shopping cart tab
 public class ShoppingCartTab extends SuperTab {
+    //Create a title for the shopping cart, need to use it for multiple methods
     private final Text shoppingCartTitle = new Text("Shopping Cart");
+    //Create a basketController object to be able to add recipes to the basket
     private final BasketController basketController = new BasketController();
+    //Create a recipeController object to be able to get all recipes
     private final RecipeController recipeController = new RecipeController();
+    private final InventoryController inventoryController = new InventoryController();
+    //Create a recipeBox to hold all the recipes
     private final HBox recipeBox = allRecipes();
     private Map<String,Integer> recipeAmountMap;
 
@@ -43,7 +49,7 @@ public class ShoppingCartTab extends SuperTab {
 
         shoppingCartContent.getChildren().addAll(shoppingCartTitle, shoppingCartDescription);
         shoppingCartTitle.setFont(this.getTitleFont());
-        basketController.getShoppingListFromBasket();
+        basketController.getShoppingListFromBasket((HashMap<String, Integer>) recipeAmountMap);
 
 
         return shoppingCartContent;
@@ -114,11 +120,15 @@ public class ShoppingCartTab extends SuperTab {
         VBox shoppinCartText = new VBox();
         //Box to hold the shopping list and used recipes
         VBox finishShoppingContent = new VBox();
+        finishShoppingContent.setSpacing(10);
         Text shoppingListText = new Text("Shopping List:");
         //Box for the shopping list
         VBox shoppingList = new VBox();
+        shoppingList.setSpacing(10);
         //Box for the used recipes
         VBox usedRecipes = new VBox();
+        usedRecipes.setSpacing(10);
+        usedRecipes.getChildren().add(new Text("Recipes used:"));
 
         //Iterate through the recipeAmountMap and add the recipes to the basket
         recipeAmountMap.forEach((recipeName, amount) -> {
@@ -136,21 +146,27 @@ public class ShoppingCartTab extends SuperTab {
                 }
             }
         });
-        System.out.println(basketController.getBasketOfRecipes().size());
-        System.out.println("Starter utskrift av handleliste");
-        basketController.getBasketOfRecipes().forEach(ingredient -> {
-            if (ingredient[0] == null || ingredient[1] == null) {
-                System.out.println("Null");
-            } else {
-                System.out.println(ingredient[0] + ": " + ingredient[1]);
-            }
-            Text ingredientText = new Text(ingredient[0] + ": " + ingredient[1]);
+        //Returnerer arraylist av recipes
+        //Denne er litt rar...
+        HashMap<String,Integer> testList = new HashMap<>();
 
-            shoppingList.getChildren().add(ingredientText);
+        basketController.getBasketOfRecipes().stream().forEach(recipe ->{
+            testList.put(recipe.getRecipeID(),1);
         });
+
+        basketController.getShoppingListFromBasket(testList).forEach((groceryName, amount) -> {
+            Text groceryText = new Text(groceryName + ": " + amount);
+            shoppingList.getChildren().add(groceryText);
+        });
+        inventoryController.getAllItemsInInventory().forEach(item -> {
+            System.out.println(item[0] + " " + item[1]);
+        });
+
+
 
         shoppinCartText.getChildren().addAll(shoppingCartTitle,shoppingListText);
         HBox listBox = new HBox();
+        listBox.setSpacing(30);
         listBox.getChildren().addAll(shoppingList, usedRecipes);
         finishShoppingContent.getChildren().addAll(shoppinCartText, listBox);
 

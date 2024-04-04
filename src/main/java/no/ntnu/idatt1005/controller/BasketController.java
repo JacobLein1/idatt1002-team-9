@@ -28,7 +28,6 @@ public class BasketController {
   }
 
   public void addRecipeToBasket(Recipe recipe) {
-    System.out.println("Added " + recipe.getRecipeName() + " to basket");
     basketOfRecipes.add(recipe);
   }
   public ArrayList<Recipe> getBasketOfRecipes() {
