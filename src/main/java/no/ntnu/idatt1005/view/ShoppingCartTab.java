@@ -1,13 +1,12 @@
 package no.ntnu.idatt1005.view;
 
 import javafx.geometry.Insets;
-import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
-import no.ntnu.idatt1005.Recipe.Recipe;
+import no.ntnu.idatt1005.RecipeInfo.Recipe;
 import no.ntnu.idatt1005.controller.BasketController;
 import no.ntnu.idatt1005.controller.InventoryController;
 import no.ntnu.idatt1005.controller.RecipeController;
@@ -79,7 +78,7 @@ public class ShoppingCartTab extends SuperTab {
             increaseButton.setOnAction(e -> {
                 int currentAmount = Integer.parseInt(counterText.getText()) + 1;
                 counterText.setText(Integer.toString(currentAmount));
-                recipeAmountMap.put(recipe.getRecipeName(), currentAmount);
+                recipeAmountMap.put(recipe.getRecipeID(), currentAmount);
                 System.out.println(recipeAmountMap);
             });
 
@@ -88,7 +87,7 @@ public class ShoppingCartTab extends SuperTab {
                 if (currentAmount > 0) {
                     currentAmount--;
                     counterText.setText(Integer.toString(currentAmount));
-                    recipeAmountMap.put(recipe.getRecipeName(), currentAmount);
+                    recipeAmountMap.put(recipe.getRecipeID(), currentAmount);
                     System.out.println(recipeAmountMap);
                 }
             });
@@ -137,27 +136,30 @@ public class ShoppingCartTab extends SuperTab {
                 usedRecipes.getChildren().add(recipeText);
 
                 //Add the recipe to the basket, as many times as the amount
-                for (int i = 0; i < amount; i++) {
+                /*for (int i = 0; i < amount; i++) {
                     recipeController.getAllRecipes().forEach(recipe -> {
                         if (recipe.getRecipeName().equals(recipeName)) {
                             basketController.addRecipeToBasket(recipe);
                         }
                     });
-                }
+                }*/
             }
         });
         //Returnerer arraylist av recipes
         //Denne er litt rar...
-        HashMap<String,Integer> testList = new HashMap<>();
+        HashMap<String,String> shoppingListHashMap = new HashMap<>();
 
-        basketController.getBasketOfRecipes().stream().forEach(recipe ->{
+        /*basketController.getBasketOfRecipes().stream().forEach(recipe ->{
             testList.put(recipe.getRecipeID(),1);
-        });
+        });*/
 
-        basketController.getShoppingListFromBasket(testList).forEach((groceryName, amount) -> {
-            Text groceryText = new Text(groceryName + ": " + amount);
+        basketController.getShoppingListFromBasket(
+            (HashMap<String, Integer>) recipeAmountMap).forEach((groceryName, amountAndUnit) -> {
+            Text groceryText = new Text(groceryName + ": " + amountAndUnit);
             shoppingList.getChildren().add(groceryText);
         });
+
+        //kan fjernes
         inventoryController.getAllItemsInInventory().forEach(item -> {
             System.out.println(item[0] + " " + item[1]);
         });

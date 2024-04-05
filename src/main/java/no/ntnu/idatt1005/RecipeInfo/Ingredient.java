@@ -1,4 +1,4 @@
-package no.ntnu.idatt1005.Recipe;
+package no.ntnu.idatt1005.RecipeInfo;
 
 public class Ingredient {
   private final String groceryId;

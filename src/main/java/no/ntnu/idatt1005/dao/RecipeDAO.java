@@ -1,15 +1,10 @@
 package no.ntnu.idatt1005.dao;
 import java.sql.*;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
-import no.ntnu.idatt1005.Grocery.Grocery;
-import no.ntnu.idatt1005.Grocery.GroceryList;
-import no.ntnu.idatt1005.Recipe.Ingredient;
-import no.ntnu.idatt1005.Recipe.Recipe;
-import no.ntnu.idatt1005.Unit.UnitsE;
+import no.ntnu.idatt1005.RecipeInfo.Ingredient;
+import no.ntnu.idatt1005.RecipeInfo.Recipe;
 
 import static no.ntnu.idatt1005.dao.DBConnectionProvider.close;
 

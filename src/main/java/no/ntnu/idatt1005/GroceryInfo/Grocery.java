@@ -1,7 +1,4 @@
-package no.ntnu.idatt1005.Grocery;
-
-import no.ntnu.idatt1005.Unit.Unit;
-import no.ntnu.idatt1005.Unit.UnitsE;
+package no.ntnu.idatt1005.GroceryInfo;
 
 public class Grocery {
     private final String name;

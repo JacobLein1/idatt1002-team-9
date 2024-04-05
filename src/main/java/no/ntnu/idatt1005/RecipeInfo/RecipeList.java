@@ -1,6 +1,4 @@
-package no.ntnu.idatt1005.Recipe;
-
-import no.ntnu.idatt1005.Recipe.Recipe;
+package no.ntnu.idatt1005.RecipeInfo;
 
 import java.util.HashMap;
 import java.util.Map;

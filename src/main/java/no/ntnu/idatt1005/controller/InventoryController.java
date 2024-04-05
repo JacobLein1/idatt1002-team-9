@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import no.ntnu.idatt1005.Grocery.Grocery;
+import no.ntnu.idatt1005.GroceryInfo.Grocery;
 import no.ntnu.idatt1005.dao.DBConnectionProvider;
 import no.ntnu.idatt1005.dao.InventoryDAO;
 

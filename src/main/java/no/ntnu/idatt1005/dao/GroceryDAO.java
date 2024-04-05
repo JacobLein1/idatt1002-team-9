@@ -4,9 +4,7 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-import no.ntnu.idatt1005.Grocery.Grocery;
-import no.ntnu.idatt1005.Grocery.GroceryList;
-import no.ntnu.idatt1005.Unit.Unit;
+import no.ntnu.idatt1005.GroceryInfo.Grocery;
 import no.ntnu.idatt1005.Unit.UnitsE;
 
 import static no.ntnu.idatt1005.dao.DBConnectionProvider.close;

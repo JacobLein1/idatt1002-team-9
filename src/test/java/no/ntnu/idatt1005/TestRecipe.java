@@ -1,14 +1,5 @@
 package no.ntnu.idatt1005;
 
-import java.util.HashMap;
-import java.util.Map;
-
-import no.ntnu.idatt1005.Recipe.Recipe;
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Test;
-
-import static org.junit.jupiter.api.Assertions.*;
-
 public class TestRecipe {
 
   /*@Test

@@ -1,7 +1,4 @@
-package no.ntnu.idatt1005.Recipe;
-
-import java.util.Map;
-import java.util.HashMap;
+package no.ntnu.idatt1005.RecipeInfo;
 
 public class Recipe {
   private final String recipeID;

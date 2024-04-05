@@ -2,9 +2,8 @@ package no.ntnu.idatt1005.controller;
 
 import java.util.*;
 
-import no.ntnu.idatt1005.Grocery.Grocery;
-import no.ntnu.idatt1005.Recipe.Ingredient;
-import no.ntnu.idatt1005.Recipe.Recipe;
+import no.ntnu.idatt1005.GroceryInfo.Grocery;
+import no.ntnu.idatt1005.RecipeInfo.Ingredient;
 
 public class BasketController {
   //opprette en liste som heter Basket som kan inneholde recipes? Og legge til en måte å kunne legge til en og en
@@ -12,8 +11,6 @@ public class BasketController {
 
   //trenger også en metode for å generere en handleliste her, se på hvordan dette kan løses
 
-  List<Recipe> basketOfRecipes;
-  
   InventoryController inventoryController;
   
   GroceryController groceryController;
@@ -21,30 +18,11 @@ public class BasketController {
   RecipeController recipeController;
 
   public BasketController() {
-    basketOfRecipes = new ArrayList<>();
     inventoryController = new InventoryController();
     groceryController = new GroceryController();
     recipeController = new RecipeController();
   }
 
-  public void addRecipeToBasket(Recipe recipe) {
-    basketOfRecipes.add(recipe);
-  }
-  public ArrayList<Recipe> getBasketOfRecipes() {
-    return (ArrayList<Recipe>) basketOfRecipes;
-  }
-
-  public void removeRecipeFromBasket(Recipe recipe) {
-    Iterator<Recipe> iterator = basketOfRecipes.iterator();
-    String recipeId = recipe.getRecipeID();
-    while (iterator.hasNext()) {
-      Recipe currentRecipe = iterator.next();
-      String currentId = currentRecipe.getRecipeID();
-      if (currentId.equals(recipeId)) {
-        iterator.remove();
-      }
-    }
-  }
 
   public HashMap<String, String> getShoppingListFromBasket(HashMap<String, Integer> recipeAmountMap) {
     HashMap<String, String> shoppingList = new HashMap<>();
