@@ -41,7 +41,7 @@ public class BasketController {
           System.out.println("Something went wrong");
         } else {
           String foodName = grocery.getName();
-          shoppingList.put(foodName, neededAmount + " " + grocery.getUnit());
+          shoppingList.put(foodName, neededAmount + " " + grocery.getUnit().getUnit());
         }
       }
     }
