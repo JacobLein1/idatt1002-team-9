@@ -1,6 +1,6 @@
 package no.ntnu.idatt1005.UserStorage;
 
-import no.ntnu.idatt1005.Grocery.Grocery;
+import no.ntnu.idatt1005.GroceryInfo.Grocery;
 
 import java.util.HashMap;
 
@@ -11,7 +11,7 @@ public class Inventory {
  private int stockSize;
 
  public Inventory() {
-  this.stockSize = 0;
+  this.stockSize = 0; //mest sannsynlig fjerne
   this.inventory = new HashMap<>();
   this.groceryAmount = 0;
  }

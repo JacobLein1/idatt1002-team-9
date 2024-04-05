@@ -1,4 +1,4 @@
-package no.ntnu.idatt1005.Grocery;
+package no.ntnu.idatt1005.GroceryInfo;
 
 import java.util.HashMap;
 

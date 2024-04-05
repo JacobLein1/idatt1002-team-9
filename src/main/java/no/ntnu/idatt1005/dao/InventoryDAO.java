@@ -1,12 +1,6 @@
 package no.ntnu.idatt1005.dao;
 import java.sql.*;
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
-
-import no.ntnu.idatt1005.Grocery.Grocery;
-import no.ntnu.idatt1005.Grocery.GroceryList;
-import no.ntnu.idatt1005.Unit.UnitsE;
 
 import static no.ntnu.idatt1005.dao.DBConnectionProvider.close;
 
@@ -106,11 +100,14 @@ public class InventoryDAO {
 
         try {
             connection = connectionProvider.getConnection();
-            preparedStatement = connection.prepareStatement("SELECT FROM Inventory WHERE groceryId = ?");
+            preparedStatement = connection.prepareStatement("SELECT * FROM Inventory WHERE groceryId = ?");
             preparedStatement.setInt(1, groceryID);
             resultSet = preparedStatement.executeQuery();
 
-            return resultSet.getDouble("groceryAmount");
+            if (resultSet.next()) {
+                return resultSet.getDouble("groceryAmount");
+            }
+            return -1;
         } catch (SQLException e) {
             e.printStackTrace();
             return -1;

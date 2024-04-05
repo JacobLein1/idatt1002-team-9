@@ -1,7 +1,7 @@
 package no.ntnu.idatt1005.controller;
 
 import java.util.List;
-import no.ntnu.idatt1005.Grocery.Grocery;
+import no.ntnu.idatt1005.GroceryInfo.Grocery;
 import no.ntnu.idatt1005.dao.DBConnectionProvider;
 import no.ntnu.idatt1005.dao.GroceryDAO;
 

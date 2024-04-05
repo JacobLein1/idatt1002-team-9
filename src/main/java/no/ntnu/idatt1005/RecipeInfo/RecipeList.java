@@ -1,6 +1,4 @@
-package no.ntnu.idatt1005.Recipe;
-
-import no.ntnu.idatt1005.Recipe.Recipe;
+package no.ntnu.idatt1005.RecipeInfo;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -15,12 +13,12 @@ public class RecipeList {
     return recipeList;
   }
 
-  public void addRecipe(String id, String recipeName, Map<String, Double> ingredients, String instructions,
+  public void addRecipe(String id, String recipeName, String instructions,
                         int numberOfPeople) throws IllegalArgumentException {
     if (recipeList.containsKey(id)) {
       throw new IllegalArgumentException("There already exists a recipe with the requested id");
     }
-    Recipe recipe = new Recipe(id, recipeName, instructions, numberOfPeople, ingredients);
+    Recipe recipe = new Recipe(id, recipeName, instructions, numberOfPeople);
     recipeList.put(id, recipe);
   }
 
