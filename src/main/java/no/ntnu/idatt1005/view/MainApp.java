@@ -58,6 +58,7 @@ public class MainApp extends Application {
 
             // Set content for Fridge tab (Placeholder for actual content)
             VBox fridgeContent = new VBox(new Label("Fridge Content"));
+            fridgeContent.getChildren().addAll(tabFridge.initializeUI());
             tabFridge.setContent(fridgeContent);
 
 
