@@ -36,6 +36,8 @@ public class RecipeController {
     return ingredientsInfo;
   }
 
+
+
   public List<Ingredient> getListOfIngredientForRecipe(String id) {
     try {
       int parsedRecipeId = Integer.parseInt(id);
