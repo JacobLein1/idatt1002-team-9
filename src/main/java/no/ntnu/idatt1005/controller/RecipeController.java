@@ -29,7 +29,7 @@ public class RecipeController {
     for (Ingredient ingredient : listOfIngredients) {
       Grocery grocery = groceryController.getGroceryById(ingredient.getGroceryId());
       String name = grocery.getName();
-      String amountAndUnit = ingredient.getAmount() + grocery.getUnit();
+      String amountAndUnit = ingredient.getAmount() + " " + grocery.getUnit();
       ingredientsInfo.put(name, amountAndUnit);
     }
 
