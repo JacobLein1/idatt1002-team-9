@@ -13,6 +13,7 @@ import java.io.FileNotFoundException;
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
+import no.ntnu.idatt1005.dao.DBConnectionProvider;
 
 public class MainApp extends Application {
 
@@ -93,7 +94,9 @@ public class MainApp extends Application {
     }
     @Override
     public void init() throws Exception {
-        super.init();
+      DBConnectionProvider db = new DBConnectionProvider();
+
+      super.init();
     }
 
     @Override
