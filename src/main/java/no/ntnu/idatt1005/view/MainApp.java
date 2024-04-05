@@ -13,6 +13,7 @@ import java.io.FileNotFoundException;
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
+import no.ntnu.idatt1005.dao.DBConnectionProvider;
 
 public class MainApp extends Application {
 
@@ -48,19 +49,14 @@ public class MainApp extends Application {
             tabPane.getTabs().addAll(tabRecipe, tabShoppingCart, tabFridge);
 
             // Set content for Recipe tab (Placeholder for actual content)
-            VBox recipeContent = new VBox(new Label("Recipes Content"));
-            Text recipeText = new Text("Recipes");
-            recipeText.setFont(tabRecipe.getTitleFont());
-            Text yourRecipes = new Text("Your Recipes");
-            yourRecipes.setFont(tabRecipe.getUnderTitleFont());
-            recipeContent.getChildren().addAll(recipeText, yourRecipes);
+
 
             // Set content for Fridge tab (Placeholder for actual content)
             VBox fridgeContent = new VBox(new Label("Fridge Content"));
             tabFridge.setContent(fridgeContent);
 
+            tabRecipe.setContent(tabRecipe.defaultTabCreation());
 
-            tabRecipe.setContent(recipeContent);
 
 
             VBox tabShoppingCartContent = new VBox();
@@ -93,7 +89,9 @@ public class MainApp extends Application {
     }
     @Override
     public void init() throws Exception {
-        super.init();
+      DBConnectionProvider db = new DBConnectionProvider();
+
+      super.init();
     }
 
     @Override

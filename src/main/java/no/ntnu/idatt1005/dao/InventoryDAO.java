@@ -107,10 +107,10 @@ public class InventoryDAO {
             if (resultSet.next()) {
                 return resultSet.getDouble("groceryAmount");
             }
-            return -1;
+            return 0;
         } catch (SQLException e) {
             e.printStackTrace();
-            return -1;
+            return 0;
         } finally {
             close(connection, preparedStatement, resultSet);
         }
