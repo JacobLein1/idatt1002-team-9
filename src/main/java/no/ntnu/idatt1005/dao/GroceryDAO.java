@@ -44,11 +44,10 @@ public class GroceryDAO {
           String name = resultSet.getString("name");
           String image = resultSet.getString("image");
           String groceryId = String.valueOf(resultSet.getInt("groceryId"));
-          String unit = resultSet.getString("unit");
+          String unitString = resultSet.getString("unit");
 
           try{
-            //UnitsE unit = UnitsE.valueOf(unitString.toLowerCase());
-            //UnitsE unit = UnitsE.WEIGHT;
+            UnitsE unit = UnitsE.getValue(unitString);
             grocery = new Grocery (name, image, groceryId, unit);
           } catch (Exception e){
             e.printStackTrace();

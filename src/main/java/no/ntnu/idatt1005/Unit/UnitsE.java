@@ -1,5 +1,7 @@
 package no.ntnu.idatt1005.Unit;
 
+import java.util.Arrays;
+
 public enum UnitsE {
 
     ARTICLE("stk"),
@@ -15,4 +17,12 @@ public enum UnitsE {
     public String getUnit() {
         return unit;
     }
+
+    public static UnitsE getValue(String unit) {
+        return Arrays.stream(UnitsE.values())
+                .filter(e -> e.getUnit().equalsIgnoreCase(unit))
+                .findFirst()
+                .orElseThrow(() -> new IllegalArgumentException("Unknown unit: " + unit));
+    }
+
 }
