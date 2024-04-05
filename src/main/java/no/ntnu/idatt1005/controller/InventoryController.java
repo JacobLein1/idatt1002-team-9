@@ -26,9 +26,11 @@ public class InventoryController {
     for (Map.Entry<String, Double> entry : allInventory.entrySet()) {
       try {
         Grocery grocery = groceryController.getGroceryById(entry.getKey());
+        String groceryId = grocery.getId();
         String foodName = grocery.getName();
         Double amount = entry.getValue();
-        convertedInventory.add(new String[] {foodName, amount + " " + grocery.getUnit()});
+        convertedInventory.
+            add(new String[] {groceryId, foodName, amount + " " + grocery.getUnit().getUnit()});
       } catch (Exception e) {
         //i stedet for å returnere null, kanskje sette i gang en eller annen feilmelding?
         return null;
@@ -38,10 +40,16 @@ public class InventoryController {
     return convertedInventory;
   }
 
-  public void addItemToInventory(String id, int amount) {
+  public void addOrUpdateItemToInventory(String id, int amount) {
     try {
       int parsedId = Integer.parseInt(id);
-      inventoryDAO.addGrocery(parsedId, amount);
+      double currentAmount = getItemAmountById(id);
+      if (currentAmount > 0) {
+        inventoryDAO.updateGrocery(parsedId, amount);
+      } else {
+        inventoryDAO.addGrocery(parsedId, amount);
+      }
+
     } catch (Exception e) {
       // Instead of using system.out.println, an error message may be sent to the user, letting
       // them know something/what went wrong
@@ -60,10 +68,11 @@ public class InventoryController {
     }
   }
 
-  public void updateAmountOfItem(String id, double amount) {
+  /*public void updateAmountOfItem(String id, double amount) {
     try {
       int parsedId = Integer.parseInt(id);
-      inventoryDAO.updateGrocery(parsedId, amount);
+      double currentAmount = inventoryDAO.getGroceryAmount(parsedId);
+
 
       if (inventoryDAO.getGroceryAmount(parsedId) <= 0) {
         inventoryDAO.removeGrocery(parsedId);
@@ -74,7 +83,7 @@ public class InventoryController {
       // them know something/what went wrong
       System.out.println("Something went wrong");
     }
-  }
+  }*/
 
   public double getItemAmountById(String id) {
     try {
@@ -86,5 +95,23 @@ public class InventoryController {
       System.out.println("Something went wrong");
       return 0;
     }
+  }
+
+  public List<String[]> getGroceriesNotInInventory() {
+    List<Grocery> allGroceries = groceryController.getAllGroceries();
+    System.out.println(allGroceries.get(0).getName());
+    List<String[]> groceriesNotInInventory = new ArrayList<>();
+
+    for (Grocery grocery : allGroceries) {
+      double amount = getItemAmountById(grocery.getId());
+      if (amount > 0) {
+
+      }else {
+        String groceryId = grocery.getId();
+        String foodName = grocery.getName();
+        groceriesNotInInventory.add(new String[] {groceryId, foodName, ", unit: " + grocery.getUnit().getUnit()});
+      }
+    }
+    return groceriesNotInInventory;
   }
 }
