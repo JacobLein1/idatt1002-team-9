@@ -47,7 +47,7 @@ public class GroceryDAO {
           String unitString = resultSet.getString("unit");
 
           try{
-            UnitsE unit = UnitsE.valueOf(unitString);
+            UnitsE unit = UnitsE.getValue(unitString);
             grocery = new Grocery (name, image, groceryId, unit);
           } catch (Exception e){
             e.printStackTrace();
