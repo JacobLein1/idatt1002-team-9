@@ -40,7 +40,6 @@ public class GroceryDAO {
   private Grocery getGroceryFromResultSet(ResultSet resultSet){
     Grocery grocery = null;
     try{
-        if(resultSet.next()){
           String name = resultSet.getString("name");
           String image = resultSet.getString("image");
           String groceryId = String.valueOf(resultSet.getInt("groceryId"));
@@ -52,12 +51,9 @@ public class GroceryDAO {
           } catch (Exception e){
             e.printStackTrace();
           }
-        }
 
     } catch (SQLException e) {
         e.printStackTrace();
-    } finally {
-      close(null, null, resultSet);
     }
     return grocery;
   }
@@ -66,7 +62,7 @@ public class GroceryDAO {
     Connection connection = null;
     PreparedStatement preparedStatement = null;
     ResultSet resultSet = null;
-    List<Grocery> groceryList = new ArrayList<Grocery>();
+    List<Grocery> groceryList = new ArrayList<>();
 
     try {
       connection = connectionProvider.getConnection();
