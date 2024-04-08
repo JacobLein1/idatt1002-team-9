@@ -1,5 +1,6 @@
 package no.ntnu.idatt1005.controller;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 import no.ntnu.idatt1005.GroceryInfo.Grocery;
@@ -36,8 +37,6 @@ public class RecipeController {
     return ingredientsInfo;
   }
 
-
-
   public List<Ingredient> getListOfIngredientForRecipe(String id) {
     try {
       int parsedRecipeId = Integer.parseInt(id);
@@ -46,11 +45,7 @@ public class RecipeController {
       // Instead of using system.out.println, an error message may be sent to the user, letting
       // them know something/what went wrong
       System.out.println("Something went wrong");
-      return null;
+      return new ArrayList<>();
     }
-  }
-
-  public int getAmountOfRecipes() {
-    return getAllRecipes().size();
   }
 }

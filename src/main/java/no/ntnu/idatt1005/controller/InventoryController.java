@@ -32,8 +32,9 @@ public class InventoryController {
         convertedInventory.
             add(new String[] {groceryId, foodName, amount + " " + grocery.getUnit().getUnit()});
       } catch (Exception e) {
-        //i stedet for å returnere null, kanskje sette i gang en eller annen feilmelding?
-        return null;
+        //Add something to make the user aware that something went wrong, or that the Inventory
+        //is empty
+        return convertedInventory;
       }
     }
 
@@ -68,23 +69,6 @@ public class InventoryController {
     }
   }
 
-  /*public void updateAmountOfItem(String id, double amount) {
-    try {
-      int parsedId = Integer.parseInt(id);
-      double currentAmount = inventoryDAO.getGroceryAmount(parsedId);
-
-
-      if (inventoryDAO.getGroceryAmount(parsedId) <= 0) {
-        inventoryDAO.removeGrocery(parsedId);
-      }
-
-    } catch (Exception e) {
-      // Instead of using system.out.println, an error message may be sent to the user, letting
-      // them know something/what went wrong
-      System.out.println("Something went wrong");
-    }
-  }*/
-
   public double getItemAmountById(String id) {
     try {
       int parsedId = Integer.parseInt(id);
@@ -99,17 +83,16 @@ public class InventoryController {
 
   public List<String[]> getGroceriesNotInInventory() {
     List<Grocery> allGroceries = groceryController.getAllGroceries();
-    System.out.println(allGroceries.get(0).getName());
     List<String[]> groceriesNotInInventory = new ArrayList<>();
 
     for (Grocery grocery : allGroceries) {
       double amount = getItemAmountById(grocery.getId());
       if (amount > 0) {
-
       }else {
         String groceryId = grocery.getId();
         String foodName = grocery.getName();
-        groceriesNotInInventory.add(new String[] {groceryId, foodName, ", unit: " + grocery.getUnit().getUnit()});
+        groceriesNotInInventory.add(new String[]
+            {groceryId, foodName, ", unit: " + grocery.getUnit().getUnit()});
       }
     }
     return groceriesNotInInventory;

@@ -6,11 +6,6 @@ import no.ntnu.idatt1005.GroceryInfo.Grocery;
 import no.ntnu.idatt1005.RecipeInfo.Ingredient;
 
 public class BasketController {
-  //opprette en liste som heter Basket som kan inneholde recipes? Og legge til en måte å kunne legge til en og en
-  //recipe i denne lista, samt fjerne.
-
-  //trenger også en metode for å generere en handleliste her, se på hvordan dette kan løses
-
   InventoryController inventoryController;
   
   GroceryController groceryController;
