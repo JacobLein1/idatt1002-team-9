@@ -28,6 +28,9 @@ public class FridgeTab extends SuperTab {
     public VBox initializeUI() {
         VBox contentBox = new VBox(10);
 
+        Text fridgeTitle = new Text("Fridge");
+        fridgeTitle.setFont(this.getTitleFont());
+
         Button addButton = new Button("Add/Update grocery");
         addButton.setOnAction(e -> addGrocery());
 
@@ -39,7 +42,7 @@ public class FridgeTab extends SuperTab {
         scrollPane.setPrefViewportHeight(800);
 
 
-        contentBox.getChildren().addAll(addButton, removeButton, scrollPane);
+        contentBox.getChildren().addAll(fridgeTitle, addButton, removeButton, scrollPane);
 
 
         refreshGroceryItemsBox();
