@@ -18,7 +18,6 @@ public class FridgeTab extends SuperTab {
     private InventoryController inventoryController;
     private VBox groceryItemsBox;
 
-
     public FridgeTab() {
         super("Fridge");
         this.inventoryController = new InventoryController();
@@ -26,11 +25,10 @@ public class FridgeTab extends SuperTab {
         initializeUI();
     }
 
-
     public VBox initializeUI() {
         VBox contentBox = new VBox(10);
 
-        Button addButton = new Button("Update grocery");
+        Button addButton = new Button("Add/Update grocery");
         addButton.setOnAction(e -> addGrocery());
 
         Button removeButton = new Button("Remove grocery");
@@ -52,22 +50,24 @@ public class FridgeTab extends SuperTab {
 
     private void addGrocery() {
         TextInputDialog idDialog = new TextInputDialog();
-        idDialog.setTitle("Legg til Vare");
-        idDialog.setHeaderText("Legg til en ny vare");
-        idDialog.setContentText("Vennligst oppgi varens ID:");
+        idDialog.setTitle("Add or update grocery");
+        idDialog.setHeaderText("Add or update grocery");
+        idDialog.setContentText("Please enter the id of the grocery:");
         Optional<String> idResult = idDialog.showAndWait();
         if (!idResult.isPresent() || !idResult.get().matches("\\d+")) {
-            showAlert("Ugyldig ID", "Varens ID må være et tall.", Alert.AlertType.ERROR);
+            showAlert("Invalid ID",
+                "The ID of the grocery has to be a number.", Alert.AlertType.ERROR);
             return;
         }
 
         TextInputDialog quantityDialog = new TextInputDialog();
-        quantityDialog.setTitle("Legg til Vare Mengde");
-        quantityDialog.setHeaderText("Legg til mengde for varen");
-        quantityDialog.setContentText("Vennligst oppgi mengde:");
+        quantityDialog.setTitle("Enter new amount");
+        quantityDialog.setHeaderText("Enter new amount");
+        quantityDialog.setContentText("Please enter the new/updated amount:");
         Optional<String> quantityResult = quantityDialog.showAndWait();
         if (!quantityResult.isPresent() || !quantityResult.get().matches("\\d+")) {
-            showAlert("Ugyldig Mengde", "Mengden må være et tall.", Alert.AlertType.ERROR);
+            showAlert("Invalid amount",
+                "The amount has to be a number", Alert.AlertType.ERROR);
             return;
         }
 
@@ -88,7 +88,7 @@ public class FridgeTab extends SuperTab {
     private Label createGroceryItem(String[] groceryDetails) {
         Label nameLabel = new Label("Id: " + groceryDetails[0] + ", "+ groceryDetails[1]+ "  "
             + groceryDetails[2]);
-        nameLabel.setFont(Font.font("Arial", FontWeight.BOLD, 18));
+        //nameLabel.setFont(Font.font("Arial", FontWeight.BOLD, 18));
         return nameLabel;
     }
 
@@ -103,7 +103,7 @@ public class FridgeTab extends SuperTab {
                     groceryItemsBox.getChildren().addAll(groceryLabel);
                 }
             }
-            groceryItemsBox.getChildren().add(new Text("Groceries not in inventory"));
+            groceryItemsBox.getChildren().add(new Text("\nGroceries not in inventory"));
             var itemsNotInInventory = inventoryController.getGroceriesNotInInventory();
             for (String[] item : itemsNotInInventory) {
                     Label groceryLabel = createGroceryItem(item);
@@ -116,12 +116,13 @@ public class FridgeTab extends SuperTab {
 
     private void removeGrocery() {
         TextInputDialog idDialog = new TextInputDialog();
-        idDialog.setTitle("Fjern Vare");
-        idDialog.setHeaderText("Fjern en vare");
-        idDialog.setContentText("Vennligst oppgi ID til varen du vil fjerne:");
+        idDialog.setTitle("Remove grocery");
+        idDialog.setHeaderText("Remove grocery");
+        idDialog.setContentText("Please enter the id of the grocery you wish to remove:");
         Optional<String> idResult = idDialog.showAndWait();
         if (!idResult.isPresent() || !idResult.get().matches("\\d+")) {
-            showAlert("Ugyldig ID", "Varens ID må være et tall.", Alert.AlertType.ERROR);
+            showAlert("Invalid ID",
+                "The ID of the grocery has to be a number.", Alert.AlertType.ERROR);
             return;
         }
 
