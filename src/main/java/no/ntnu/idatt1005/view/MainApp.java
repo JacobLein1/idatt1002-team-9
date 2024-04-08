@@ -49,12 +49,8 @@ public class MainApp extends Application {
             tabPane.getTabs().addAll(tabRecipe, tabShoppingCart, tabFridge);
 
             // Set content for Recipe tab (Placeholder for actual content)
-            VBox recipeContent = new VBox(new Label("Recipes Content"));
-            Text recipeText = new Text("Recipes");
-            recipeText.setFont(tabRecipe.getTitleFont());
-            Text yourRecipes = new Text("Your Recipes");
-            yourRecipes.setFont(tabRecipe.getUnderTitleFont());
-            recipeContent.getChildren().addAll(recipeText, yourRecipes);
+            VBox recipeContent = new VBox();
+
 
             // Set content for Fridge tab (Placeholder for actual content)
             VBox fridgeContent = new VBox(new Label("Fridge Content"));
@@ -62,7 +58,7 @@ public class MainApp extends Application {
             tabFridge.setContent(fridgeContent);
 
 
-            tabRecipe.setContent(recipeContent);
+            tabRecipe.setContent(tabRecipe.defaultTabCreation());
 
 
             VBox tabShoppingCartContent = new VBox();
