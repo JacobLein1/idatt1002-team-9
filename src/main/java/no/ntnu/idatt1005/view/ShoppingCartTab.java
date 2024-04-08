@@ -79,7 +79,6 @@ public class ShoppingCartTab extends SuperTab {
                 int currentAmount = Integer.parseInt(counterText.getText()) + 1;
                 counterText.setText(Integer.toString(currentAmount));
                 recipeAmountMap.put(recipe.getRecipeID(), currentAmount);
-                System.out.println(recipeAmountMap);
             });
 
             decreaseButton.setOnAction(e -> {
@@ -88,7 +87,6 @@ public class ShoppingCartTab extends SuperTab {
                     currentAmount--;
                     counterText.setText(Integer.toString(currentAmount));
                     recipeAmountMap.put(recipe.getRecipeID(), currentAmount);
-                    System.out.println(recipeAmountMap);
                 }
             });
 
@@ -158,12 +156,6 @@ public class ShoppingCartTab extends SuperTab {
             Text groceryText = new Text(groceryName + ": " + amountAndUnit);
             shoppingList.getChildren().add(groceryText);
         });
-
-        //kan fjernes
-        inventoryController.getAllItemsInInventory().forEach(item -> {
-            System.out.println(item[0] + " " + item[1]);
-        });
-
 
 
         shoppinCartText.getChildren().addAll(shoppingCartTitle,shoppingListText);

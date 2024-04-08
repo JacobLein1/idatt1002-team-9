@@ -84,8 +84,7 @@ public class RecipeTab extends SuperTab {
     Text recipeInstructions = new Text(recipe.getInstructions());
 
     singleRecipeBox.getChildren().addAll(recipeInstructionsIntro,recipeInstructions);
-
-    singleRecipeBox.getChildren().addAll(recipeTitle,recipeIngredientsIntro);
+    
     return singleRecipeBox;
   }
   //this.setContent(recipeContent);
