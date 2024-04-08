@@ -128,9 +128,12 @@ public class ShoppingCartTab extends SuperTab {
         usedRecipes.getChildren().add(new Text("Recipes used:"));
 
         //Iterate through the recipeAmountMap and add the recipes to the basket
-        recipeAmountMap.forEach((recipeName, amount) -> {
-            if (amount > 0) { //If the amount is greater than 0, add the recipe to the basket
-                Text recipeText = new Text(recipeName + ": " + amount);
+        //HashMap<String, String> shoppingListMap = basketController.getShoppingListFromBasket(
+        //(HashMap<String, Integer>) recipeAmountMap);
+        recipeAmountMap.forEach((recipeId, amount) -> {
+            if (amount > 0) { //If the amount is greater than 0, the name will be printed out
+                String recipeName = recipeController.getRecipeNameById(recipeId);
+                Text recipeText = new Text(recipeName + " x" + amount);
                 usedRecipes.getChildren().add(recipeText);
 
                 //Add the recipe to the basket, as many times as the amount

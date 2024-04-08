@@ -48,4 +48,16 @@ public class RecipeController {
       return new ArrayList<>();
     }
   }
+
+  public String getRecipeNameById(String id) {
+    try {
+      int parsedRecipeId = Integer.parseInt(id);
+      return recipeDAO.getRecipeNameById(parsedRecipeId);
+    } catch (Exception e) {
+      // Instead of using system.out.println, an error message may be sent to the user, letting
+      // them know something/what went wrong
+      System.out.println("Something went wrong");
+      return "";
+    }
+  }
 }

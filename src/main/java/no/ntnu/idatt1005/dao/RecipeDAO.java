@@ -15,6 +15,25 @@ public class RecipeDAO {
         this.connectionProvider = connectionProvider;
     }
 
+    public String getRecipeNameById(int id) {
+        Connection connection = null;
+        PreparedStatement preparedStatement = null;
+        ResultSet resultSet = null;
+        try {
+            connection = connectionProvider.getConnection();
+            preparedStatement = connection.prepareStatement("SELECT * FROM RecipeList WHERE recipeId=?");
+            preparedStatement.setInt(1, id);
+            resultSet = preparedStatement.executeQuery();
+
+            return String.valueOf(resultSet.getString("recipeName"));
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            close(connection, preparedStatement, resultSet);
+        }
+        return "";
+    }
+
     public List<Ingredient> getIngredientsForRecipe(int id){
         Connection connection = null;
         PreparedStatement preparedStatement = null;
