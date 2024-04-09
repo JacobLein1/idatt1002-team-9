@@ -110,6 +110,25 @@
             <artifactId>slf4j-simple</artifactId>
             <version>1.7.36</version>
         </dependency>
+
+        <dependency>
+            <groupId>c3p0</groupId>
+            <artifactId>c3p0</artifactId>
+            <version>0.9.1.2</version>
+        </dependency>
+        <dependency>
+            <groupId>mysql</groupId>
+            <artifactId>mysql-connector-java</artifactId>
+            <version>8.0.33</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.testcontainers</groupId>
+            <artifactId>mysql</artifactId>
+            <version>1.19.6</version>
+            <scope>test</scope>
+        </dependency>
+
     </dependencies>
 
     <build>
@@ -151,7 +170,7 @@
                             <archive>
                                 <manifest>
                                     <mainClass>
-                                        no.ntnu.idatt1005.App
+                                        no.ntnu.idatt1005.view.MainApp
                                     </mainClass>
                                 </manifest>
                             </archive>
@@ -171,7 +190,7 @@
                         <!-- Default configuration for running with: mvn clean javafx:run -->
                         <id>default-cli</id>
                         <configuration>
-                            <mainClass>no.ntnu.idatt1005/no.ntnu.idatt1005.App</mainClass>
+                            <mainClass>no.ntnu.idatt1005.view.MainApp</mainClass>
                             <launcher>app</launcher>
                             <jlinkZipName>app</jlinkZipName>
                             <jlinkImageName>app</jlinkImageName>
