@@ -40,7 +40,8 @@ public class RecipeController {
   public List<Ingredient> getListOfIngredientForRecipe(String id) {
     try {
       int parsedRecipeId = Integer.parseInt(id);
-      return recipeDAO.getIngredientsForRecipe(parsedRecipeId);
+      Recipe recipe = recipeDAO.getRecipeById(parsedRecipeId);
+      return recipe.getIngredients();
     } catch (Exception e) {
       // Instead of using system.out.println, an error message may be sent to the user, letting
       // them know something/what went wrong
@@ -49,15 +50,15 @@ public class RecipeController {
     }
   }
 
-  public String getRecipeNameById(String id) {
+  public Recipe getRecipeById(String id) {
     try {
       int parsedRecipeId = Integer.parseInt(id);
-      return recipeDAO.getRecipeNameById(parsedRecipeId);
+      return recipeDAO.getRecipeById(parsedRecipeId);
     } catch (Exception e) {
       // Instead of using system.out.println, an error message may be sent to the user, letting
       // them know something/what went wrong
       System.out.println("Something went wrong");
-      return "";
+      return null;
     }
   }
 }

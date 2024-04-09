@@ -11,11 +11,13 @@ import static no.ntnu.idatt1005.dao.DBConnectionProvider.close;
 public class RecipeDAO {
 
     private DBConnectionProvider connectionProvider;
+    private GroceryDAO groceryDAO;
     public RecipeDAO(DBConnectionProvider connectionProvider) {
         this.connectionProvider = connectionProvider;
+        this.groceryDAO = new GroceryDAO(connectionProvider);
     }
 
-    public String getRecipeNameById(int id) {
+    public Recipe getRecipeById(int id) {
         Connection connection = null;
         PreparedStatement preparedStatement = null;
         ResultSet resultSet = null;
@@ -25,16 +27,23 @@ public class RecipeDAO {
             preparedStatement.setInt(1, id);
             resultSet = preparedStatement.executeQuery();
 
-            return String.valueOf(resultSet.getString("recipeName"));
+            int recipeID = resultSet.getInt("recipeId");
+            String recipeName = resultSet.getString("recipeName");
+            String instructions = resultSet.getString("instructions");
+            int numberOfPeople = resultSet.getInt("numberOfPeople");
+            List<Ingredient> ingredients = getIngredientsForRecipe(recipeID);
+
+            return new Recipe(
+                String.valueOf(recipeID), recipeName, ingredients, instructions, numberOfPeople);
         } catch (SQLException e) {
             e.printStackTrace();
+            return null;
         } finally {
             close(connection, preparedStatement, resultSet);
         }
-        return "";
     }
 
-    public List<Ingredient> getIngredientsForRecipe(int id){
+    private List<Ingredient> getIngredientsForRecipe(int id){
         Connection connection = null;
         PreparedStatement preparedStatement = null;
         ResultSet resultSet = null;
@@ -45,10 +54,12 @@ public class RecipeDAO {
             preparedStatement.setInt(1, id);
             resultSet = preparedStatement.executeQuery();
             while (resultSet.next()) {
-                String groceryId = String.valueOf(resultSet.getInt("groceryId"));
+                int groceryId = resultSet.getInt("groceryId");
+                String groceryName = groceryDAO.getGroceryById(groceryId).getName();
                 double amount = resultSet.getDouble("amount");
 
-                Ingredient ingredient = new Ingredient(groceryId, amount);
+                Ingredient ingredient = new Ingredient(
+                    String.valueOf(groceryId), groceryName, amount);
                 ingredients.add(ingredient);
             }
 
@@ -70,11 +81,14 @@ public class RecipeDAO {
             preparedStatement = connection.prepareStatement("SELECT * FROM RecipeList");
             resultSet = preparedStatement.executeQuery();
             while (resultSet.next()) {
-                String recipeID = String.valueOf(resultSet.getInt("recipeId"));
+                int recipeID = resultSet.getInt("recipeId");
+                //String recipeID = String.valueOf(resultSet.getInt("recipeId"));
                 String recipeName = resultSet.getString("recipeName");
                 String instructions = resultSet.getString("instructions");
                 int numberOfPeople = resultSet.getInt("numberOfPeople");
-                Recipe recipe = new Recipe(recipeID, recipeName, instructions, numberOfPeople);
+                List<Ingredient> ingredients = getIngredientsForRecipe(recipeID);
+                Recipe recipe = new Recipe(String.valueOf(recipeID),
+                    recipeName, ingredients, instructions, numberOfPeople);
                 recipes.add(recipe);
             }
 
