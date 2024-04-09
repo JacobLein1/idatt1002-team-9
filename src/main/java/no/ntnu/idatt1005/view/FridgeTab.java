@@ -4,20 +4,26 @@ package no.ntnu.idatt1005.view;
 import javafx.application.Platform;
 import javafx.scene.control.*;
 import javafx.scene.layout.VBox;
-import javafx.scene.text.Font;
-import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
 import no.ntnu.idatt1005.controller.InventoryController;
-import no.ntnu.idatt1005.Unit.UnitsE;
 
 
 import java.util.Optional;
 
-
+/**
+ * The FridgeTab class represents a tab within a user interface that allows users to manage grocery items.
+ * It extends the SuperTab class, providing a specialized view that has functionalities to add, update, and remove grocery items.
+ * @Author: Sander berge
+ */
 public class FridgeTab extends SuperTab {
     private InventoryController inventoryController;
     private VBox groceryItemsBox;
 
+
+    /**
+     * Constructs a new FridgeTab. This constructor initializes the inventory controller, the layout for displaying grocery items,
+     * and sets up the user interface with the components
+     */
     public FridgeTab() {
         super("Fridge");
         this.inventoryController = new InventoryController();
@@ -25,6 +31,10 @@ public class FridgeTab extends SuperTab {
         initializeUI();
     }
 
+    /**
+     * Initializes the UI components for the FridgeTab. This method sets up the title, buttons for adding and removing grocery items,
+     * and a scrollable area for displaying the grocery items. It also sets up event handlers for the buttons to add and remove grocery items.
+     */
     public VBox initializeUI() {
         VBox contentBox = new VBox(10);
 
@@ -50,7 +60,10 @@ public class FridgeTab extends SuperTab {
         return contentBox;
     }
 
-
+    /**
+     * Adds a new grocery item to the inventory. This method prompts the user to enter the ID and quantity of the grocery item they wish to add.
+     * If the user enters invalid input, an error message is displayed. Otherwise, the grocery item is added to the inventory and the list of grocery items is refreshed.
+     */
     private void addGrocery() {
         TextInputDialog idDialog = new TextInputDialog();
         idDialog.setTitle("Add or update grocery");
@@ -87,7 +100,10 @@ public class FridgeTab extends SuperTab {
     }
 
 
-
+    /**
+     * Creates a label for a grocery item. This method takes an array of strings representing the details of a grocery item and returns a label
+     * that displays the ID, name, and quantity of the grocery item.
+     */
     private Label createGroceryItem(String[] groceryDetails) {
         Label nameLabel = new Label("Id: " + groceryDetails[0] + ", "+ groceryDetails[1]+ "  "
             + groceryDetails[2]);
@@ -95,7 +111,10 @@ public class FridgeTab extends SuperTab {
         return nameLabel;
     }
 
-
+    /**
+     * Refreshes the list of grocery items displayed in the user interface. This method retrieves the list of grocery items from the inventory controller
+     * and creates a label for each item. The labels are then added to the groceryItemsBox layout.
+     */
     private void refreshGroceryItemsBox() {
         Platform.runLater(() -> {
             groceryItemsBox.getChildren().clear();
@@ -109,14 +128,17 @@ public class FridgeTab extends SuperTab {
             groceryItemsBox.getChildren().add(new Text("\nGroceries not in inventory"));
             var itemsNotInInventory = inventoryController.getGroceriesNotInInventory();
             for (String[] item : itemsNotInInventory) {
-                    Label groceryLabel = createGroceryItem(item);
-                    groceryItemsBox.getChildren().addAll(groceryLabel);
+                Label groceryLabel = createGroceryItem(item);
+                groceryItemsBox.getChildren().addAll(groceryLabel);
             }
 
         });
     }
 
-
+    /**
+     * Removes a grocery item from the inventory. This method prompts the user to enter the ID of the grocery item they wish to remove.
+     * If the user enters invalid input, an error message is displayed. If not, the grocery item is removed from the inventory and the list of grocery items is refreshed.
+     */
     private void removeGrocery() {
         TextInputDialog idDialog = new TextInputDialog();
         idDialog.setTitle("Remove grocery");
