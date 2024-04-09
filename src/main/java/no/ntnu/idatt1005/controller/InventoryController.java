@@ -88,6 +88,8 @@ public class InventoryController {
     for (Grocery grocery : allGroceries) {
       double amount = getItemAmountById(grocery.getId());
       if (amount > 0) {
+        // Empty since the goal of this method is to get all groceries that don't exist in the
+        // inventory, i.e. we don't want to add the groceries with an amount greater than 0
       }else {
         String groceryId = grocery.getId();
         String foodName = grocery.getName();
