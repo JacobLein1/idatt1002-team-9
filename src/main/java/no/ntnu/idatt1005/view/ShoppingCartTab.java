@@ -132,9 +132,11 @@ public class ShoppingCartTab extends SuperTab {
         //(HashMap<String, Integer>) recipeAmountMap);
         recipeAmountMap.forEach((recipeId, amount) -> {
             if (amount > 0) { //If the amount is greater than 0, the name will be printed out
-                String recipeName = recipeController.getRecipeNameById(recipeId);
-                Text recipeText = new Text(recipeName + " x" + amount);
-                usedRecipes.getChildren().add(recipeText);
+                if (recipeController.getRecipeById(recipeId) != null) {
+                    String recipeName = recipeController.getRecipeById(recipeId).getRecipeName();
+                    Text recipeText = new Text(recipeName + " x" + amount);
+                    usedRecipes.getChildren().add(recipeText);
+                }
 
                 //Add the recipe to the basket, as many times as the amount
                 /*for (int i = 0; i < amount; i++) {
