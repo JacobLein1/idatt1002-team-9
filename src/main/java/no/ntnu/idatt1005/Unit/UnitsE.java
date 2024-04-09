@@ -20,8 +20,9 @@ public enum UnitsE {
 
     public static UnitsE getValue(String unit) {
         return Arrays.stream(UnitsE.values())
-                .filter(unitsE -> unitsE.getUnit().equalsIgnoreCase(unit))
+                .filter(e -> e.getUnit().equalsIgnoreCase(unit))
                 .findFirst()
-                .orElseThrow(() -> new IllegalArgumentException("No enum constant " + unit));
+                .orElseThrow(() -> new IllegalArgumentException("Unknown unit: " + unit));
     }
+
 }

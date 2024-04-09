@@ -15,78 +15,78 @@ import java.util.Map;
 import java.util.Set;
 
 public class RecipeTab extends SuperTab {
-    RecipeController recipeController = new RecipeController();
-public RecipeTab() {
-        super("Recipe");
-    }
-    VBox recipeContent = new VBox();
+  RecipeController recipeController = new RecipeController();
+  public RecipeTab() {
+    super("Recipe");
+  }
+  VBox recipeContent = new VBox();
 
 
-    //Create the default tab for the recipe tab
-    public VBox defaultTabCreation() {
-        this.setClosable(false);
-        Text recipeTitle = new Text("Recipe");
-        Text recipeUnderTitle = new Text("All Recipes:");
-        recipeTitle.setFont(this.getTitleFont());
-        recipeUnderTitle.setFont(this.getUnderTitleFont());
-        recipeTitle.setFont(this.getTitleFont());
+  //Create the default tab for the recipe tab
+  public VBox defaultTabCreation() {
+    this.setClosable(false);
+    Text recipeTitle = new Text("Recipe");
+    Text recipeUnderTitle = new Text("All Recipes:");
+    recipeTitle.setFont(this.getTitleFont());
+    recipeUnderTitle.setFont(this.getUnderTitleFont());
+    recipeTitle.setFont(this.getTitleFont());
 
-        recipeContent.getChildren().addAll(recipeTitle);
+    recipeContent.getChildren().addAll(recipeTitle);
 
-        recipeContent.setSpacing(10);
-        recipeContent.getChildren().add(recipeUnderTitle);
-        recipeContent.getChildren().add(recipesBox());
-        return recipeContent;
-    }
+    recipeContent.setSpacing(10);
+    recipeContent.getChildren().add(recipeUnderTitle);
+    recipeContent.getChildren().add(recipesBox());
+    return recipeContent;
+  }
 
-    public HBox recipesBox() {
-        HBox recipeBox = new HBox();
-        recipeBox.setSpacing(10);
+  public HBox recipesBox() {
+    HBox recipeBox = new HBox();
+    recipeBox.setSpacing(10);
 
-        List<Recipe> recipes = recipeController.getAllRecipes();
-        System.out.println(recipes.size());
-        for (Recipe recipe : recipes) {
-            VBox singleRecipeBox = singleRecipeBox(recipe);
-            recipeBox.getChildren().add(singleRecipeBox);
-        }
-
-        return recipeBox;
+    List<Recipe> recipes = recipeController.getAllRecipes();
+    System.out.println(recipes.size());
+    for (Recipe recipe : recipes) {
+      VBox singleRecipeBox = singleRecipeBox(recipe);
+      recipeBox.getChildren().add(singleRecipeBox);
     }
 
-    public VBox singleRecipeBox(Recipe recipe){
-        VBox singleRecipeBox = new VBox();
-        singleRecipeBox.setSpacing(10);
-        Text recipeTitle = new Text(recipe.getRecipeName());
-        recipeTitle.setFont(this.getUnderTitleFont());
+    return recipeBox;
+  }
 
-        //Add the list of ingredients to the single recipe box
-        Text recipeIngredientsIntro = new Text("Ingredients:");
-        List<Ingredient> listOfIngredients = recipeController.getListOfIngredientForRecipe(recipe.getRecipeID());
+  public VBox singleRecipeBox(Recipe recipe){
+    VBox singleRecipeBox = new VBox();
+    singleRecipeBox.setSpacing(10);
+    Text recipeTitle = new Text(recipe.getRecipeName());
+    recipeTitle.setFont(this.getUnderTitleFont());
 
-        VBox ingredientBox = new VBox();
-        ingredientBox.setSpacing(10);
+    //Add the list of ingredients to the single recipe box
+    Text recipeIngredientsIntro = new Text("Ingredients:");
+    List<Ingredient> listOfIngredients = recipeController.getListOfIngredientForRecipe(recipe.getRecipeID());
 
-        HashMap<String,String> groceryList = recipeController.getIngredientsForRecipe(recipe.getRecipeID());
+    VBox ingredientBox = new VBox();
+    ingredientBox.setSpacing(10);
 
-        for (Map.Entry<String, String> entry : groceryList.entrySet()) {
-            String key = entry.getKey(); // Ingredient name
-            String value = entry.getValue(); // Ingredient amount and unit
+    HashMap<String,String> groceryList = recipeController.getIngredientsForRecipe(recipe.getRecipeID());
 
-            //Add each ingredient to ingredientBox
-            ingredientBox.getChildren().add(new Text(key + ": " + value));
-        }
+    for (Map.Entry<String, String> entry : groceryList.entrySet()) {
+      String key = entry.getKey(); // Ingredient name
+      String value = entry.getValue(); // Ingredient amount and unit
 
-
-        singleRecipeBox.getChildren().addAll(recipeTitle,recipeIngredientsIntro,ingredientBox);
-
-        Text recipeInstructionsIntro = new Text("Instructions:");
-        recipeInstructionsIntro.setFont(this.getUnderTitleFont());
-        Text recipeInstructions = new Text(recipe.getInstructions());
-
-        singleRecipeBox.getChildren().addAll(recipeInstructionsIntro,recipeInstructions);
-
-        singleRecipeBox.getChildren().addAll(recipeTitle,recipeIngredientsIntro);
-        return singleRecipeBox;
+      //Add each ingredient to ingredientBox
+      ingredientBox.getChildren().add(new Text(key + ": " + value));
     }
-    //this.setContent(recipeContent);
+
+
+    singleRecipeBox.getChildren().addAll(recipeTitle,recipeIngredientsIntro,ingredientBox);
+
+    Text recipeInstructionsIntro = new Text("Instructions:");
+    recipeInstructionsIntro.setFont(this.getUnderTitleFont());
+    Text recipeInstructions = new Text(recipe.getInstructions());
+
+    singleRecipeBox.getChildren().addAll(recipeInstructionsIntro,recipeInstructions);
+
+    singleRecipeBox.getChildren().addAll(recipeTitle,recipeIngredientsIntro);
+    return singleRecipeBox;
+  }
+  //this.setContent(recipeContent);
 }
