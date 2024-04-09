@@ -1,15 +1,16 @@
 package no.ntnu.idatt1005.RecipeInfo;
 
+import java.util.List;
+
 public class Recipe {
   private final String recipeID;
-
   private final String recipeName;
-  //private final Map<String, Double> ingredients;
+  private final List<Ingredient> ingredients;
   private final String instructions;
   private final int numberOfPeople;
 
-  public Recipe(String recipeID, String recipeName, String instructions, int numberOfPeople) {
-    //this.ingredients = ingredients;
+  public Recipe(String recipeID, String recipeName, List<Ingredient> ingredients,String instructions, int numberOfPeople) {
+    this.ingredients = ingredients;
     this.instructions = instructions;
     this.numberOfPeople = numberOfPeople;
     this.recipeID = recipeID;
@@ -19,12 +20,14 @@ public class Recipe {
   public String getRecipeID() {
     return recipeID;
   }
+
   public String getRecipeName() {
     return recipeName;
   }
-  /*public Map<String, Double> getIngredients() {
+
+  public List<Ingredient> getIngredients() {
     return ingredients;
-  }*/
+  }
 
   public String getInstructions() {
     return instructions;
@@ -33,14 +36,5 @@ public class Recipe {
   public int getNumberOfPeople() {
     return numberOfPeople;
   }
-
-  /*private Map<String, Double>  multiplyIngredients(int numberOfPeople) {
-    HashMap<String, Double> updatedMap = new HashMap<>();
-
-    for (Map.Entry<String, Double> entry : this.ingredients.entrySet()) {
-      updatedMap.put(entry.getKey(), entry.getValue() * numberOfPeople);
-    }
-    return updatedMap;
-  }*/
 
 }
