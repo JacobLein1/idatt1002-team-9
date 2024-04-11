@@ -1,4 +1,4 @@
-package no.ntnu.idatt1005.dao;
+package no.ntnu.idatt1005.model.dao;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -6,7 +6,7 @@ import java.util.List;
 import no.ntnu.idatt1005.model.RecipeInfo.Ingredient;
 import no.ntnu.idatt1005.model.RecipeInfo.Recipe;
 
-import static no.ntnu.idatt1005.dao.DBConnectionProvider.close;
+import static no.ntnu.idatt1005.model.dao.DBConnectionProvider.close;
 
 public class RecipeDAO {
 

@@ -5,8 +5,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import no.ntnu.idatt1005.dao.DBConnectionProvider;
-import no.ntnu.idatt1005.dao.InventoryDAO;
+import no.ntnu.idatt1005.model.dao.DBConnectionProvider;
+import no.ntnu.idatt1005.model.dao.InventoryDAO;
 import no.ntnu.idatt1005.model.grocery.Grocery;
 import no.ntnu.idatt1005.model.grocery.GroceryController;
 

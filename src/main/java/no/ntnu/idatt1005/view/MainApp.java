@@ -6,15 +6,13 @@ import javafx.collections.ObservableList;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.layout.*;
-import javafx.scene.paint.Paint;
-import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
 import java.io.FileNotFoundException;
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
-import no.ntnu.idatt1005.dao.DBConnectionProvider;
+import no.ntnu.idatt1005.model.dao.DBConnectionProvider;
 
 public class MainApp extends Application {
 

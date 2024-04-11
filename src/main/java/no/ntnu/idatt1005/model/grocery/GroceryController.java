@@ -2,9 +2,8 @@ package no.ntnu.idatt1005.model.grocery;
 
 import java.util.List;
 
-import no.ntnu.idatt1005.dao.DBConnectionProvider;
-import no.ntnu.idatt1005.dao.GroceryDAO;
-import no.ntnu.idatt1005.model.grocery.Grocery;
+import no.ntnu.idatt1005.model.dao.DBConnectionProvider;
+import no.ntnu.idatt1005.model.dao.GroceryDAO;
 
 public class GroceryController {
   GroceryDAO groceryDAO;
@@ -24,7 +23,7 @@ public class GroceryController {
     } catch (Exception e) {
       // Instead of using system.out.println, an error message may be sent to the user, letting
       // them know something/what went wrong
-      System.out.println("Something went wrong");
+      System.out.println("Something went wrong, groceryController");
       return null;
     }
   }

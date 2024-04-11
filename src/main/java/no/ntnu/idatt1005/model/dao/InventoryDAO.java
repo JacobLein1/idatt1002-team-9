@@ -1,8 +1,8 @@
-package no.ntnu.idatt1005.dao;
+package no.ntnu.idatt1005.model.dao;
 import java.sql.*;
 import java.util.HashMap;
 
-import static no.ntnu.idatt1005.dao.DBConnectionProvider.close;
+import static no.ntnu.idatt1005.model.dao.DBConnectionProvider.close;
 
 public class InventoryDAO {
 

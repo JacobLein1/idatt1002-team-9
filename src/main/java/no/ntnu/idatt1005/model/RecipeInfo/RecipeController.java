@@ -5,8 +5,8 @@ import java.util.HashMap;
 
 import no.ntnu.idatt1005.model.grocery.Grocery;
 import no.ntnu.idatt1005.model.grocery.GroceryController;
-import no.ntnu.idatt1005.dao.DBConnectionProvider;
-import no.ntnu.idatt1005.dao.RecipeDAO;
+import no.ntnu.idatt1005.model.dao.DBConnectionProvider;
+import no.ntnu.idatt1005.model.dao.RecipeDAO;
 
 import java.util.List;
 
@@ -33,8 +33,6 @@ public class RecipeController {
       String amountAndUnit = ingredient.getAmount() + " " + grocery.getUnit().getUnit();
       ingredientsInfo.put(name, amountAndUnit);
     }
-
-
     return ingredientsInfo;
   }
 
