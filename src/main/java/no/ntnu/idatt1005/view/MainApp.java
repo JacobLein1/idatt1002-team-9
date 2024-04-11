@@ -46,7 +46,7 @@ public class MainApp extends Application {
 
             // Add tabs to TabPane
             tabPane.getTabs().addAll(tabRecipe, tabShoppingCart, tabFridge);
-            tabPane.getTabs().forEach(tab -> tab.setStyle("-fx-background-color: #AED581;"));
+            tabPane.getTabs().forEach(tab -> tab.getStyleClass().add("tab"));
 
 
 
@@ -81,6 +81,8 @@ public class MainApp extends Application {
 
             // Create scene with the main layout
             Scene scene = new Scene(mainLayout, 800, 600);
+
+            scene.getStylesheets().add("ButtonStyle.css");
 
             primaryStage.setTitle("The CookBook");
             primaryStage.setScene(scene);

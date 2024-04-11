@@ -74,6 +74,9 @@ public class ShoppingCartTab extends SuperTab {
             Button decreaseButton = new Button("-");
             Button increaseButton = new Button("+");
 
+            decreaseButton.getStyleClass().add("negativeButton");
+            increaseButton.getStyleClass().add("positiveButton");
+
             //Add responses to the buttons
             increaseButton.setOnAction(e -> {
                 int currentAmount = Integer.parseInt(counterText.getText()) + 1;
