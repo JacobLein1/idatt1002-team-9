@@ -22,7 +22,7 @@ public class Ingredient {
   @Override
   public String toString() {
     return grocery.getName() +
-            ", " + amount;
+            ", " + amount + grocery.getUnit().getUnit();
   }
 }
 
