@@ -1,22 +1,18 @@
 package no.ntnu.idatt1005.model.RecipeInfo;
 
+import no.ntnu.idatt1005.model.grocery.Grocery;
+
 public class Ingredient {
-  private final String groceryId;
-  private final String groceryName;
+  private Grocery grocery;
   private final double amount;
 
-  public Ingredient(String groceryId, String groceryName, double amount) {
-    this.groceryId = groceryId;
-    this.groceryName = groceryName;
+  public Ingredient(Grocery grocery, double amount) {
+    this.grocery = grocery;
     this.amount = amount;
   }
 
-  public String getGroceryId() {
-    return groceryId;
-  }
-
-  public String getGroceryName() {
-    return groceryName;
+  public Grocery getGrocery() {
+    return grocery;
   }
 
   public double getAmount() {

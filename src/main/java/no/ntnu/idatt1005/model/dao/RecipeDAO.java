@@ -5,6 +5,7 @@ import java.util.List;
 
 import no.ntnu.idatt1005.model.RecipeInfo.Ingredient;
 import no.ntnu.idatt1005.model.RecipeInfo.Recipe;
+import no.ntnu.idatt1005.model.grocery.Grocery;
 
 import static no.ntnu.idatt1005.model.dao.DBConnectionProvider.close;
 
@@ -55,11 +56,10 @@ public class RecipeDAO {
             resultSet = preparedStatement.executeQuery();
             while (resultSet.next()) {
                 int groceryId = resultSet.getInt("groceryId");
-                String groceryName = groceryDAO.getGroceryById(groceryId).getName();
+                Grocery grocery = groceryDAO.getGroceryById(id);
                 double amount = resultSet.getDouble("amount");
 
-                Ingredient ingredient = new Ingredient(
-                    String.valueOf(groceryId), groceryName, amount);
+                Ingredient ingredient = new Ingredient(grocery, amount);
                 ingredients.add(ingredient);
             }
 
