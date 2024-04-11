@@ -1,13 +1,13 @@
-package no.ntnu.idatt1005.controller;
+package no.ntnu.idatt1005.model.RecipeInfo;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Map;
-import no.ntnu.idatt1005.GroceryInfo.Grocery;
-import no.ntnu.idatt1005.RecipeInfo.Ingredient;
-import no.ntnu.idatt1005.RecipeInfo.Recipe;
+
+import no.ntnu.idatt1005.model.grocery.Grocery;
+import no.ntnu.idatt1005.model.grocery.GroceryController;
 import no.ntnu.idatt1005.dao.DBConnectionProvider;
 import no.ntnu.idatt1005.dao.RecipeDAO;
+
 import java.util.List;
 
 public class RecipeController {

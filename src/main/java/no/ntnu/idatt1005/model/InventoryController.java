@@ -1,12 +1,14 @@
-package no.ntnu.idatt1005.controller;
+package no.ntnu.idatt1005.model;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import no.ntnu.idatt1005.GroceryInfo.Grocery;
+
 import no.ntnu.idatt1005.dao.DBConnectionProvider;
 import no.ntnu.idatt1005.dao.InventoryDAO;
+import no.ntnu.idatt1005.model.grocery.Grocery;
+import no.ntnu.idatt1005.model.grocery.GroceryController;
 
 public class InventoryController {
   InventoryDAO inventoryDAO;

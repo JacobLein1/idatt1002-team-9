@@ -1,4 +1,4 @@
-package no.ntnu.idatt1005.RecipeInfo;
+package no.ntnu.idatt1005.model.RecipeInfo;
 
 import java.util.List;
 

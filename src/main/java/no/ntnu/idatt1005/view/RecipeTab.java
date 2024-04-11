@@ -1,18 +1,15 @@
 package no.ntnu.idatt1005.view;
 
-import javafx.scene.control.Label;
-import javafx.scene.control.Tab;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
-import no.ntnu.idatt1005.RecipeInfo.Ingredient;
-import no.ntnu.idatt1005.RecipeInfo.Recipe;
-import no.ntnu.idatt1005.controller.RecipeController;
+import no.ntnu.idatt1005.model.RecipeInfo.Ingredient;
+import no.ntnu.idatt1005.model.RecipeInfo.Recipe;
+import no.ntnu.idatt1005.model.RecipeInfo.RecipeController;
 
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
 
 public class RecipeTab extends SuperTab {
   RecipeController recipeController = new RecipeController();

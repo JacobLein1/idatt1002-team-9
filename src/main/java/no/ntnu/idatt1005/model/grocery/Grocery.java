@@ -1,4 +1,4 @@
-package no.ntnu.idatt1005.GroceryInfo;
+package no.ntnu.idatt1005.model.grocery;
 
 import no.ntnu.idatt1005.Unit.UnitsE;
 

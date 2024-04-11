@@ -6,10 +6,10 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
-import no.ntnu.idatt1005.RecipeInfo.Recipe;
-import no.ntnu.idatt1005.controller.BasketController;
-import no.ntnu.idatt1005.controller.InventoryController;
-import no.ntnu.idatt1005.controller.RecipeController;
+import no.ntnu.idatt1005.model.RecipeInfo.Recipe;
+import no.ntnu.idatt1005.model.BasketController;
+import no.ntnu.idatt1005.model.InventoryController;
+import no.ntnu.idatt1005.model.RecipeInfo.RecipeController;
 
 import java.util.HashMap;
 import java.util.List;
