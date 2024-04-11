@@ -51,9 +51,6 @@ public class MainApp extends Application {
             tabPane.getTabs().forEach(tab -> tab.setStyle("-fx-background-color: #AED581;"));
 
 
-            // Set content for Recipe tab (Placeholder for actual content)
-            VBox recipeContent = new VBox();
-
 
             // Set content for Fridge tab (Placeholder for actual content)
             VBox fridgeContent = new VBox();
@@ -65,12 +62,20 @@ public class MainApp extends Application {
 
 
             VBox tabShoppingCartContent = new VBox();
+            tabPane.getSelectionModel().selectedItemProperty().addListener((obs, oldTab,newTab) -> {
+                if(newTab == tabShoppingCart){
+                    tabShoppingCartContent.getChildren().clear();
+                    tabShoppingCartContent.getChildren().addAll(tabShoppingCart.defaultTabCreation(),tabShoppingCart.allRecipes(),tabShoppingCart.createFinishShoppingButton());
+                    tabShoppingCart.setContent(tabShoppingCartContent);
+                }
+            } );
+
             Button finishSHoppingButton = tabShoppingCart.createFinishShoppingButton();
 
-            tabShoppingCartContent.getChildren().addAll(tabShoppingCart.defaultTabCreation(),tabShoppingCart.allRecipes(),finishSHoppingButton);
+            //tabShoppingCartContent.getChildren().addAll(tabShoppingCart.defaultTabCreation(),tabShoppingCart.allRecipes(),finishSHoppingButton);
 
 
-            tabShoppingCart.setContent(tabShoppingCartContent);
+            //tabShoppingCart.setContent(tabShoppingCartContent);
 
 
             // Main layout
