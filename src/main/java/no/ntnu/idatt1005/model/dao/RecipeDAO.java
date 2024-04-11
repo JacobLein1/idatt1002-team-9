@@ -56,7 +56,7 @@ public class RecipeDAO {
             resultSet = preparedStatement.executeQuery();
             while (resultSet.next()) {
                 int groceryId = resultSet.getInt("groceryId");
-                Grocery grocery = groceryDAO.getGroceryById(id);
+                Grocery grocery = groceryDAO.getGroceryById(groceryId);
                 double amount = resultSet.getDouble("amount");
 
                 Ingredient ingredient = new Ingredient(grocery, amount);
