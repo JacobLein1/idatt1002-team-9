@@ -22,7 +22,7 @@ public enum UnitsE {
         return Arrays.stream(UnitsE.values())
                 .filter(e -> e.getUnit().equalsIgnoreCase(unit))
                 .findFirst()
-                .orElseThrow(() -> new IllegalArgumentException("Unknown unit: " + unit));
+                .orElseThrow(() -> new IllegalArgumentException("Unknown unit:  " + unit));
     }
 
 }
