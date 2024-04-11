@@ -6,6 +6,7 @@ import javafx.collections.ObservableList;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.layout.*;
+import javafx.scene.paint.Paint;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
@@ -37,7 +38,7 @@ public class MainApp extends Application {
             searchField.setPromptText("Search");
             // Layout for the top bar (search field)
             HBox topBar = new HBox(searchField);
-            topBar.setStyle("-fx-background-color: #CACACA;"); // Example styling
+            topBar.setStyle("-fx-background-color: #8D6E63;");
 
 
             // Prevent tabs from closing
@@ -47,6 +48,8 @@ public class MainApp extends Application {
 
             // Add tabs to TabPane
             tabPane.getTabs().addAll(tabRecipe, tabShoppingCart, tabFridge);
+            tabPane.getTabs().forEach(tab -> tab.setStyle("-fx-background-color: #AED581;"));
+
 
             // Set content for Recipe tab (Placeholder for actual content)
             VBox recipeContent = new VBox();
