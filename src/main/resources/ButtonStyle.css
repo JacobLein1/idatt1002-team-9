@@ -1,0 +1,25 @@
+.negativeButton{
+    -fx-background-color: #ff6363;
+}
+.negativeButton:hover {
+    -fx-background-color: #cc3636;
+}
+
+.positiveButton {
+    -fx-background-color: #a9ff63;
+}
+
+.positiveButton:hover {
+    -fx-background-color: #6ecb31;
+}
+
+.tab:selected {
+    /*-fx-background-color: #94c262;*/
+    -fx-border-width: 1px;
+    -fx-border-style: line;
+    -fx-border-color: #4d7234;
+}
+
+.tab {
+    -fx-background-color: #AED581;
+}
