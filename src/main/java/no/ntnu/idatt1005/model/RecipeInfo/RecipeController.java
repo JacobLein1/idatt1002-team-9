@@ -23,17 +23,10 @@ public class RecipeController {
     return recipeDAO.getAllRecipes();
   }
 
-  public HashMap<String, String> getIngredientsForRecipe(String id) {
-    HashMap<String, String> ingredientsInfo = new HashMap<>();
-    List<Ingredient> listOfIngredients = getListOfIngredientForRecipe(id);
+  public List<Ingredient> getIngredientsForRecipe(String recipeId) {
+    int recipeIdInt = Integer.parseInt(recipeId);
 
-    for (Ingredient ingredient : listOfIngredients) {
-      Grocery grocery = groceryController.getGroceryById(ingredient.getGroceryId());
-      String name = grocery.getName();
-      String amountAndUnit = ingredient.getAmount() + " " + grocery.getUnit().getUnit();
-      ingredientsInfo.put(name, amountAndUnit);
-    }
-    return ingredientsInfo;
+    return recipeDAO.getRecipeById(recipeIdInt).getIngredients();
   }
 
   public List<Ingredient> getListOfIngredientForRecipe(String id) {

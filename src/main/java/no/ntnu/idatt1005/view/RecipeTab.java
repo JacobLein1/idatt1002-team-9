@@ -63,15 +63,11 @@ public class RecipeTab extends SuperTab {
     VBox ingredientBox = new VBox();
     ingredientBox.setSpacing(10);
 
-    HashMap<String,String> groceryList = recipeController.getIngredientsForRecipe(recipe.getRecipeID());
+    List<Ingredient> ingredientList = recipeController.getIngredientsForRecipe(recipe.getRecipeID());
 
-    for (Map.Entry<String, String> entry : groceryList.entrySet()) {
-      String key = entry.getKey(); // Ingredient name
-      String value = entry.getValue(); // Ingredient amount and unit
-
-      //Add each ingredient to ingredientBox
-      ingredientBox.getChildren().add(new Text(key + ": " + value));
-    }
+    ingredientList.forEach(ingredient -> {
+      ingredientBox.getChildren().add(new Text(ingredient.toString()));
+    });
 
 
     singleRecipeBox.getChildren().addAll(recipeTitle,recipeIngredientsIntro,ingredientBox);

@@ -54,7 +54,7 @@ public class BasketController {
           recipeController.getListOfIngredientForRecipe(recipeId);
 
       for (Ingredient ingredient : ingredientsForRecipe) {
-        String groceryId = ingredient.getGroceryId();
+        String groceryId = ingredient.getGrocery().getId();
         double neededIngredientAmount = ingredient.getAmount() * entry.getValue();
 
         if (neededIngredients.containsKey(groceryId)) {

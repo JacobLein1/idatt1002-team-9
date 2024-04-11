@@ -18,4 +18,11 @@ public class Ingredient {
   public double getAmount() {
     return amount;
   }
+
+  @Override
+  public String toString() {
+    return grocery.getName() +
+            ", " + amount;
+  }
 }
+
