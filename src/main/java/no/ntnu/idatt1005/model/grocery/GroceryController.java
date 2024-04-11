@@ -21,10 +21,7 @@ public class GroceryController {
       int parsedId = Integer.parseInt(id);
       return groceryDAO.getGroceryById(parsedId);
     } catch (Exception e) {
-      // Instead of using system.out.println, an error message may be sent to the user, letting
-      // them know something/what went wrong
-      System.out.println("Something went wrong, groceryController");
-      return null;
+      throw new IllegalArgumentException("Grocery not found");
     }
   }
 }

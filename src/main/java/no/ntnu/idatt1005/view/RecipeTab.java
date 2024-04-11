@@ -87,7 +87,6 @@ public class RecipeTab extends SuperTab {
 
     //Add the list of ingredients to the single recipe box
     Text recipeIngredientsIntro = new Text("Ingredients:");
-    List<Ingredient> listOfIngredients = recipeController.getListOfIngredientForRecipe(recipe.getRecipeID());
 
     VBox ingredientBox = new VBox();
     ingredientBox.setSpacing(10);

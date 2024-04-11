@@ -29,28 +29,12 @@ public class RecipeController {
     return recipeDAO.getRecipeById(recipeIdInt).getIngredients();
   }
 
-  public List<Ingredient> getListOfIngredientForRecipe(String id) {
-    try {
-      int parsedRecipeId = Integer.parseInt(id);
-      Recipe recipe = recipeDAO.getRecipeById(parsedRecipeId);
-      return recipe.getIngredients();
-    } catch (Exception e) {
-      // Instead of using system.out.println, an error message may be sent to the user, letting
-      // them know something/what went wrong
-      System.out.println("Something went wrong");
-      return new ArrayList<>();
-    }
-  }
-
-  public Recipe getRecipeById(String id) {
+  public Recipe getRecipeById(String id) throws IllegalArgumentException {
     try {
       int parsedRecipeId = Integer.parseInt(id);
       return recipeDAO.getRecipeById(parsedRecipeId);
     } catch (Exception e) {
-      // Instead of using system.out.println, an error message may be sent to the user, letting
-      // them know something/what went wrong
-      System.out.println("Something went wrong");
-      return null;
+      throw new IllegalArgumentException("Recipe not found");
     }
   }
 }

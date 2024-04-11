@@ -51,7 +51,7 @@ public class BasketController {
     for (Map.Entry<String, Integer> entry : recipeAmountMap.entrySet()) {
       String recipeId = entry.getKey();
       List<Ingredient> ingredientsForRecipe =
-          recipeController.getListOfIngredientForRecipe(recipeId);
+          recipeController.getIngredientsForRecipe(recipeId);
 
       for (Ingredient ingredient : ingredientsForRecipe) {
         String groceryId = ingredient.getGrocery().getId();
