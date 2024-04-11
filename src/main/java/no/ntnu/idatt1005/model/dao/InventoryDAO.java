@@ -1,6 +1,9 @@
 package no.ntnu.idatt1005.model.dao;
 import java.sql.*;
 import java.util.HashMap;
+import no.ntnu.idatt1005.model.RecipeInfo.Ingredient;
+import no.ntnu.idatt1005.model.grocery.Grocery;
+import no.ntnu.idatt1005.model.inventory.Inventory;
 
 import static no.ntnu.idatt1005.model.dao.DBConnectionProvider.close;
 
@@ -8,15 +11,18 @@ public class InventoryDAO {
 
     private DBConnectionProvider connectionProvider;
 
+    private GroceryDAO groceryDAO;
+
     public InventoryDAO(DBConnectionProvider connectionProvider) {
         this.connectionProvider = connectionProvider;
+        this.groceryDAO = new GroceryDAO(connectionProvider);
     }
 
-    public HashMap<String, Double> getInventory() {
+    public Inventory getInventory() {
         Connection connection = null;
         PreparedStatement preparedStatement = null;
         ResultSet resultSet = null;
-        HashMap<String, Double> inventory = new HashMap<>();
+        Inventory inventory = new Inventory();
 
         try {
             connection = connectionProvider.getConnection();
@@ -24,9 +30,12 @@ public class InventoryDAO {
             resultSet = preparedStatement.executeQuery();
 
             while (resultSet.next()) {
-                String groceryID = String.valueOf(resultSet.getInt("groceryId"));
+                int groceryID = resultSet.getInt("groceryId");
+                Grocery grocery = groceryDAO.getGroceryById(groceryID);
                 double amount = resultSet.getDouble("groceryAmount");
-                inventory.put(groceryID, amount);
+
+                Ingredient invGrocery = new Ingredient(grocery, amount);
+                inventory.addGroceryToInventory(invGrocery);
             }
         } catch (SQLException e) {
             e.printStackTrace();

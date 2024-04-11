@@ -1,14 +1,13 @@
 package no.ntnu.idatt1005.model;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import no.ntnu.idatt1005.model.dao.DBConnectionProvider;
 import no.ntnu.idatt1005.model.dao.InventoryDAO;
 import no.ntnu.idatt1005.model.grocery.Grocery;
 import no.ntnu.idatt1005.model.grocery.GroceryController;
+import no.ntnu.idatt1005.model.inventory.Inventory;
 
 public class InventoryController {
   InventoryDAO inventoryDAO;
@@ -20,28 +19,9 @@ public class InventoryController {
   }
 
   //Got help from chatGPT
-  public List<String[]> getAllItemsInInventory() {
-    HashMap<String, Double> allInventory = inventoryDAO.getInventory();
-
-    List<String[]> convertedInventory = new ArrayList<>();
-
-    for (Map.Entry<String, Double> entry : allInventory.entrySet()) {
-      try {
-        Grocery grocery = groceryController.getGroceryById(entry.getKey());
-        String groceryId = grocery.getId();
-        String foodName = grocery.getName();
-        Double amount = entry.getValue();
-        convertedInventory.
-            add(new String[] {groceryId, foodName, amount + " " + grocery.getUnit().getUnit()});
-      } catch (Exception e) {
-        //Add something to make the user aware that something went wrong, or that the Inventory
-        //is empty
-        return convertedInventory;
-      }
+  public Inventory getAllItemsInInventory() {
+      return inventoryDAO.getInventory();
     }
-
-    return convertedInventory;
-  }
 
   public void addOrUpdateItemToInventory(String id, int amount) {
     try {
@@ -83,9 +63,9 @@ public class InventoryController {
     }
   }
 
-  public List<String[]> getGroceriesNotInInventory() {
+  public List<Grocery> getGroceriesNotInInventory() {
     List<Grocery> allGroceries = groceryController.getAllGroceries();
-    List<String[]> groceriesNotInInventory = new ArrayList<>();
+    List<Grocery> groceriesNotInInventory = new ArrayList<>();
 
     for (Grocery grocery : allGroceries) {
       double amount = getItemAmountById(grocery.getId());
@@ -93,10 +73,7 @@ public class InventoryController {
         // Empty since the goal of this method is to get all groceries that don't exist in the
         // inventory, i.e. we don't want to add the groceries with an amount greater than 0
       }else {
-        String groceryId = grocery.getId();
-        String foodName = grocery.getName();
-        groceriesNotInInventory.add(new String[]
-            {groceryId, foodName, ", unit: " + grocery.getUnit().getUnit()});
+        groceriesNotInInventory.add(grocery);
       }
     }
     return groceriesNotInInventory;

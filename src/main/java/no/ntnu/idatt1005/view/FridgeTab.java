@@ -1,6 +1,7 @@
 package no.ntnu.idatt1005.view;
 
 
+import java.util.List;
 import javafx.application.Platform;
 import javafx.scene.control.*;
 import javafx.scene.layout.VBox;
@@ -9,6 +10,8 @@ import no.ntnu.idatt1005.model.InventoryController;
 
 
 import java.util.Optional;
+import no.ntnu.idatt1005.model.RecipeInfo.Ingredient;
+import no.ntnu.idatt1005.model.grocery.Grocery;
 
 /**
  * The FridgeTab class represents a tab within a user interface that allows users to manage grocery items.
@@ -43,9 +46,11 @@ public class FridgeTab extends SuperTab {
 
         Button addButton = new Button("Add/Update grocery");
         addButton.setOnAction(e -> addGrocery());
+        addButton.getStyleClass().add("positiveButton");
 
         Button removeButton = new Button("Remove grocery");
         removeButton.setOnAction(e -> removeGrocery());
+        removeButton.getStyleClass().add("negativeButton");
 
         ScrollPane scrollPane = new ScrollPane();
         scrollPane.setContent(groceryItemsBox);
@@ -104,11 +109,14 @@ public class FridgeTab extends SuperTab {
      * Creates a label for a grocery item. This method takes an array of strings representing the details of a grocery item and returns a label
      * that displays the ID, name, and quantity of the grocery item.
      */
-    private Label createGroceryItem(String[] groceryDetails) {
-        Label nameLabel = new Label("Id: " + groceryDetails[0] + ", "+ groceryDetails[1]+ "  "
-            + groceryDetails[2]);
-        //nameLabel.setFont(Font.font("Arial", FontWeight.BOLD, 18));
-        return nameLabel;
+    private Label createInventoryItem(Ingredient item) {
+        return new Label("Id: " + item.getGrocery().getId() + ", " + item.getGrocery().getName()
+            + "  " + item.getAmount() + " " + item.getGrocery().getUnit().getUnit());
+    }
+
+    private Label createGroceryItem(Grocery grocery) {
+        return new Label("Id: " + grocery.getId() + ", " + grocery.getName() + ", unit: " +
+            grocery.getUnit().getUnit());
     }
 
     /**
@@ -118,17 +126,17 @@ public class FridgeTab extends SuperTab {
     private void refreshGroceryItemsBox() {
         Platform.runLater(() -> {
             groceryItemsBox.getChildren().clear();
-            var inventoryItems = inventoryController.getAllItemsInInventory();
+            List<Ingredient> inventoryItems = inventoryController.getAllItemsInInventory().getInventory();
             if (inventoryItems != null) {
-                for (String[] item : inventoryItems) {
-                    Label groceryLabel = createGroceryItem(item);
+                for (Ingredient item : inventoryItems) {
+                    Label groceryLabel = createInventoryItem(item);
                     groceryItemsBox.getChildren().addAll(groceryLabel);
                 }
             }
             groceryItemsBox.getChildren().add(new Text("\nGroceries not in inventory"));
             var itemsNotInInventory = inventoryController.getGroceriesNotInInventory();
-            for (String[] item : itemsNotInInventory) {
-                Label groceryLabel = createGroceryItem(item);
+            for (Grocery grocery : itemsNotInInventory) {
+                Label groceryLabel = createGroceryItem(grocery);
                 groceryItemsBox.getChildren().addAll(groceryLabel);
             }
 
