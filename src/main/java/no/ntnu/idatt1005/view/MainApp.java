@@ -82,7 +82,7 @@ public class MainApp extends Application {
             // Create scene with the main layout
             Scene scene = new Scene(mainLayout, 800, 600);
 
-            scene.getStylesheets().add("ButtonStyle.css");
+            scene.getStylesheets().add("ApplicationStyling.css");
 
             primaryStage.setTitle("The CookBook");
             primaryStage.setScene(scene);

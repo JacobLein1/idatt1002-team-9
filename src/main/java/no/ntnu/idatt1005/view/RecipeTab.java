@@ -88,6 +88,7 @@ public class RecipeTab extends SuperTab {
 
     //Add the list of ingredients to the single recipe box
     Text recipeIngredientsIntro = new Text("Ingredients:");
+    recipeIngredientsIntro.setFont(this.getBoldDescriptionFont());
 
     VBox ingredientBox = new VBox();
     ingredientBox.setSpacing(10);
@@ -102,7 +103,7 @@ public class RecipeTab extends SuperTab {
     singleRecipeBox.getChildren().addAll(recipeTitle,recipeIngredientsIntro,ingredientBox);
 
     Text recipeInstructionsIntro = new Text("Instructions:");
-    recipeInstructionsIntro.setFont(this.getUnderTitleFont());
+    recipeInstructionsIntro.setFont(this.getBoldDescriptionFont());
     Text recipeInstructions = new Text(recipe.getInstructions());
 
     singleRecipeBox.getChildren().addAll(recipeInstructionsIntro,recipeInstructions);

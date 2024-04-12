@@ -14,10 +14,9 @@
 }
 
 .tab:selected {
-    /*-fx-background-color: #94c262;*/
-    -fx-border-width: 1px;
-    -fx-border-style: line;
-    -fx-border-color: #4d7234;
+    -fx-padding: 5px;
+    -fx-focus-color: transparent;
+    -fx-faint-focus-color: transparent;
 }
 
 .tab {

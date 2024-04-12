@@ -160,11 +160,11 @@ public class FridgeTab extends SuperTab {
         TextInputDialog idDialog = new TextInputDialog();
         idDialog.setTitle("Remove grocery");
         idDialog.setHeaderText("Remove grocery");
-        idDialog.setContentText("Please enter the id of the grocery you wish to remove:");
+        idDialog.setContentText("Please enter the name of the grocery you wish to remove:");
         Optional<String> idResult = idDialog.showAndWait();
         if (!idResult.isPresent()) {
-            showAlert("Invalid ID",
-                "The ID of the grocery has to be a number.", Alert.AlertType.ERROR);
+            showAlert("Invalid input",
+                "The input was empty.", Alert.AlertType.ERROR);
             return;
         }
 

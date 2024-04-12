@@ -9,6 +9,8 @@ public class SuperTab extends Tab {
     private final Font titleFont = Font.font("Arial", FontWeight.BOLD, 20);
     private final Font underTitleFont = Font.font("Arial", FontWeight.BOLD, 15);
     private final Font descriptionFont = Font.font("Arial", FontWeight.NORMAL, 12);
+    private final Font boldDescriptionFont = Font.font("Arial", FontWeight.BOLD, 12);
+
     public SuperTab(String title) {
         super(title);
     }
@@ -21,5 +23,9 @@ public class SuperTab extends Tab {
     }
     public Font getDescriptionFont() {
         return descriptionFont;
+    }
+
+    public Font getBoldDescriptionFont() {
+        return boldDescriptionFont;
     }
 }
