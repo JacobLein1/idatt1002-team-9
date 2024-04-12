@@ -17,7 +17,7 @@ import no.ntnu.idatt1005.model.grocery.Grocery;
 /**
  * The FridgeTab class represents a tab within a user interface that allows users to manage grocery items.
  * It extends the SuperTab class, providing a specialized view that has functionalities to add, update, and remove grocery items.
- * @Author: Sander berge
+ * @author Sander Berge, Therese Synnøve Rondeel
  */
 public class FridgeTab extends SuperTab {
     private InventoryController inventoryController;
@@ -78,9 +78,9 @@ public class FridgeTab extends SuperTab {
         idDialog.setHeaderText("Add or update grocery");
         idDialog.setContentText("Please enter the name of the grocery:");
         Optional<String> idResult = idDialog.showAndWait();
-        if (!idResult.isPresent() /*|| !idResult.get().matches("\\d+")*/) {
-            showAlert("Invalid ID",
-                "The ID of the grocery has to be a number.", Alert.AlertType.ERROR);
+        if (!idResult.isPresent()) {
+            showAlert("Invalid amount",
+                "The input was empty", Alert.AlertType.ERROR);
             return;
         }
 
