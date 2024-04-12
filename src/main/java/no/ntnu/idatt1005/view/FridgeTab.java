@@ -4,6 +4,7 @@ package no.ntnu.idatt1005.view;
 import java.util.List;
 import javafx.application.Platform;
 import javafx.scene.control.*;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 import no.ntnu.idatt1005.model.InventoryController;
@@ -40,12 +41,15 @@ public class FridgeTab extends SuperTab {
      */
     public VBox initializeUI() {
         VBox contentBox = new VBox(10);
+        contentBox.getStyleClass().add("vBox");
 
         Text fridgeTitle = new Text("Fridge");
         fridgeTitle.setFont(this.getTitleFont());
 
-        Button addButton = new Button("Add/Update grocery");
-        addButton.setOnAction(e -> addGrocery());
+        HBox buttonBox = new HBox(10);
+
+        Button addButton = new Button("Add or update grocery");
+        addButton.setOnAction(e -> addOrUpdateGrocery());
         addButton.getStyleClass().add("positiveButton");
 
         Button removeButton = new Button("Remove grocery");
@@ -56,12 +60,11 @@ public class FridgeTab extends SuperTab {
         scrollPane.setContent(groceryItemsBox);
         scrollPane.setPrefViewportHeight(800);
 
-
-        contentBox.getChildren().addAll(fridgeTitle, addButton, removeButton, scrollPane);
+        buttonBox.getChildren().addAll(addButton, removeButton);
+        contentBox.getChildren().addAll(fridgeTitle, buttonBox, scrollPane);
 
 
         refreshGroceryItemsBox();
-        //this.setContent(contentBox);
         return contentBox;
     }
 
@@ -69,13 +72,13 @@ public class FridgeTab extends SuperTab {
      * Adds a new grocery item to the inventory. This method prompts the user to enter the ID and quantity of the grocery item they wish to add.
      * If the user enters invalid input, an error message is displayed. Otherwise, the grocery item is added to the inventory and the list of grocery items is refreshed.
      */
-    private void addGrocery() {
+    private void addOrUpdateGrocery() {
         TextInputDialog idDialog = new TextInputDialog();
         idDialog.setTitle("Add or update grocery");
         idDialog.setHeaderText("Add or update grocery");
-        idDialog.setContentText("Please enter the id of the grocery:");
+        idDialog.setContentText("Please enter the name of the grocery:");
         Optional<String> idResult = idDialog.showAndWait();
-        if (!idResult.isPresent() || !idResult.get().matches("\\d+")) {
+        if (!idResult.isPresent() /*|| !idResult.get().matches("\\d+")*/) {
             showAlert("Invalid ID",
                 "The ID of the grocery has to be a number.", Alert.AlertType.ERROR);
             return;
@@ -84,16 +87,22 @@ public class FridgeTab extends SuperTab {
         TextInputDialog quantityDialog = new TextInputDialog();
         quantityDialog.setTitle("Enter new amount");
         quantityDialog.setHeaderText("Enter new amount");
-        quantityDialog.setContentText("Please enter the new/updated amount:");
+        quantityDialog.setContentText("Please enter the amount for the grocery:");
         Optional<String> quantityResult = quantityDialog.showAndWait();
-        if (!quantityResult.isPresent() || !quantityResult.get().matches("\\d+")) {
+        if (quantityResult.isEmpty() || !quantityResult.get().matches("\\d+")) {
             showAlert("Invalid amount",
                 "The amount has to be a number", Alert.AlertType.ERROR);
             return;
         }
 
         int quantity = Integer.parseInt(quantityResult.get());
-        inventoryController.addOrUpdateItemToInventory(idResult.get(), quantity);
+        if (inventoryController.addOrUpdateItemToInventory(idResult.get(), quantity)) {
+            showAlert("Operation successful!", "The update or addition of the grocery" +
+                " was successful!", Alert.AlertType.INFORMATION);
+        } else {
+            showAlert("Operation unsuccessful..", "The system could not find a grocery" +
+                " with the requested name", Alert.AlertType.ERROR);
+        }
         refreshGroceryItemsBox();
     }
 
@@ -110,12 +119,12 @@ public class FridgeTab extends SuperTab {
      * that displays the ID, name, and quantity of the grocery item.
      */
     private Label createInventoryItem(Ingredient item) {
-        return new Label("Id: " + item.getGrocery().getId() + ", " + item.getGrocery().getName()
+        return new Label(item.getGrocery().getName()
             + "  " + item.getAmount() + " " + item.getGrocery().getUnit().getUnit());
     }
 
     private Label createGroceryItem(Grocery grocery) {
-        return new Label("Id: " + grocery.getId() + ", " + grocery.getName() + ", unit: " +
+        return new Label(grocery.getName() + ", unit: " +
             grocery.getUnit().getUnit());
     }
 
@@ -153,13 +162,19 @@ public class FridgeTab extends SuperTab {
         idDialog.setHeaderText("Remove grocery");
         idDialog.setContentText("Please enter the id of the grocery you wish to remove:");
         Optional<String> idResult = idDialog.showAndWait();
-        if (!idResult.isPresent() || !idResult.get().matches("\\d+")) {
+        if (!idResult.isPresent()) {
             showAlert("Invalid ID",
                 "The ID of the grocery has to be a number.", Alert.AlertType.ERROR);
             return;
         }
 
-        inventoryController.removeItemFromInventory(idResult.get());
+        if(inventoryController.removeItemFromInventory(idResult.get())){
+            showAlert("Operation successful!", "The removal of the grocery was" +
+                " successful!", Alert.AlertType.INFORMATION);
+        } else {
+            showAlert("Operation unsuccessful..", "The system could not find a grocery" +
+                " with the requested name", Alert.AlertType.ERROR);
+        }
         refreshGroceryItemsBox();
     }
 

@@ -23,32 +23,46 @@ public class InventoryController {
       return inventoryDAO.getInventory();
     }
 
-  public void addOrUpdateItemToInventory(String id, int amount) {
+  public boolean addOrUpdateItemToInventory(String groceryName, int amount) {
     try {
-      int parsedId = Integer.parseInt(id);
-      double currentAmount = getItemAmountById(id);
-      if (currentAmount > 0) {
-        inventoryDAO.updateGrocery(parsedId, amount);
-      } else {
-        inventoryDAO.addGrocery(parsedId, amount);
-      }
+      List<Grocery> allGroceries = groceryController.getAllGroceries();
+      for (Grocery grocery : allGroceries) {
+        if(grocery.getName().equalsIgnoreCase(groceryName)) {
+          int parsedId = Integer.parseInt(grocery.getId());
+          double currentAmount = getItemAmountById(grocery.getId());
 
+          if (currentAmount > 0) {
+            inventoryDAO.updateGrocery(parsedId, amount);
+          } else {
+            inventoryDAO.addGrocery(parsedId, amount);
+          }
+          return true;
+        }
+      }
     } catch (Exception e) {
       // Instead of using system.out.println, an error message may be sent to the user, letting
       // them know something/what went wrong
       System.out.println("Something went wrong");
     }
+    return false;
   }
 
-  public void removeItemFromInventory(String id) {
+  public boolean removeItemFromInventory(String groceryName) {
     try {
-      int parsedId = Integer.parseInt(id);
-      inventoryDAO.removeGrocery(parsedId);
+      List<Grocery> allGroceries = groceryController.getAllGroceries();
+      for (Grocery grocery : allGroceries) {
+        if (grocery.getName().equalsIgnoreCase(groceryName)) {
+          int parsedId = Integer.parseInt(grocery.getId());
+          inventoryDAO.removeGrocery(parsedId);
+          return true;
+        }
+      }
     } catch (Exception e) {
       // Instead of using system.out.println, an error message may be sent to the user, letting
       // them know something/what went wrong
       System.out.println("Something went wrong");
     }
+    return false;
   }
 
   public double getItemAmountById(String id) {
