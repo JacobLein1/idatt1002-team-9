@@ -38,6 +38,7 @@ public class RecipeTab extends SuperTab {
 
     recipeContentBox.getChildren().addAll(recipesLinkBox(),recipeLinkResult);
     recipeContent.getChildren().add(recipeContentBox);
+    recipeContent.getStyleClass().add("vBox");
 
     return recipeContent;
   }

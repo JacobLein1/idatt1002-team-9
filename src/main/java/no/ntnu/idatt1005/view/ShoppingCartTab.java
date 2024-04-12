@@ -40,13 +40,19 @@ public class ShoppingCartTab extends SuperTab {
 
         VBox shoppingCartContent = new VBox();
         shoppingCartContent.setSpacing(10);
+        shoppingCartContent.getStyleClass().add("vBox");
 
         //Kan vurdere å legge til i superklassen
-        shoppingCartContent.setPadding(new Insets(30));
+        //shoppingCartContent.setPadding(new Insets(30));
         Text shoppingCartDescription = new Text("Please click on the desired recipes to add it to your shopping cart. The required goods to buy will be calculated later.");
         shoppingCartDescription.setFont(this.getDescriptionFont());
 
-        shoppingCartContent.getChildren().addAll(shoppingCartTitle, shoppingCartDescription);
+        HBox allRecipesBox = allRecipes();
+
+        Button finishShopping = createFinishShoppingButton();
+
+        shoppingCartContent.getChildren().addAll(shoppingCartTitle, shoppingCartDescription,
+            allRecipesBox, finishShopping);
         shoppingCartTitle.setFont(this.getTitleFont());
         basketController.getShoppingListFromBasket((HashMap<String, Integer>) recipeAmountMap);
 

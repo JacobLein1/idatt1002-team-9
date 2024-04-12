@@ -25,7 +25,6 @@ public class MainApp extends Application {
             // TabPane for Recipe, Shopping cart, and Fridge tabs
             TabPane tabPane = new TabPane();
 
-
             // Create Tabs
             RecipeTab tabRecipe = new RecipeTab();
             ShoppingCartTab tabShoppingCart = new ShoppingCartTab();
@@ -63,8 +62,9 @@ public class MainApp extends Application {
             tabPane.getSelectionModel().selectedItemProperty().addListener((obs, oldTab,newTab) -> {
                 if(newTab == tabShoppingCart){
                     tabShoppingCartContent.getChildren().clear();
-                    tabShoppingCartContent.getChildren().addAll(tabShoppingCart.defaultTabCreation(),tabShoppingCart.allRecipes(),tabShoppingCart.createFinishShoppingButton());
-                    tabShoppingCart.setContent(tabShoppingCartContent);
+                    //tabShoppingCartContent.getChildren().addAll(tabShoppingCart.defaultTabCreation(),tabShoppingCart.allRecipes(),tabShoppingCart.createFinishShoppingButton());
+                    //tabShoppingCart.setContent(tabShoppingCartContent);
+                  tabShoppingCart.setContent(tabShoppingCart.defaultTabCreation());
                 }
             } );
 
