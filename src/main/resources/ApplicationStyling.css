@@ -1,5 +1,7 @@
 .negativeButton{
     -fx-background-color: #ff6363;
+    -fx-font-weight: bold;
+    -fx-font-size: 13px;
 }
 .negativeButton:hover {
     -fx-background-color: #cc3636;
@@ -7,6 +9,8 @@
 
 .positiveButton {
     -fx-background-color: #a9ff63;
+    -fx-font-weight: bold;
+    -fx-font-size: 13px;
 }
 
 .positiveButton:hover {
