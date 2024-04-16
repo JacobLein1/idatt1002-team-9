@@ -7,7 +7,7 @@ import javafx.scene.control.*;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
-import no.ntnu.idatt1005.model.InventoryController;
+import no.ntnu.idatt1005.controller.InventoryController;
 
 
 import java.util.Optional;

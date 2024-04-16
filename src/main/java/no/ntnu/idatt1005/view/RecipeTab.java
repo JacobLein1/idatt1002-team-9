@@ -6,12 +6,9 @@ import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 import no.ntnu.idatt1005.model.RecipeInfo.Ingredient;
 import no.ntnu.idatt1005.model.RecipeInfo.Recipe;
-import no.ntnu.idatt1005.model.RecipeInfo.RecipeController;
+import no.ntnu.idatt1005.controller.RecipeController;
 
-import java.awt.*;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 /**
  * RecipeTab class represents a tab within a user interface that allows users to view recipes.
