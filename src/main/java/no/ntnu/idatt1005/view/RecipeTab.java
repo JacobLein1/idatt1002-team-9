@@ -13,6 +13,9 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * RecipeTab class represents a tab within a user interface that allows users to view recipes.
+ */
 public class RecipeTab extends SuperTab {
   RecipeController recipeController = new RecipeController();
   public RecipeTab() {
@@ -22,7 +25,12 @@ public class RecipeTab extends SuperTab {
   VBox recipeLinkResult = new VBox();
 
 
-  //Create the default tab for the recipe tab
+  /**
+   * Creates a VBox with the default content for the RecipeTab. This method sets up the title and a list of all recipes.
+   *
+   * @return v box
+   */
+  @Override
   public VBox defaultTabCreation() {
     this.setClosable(false);
     Text recipeTitle = new Text("Recipe");
@@ -43,12 +51,17 @@ public class RecipeTab extends SuperTab {
     return recipeContent;
   }
 
+  /**
+   * Recipes box h box.
+   *
+   * @return the h box
+   */
   public HBox recipesBox() {
     HBox recipeBox = new HBox();
     recipeBox.setSpacing(10);
 
     List<Recipe> recipes = recipeController.getAllRecipes();
-    System.out.println(recipes.size());
+
     for (Recipe recipe : recipes) {
       VBox singleRecipeBox = singleRecipeBox(recipe);
       //recipeBox.getChildren().add(singleRecipeBox);
@@ -57,6 +70,11 @@ public class RecipeTab extends SuperTab {
     return recipeBox;
   }
 
+  /**
+   * Creates HBox with all recipes as buttons. Each button will display the recipe when clicked.
+   *
+   * @return HBox with all recipes
+   */
   public HBox recipesLinkBox(){
     HBox recipeLinkBox = new HBox();
     recipeLinkBox.setSpacing(10);
@@ -79,7 +97,12 @@ public class RecipeTab extends SuperTab {
   }
 
 
-
+  /**
+   * Creates a VBox with a single recipe visualized in UI components. Including the recipe name, ingredients, and instructions.
+   *
+   * @param recipe the recipe
+   * @return VBox with a single recipe visualized in UI components
+   */
   public VBox singleRecipeBox(Recipe recipe){
     VBox singleRecipeBox = new VBox();
     singleRecipeBox.setSpacing(10);
@@ -110,5 +133,4 @@ public class RecipeTab extends SuperTab {
     
     return singleRecipeBox;
   }
-  //this.setContent(recipeContent);
 }
