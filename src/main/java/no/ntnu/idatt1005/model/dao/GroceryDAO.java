@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import no.ntnu.idatt1005.model.grocery.Grocery;
-import no.ntnu.idatt1005.Unit.UnitsE;
+import no.ntnu.idatt1005.unit.UnitsE;
 
 import static no.ntnu.idatt1005.model.dao.DBConnectionProvider.close;
 
