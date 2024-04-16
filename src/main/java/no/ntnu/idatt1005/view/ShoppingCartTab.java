@@ -167,8 +167,10 @@ public class ShoppingCartTab extends SuperTab {
         StackPane finishShoppingTempPane = new StackPane();
         //Box only for the text
         VBox shoppinCartText = new VBox();
+        shoppinCartText.getStyleClass().add("vBox");
         //Box to hold the shopping list and used recipes
         VBox finishShoppingContent = new VBox();
+        finishShoppingContent.getStyleClass().add("vBox");
         finishShoppingContent.setSpacing(10);
         Text shoppingListText = new Text("Shopping List:");
 
