@@ -33,6 +33,7 @@ public class MainApp extends Application {
             TabPane tabPane = new TabPane();
 
             // Create Tabs
+            HomeTab tabHome = new HomeTab();
             RecipeTab tabRecipe = new RecipeTab();
             ShoppingCartTab tabShoppingCart = new ShoppingCartTab();
             FridgeTab tabFridge = new FridgeTab();
@@ -55,15 +56,21 @@ public class MainApp extends Application {
 
 
             // Prevent tabs from closing
+            tabHome.setClosable(false);
             tabRecipe.setClosable(false);
             tabShoppingCart.setClosable(false);
             tabFridge.setClosable(false);
 
             // Add tabs to TabPane
-            tabPane.getTabs().addAll(tabRecipe, tabShoppingCart, tabFridge);
+            tabPane.getTabs().addAll(tabHome,tabRecipe, tabShoppingCart, tabFridge);
             tabPane.getTabs().forEach(tab -> tab.getStyleClass().add("tab"));
 
+
             // Set content for each tab
+            VBox tabHomeContent = new VBox();
+            tabHomeContent.getChildren().addAll(tabHome.defaultTabCreation());
+            tabHome.setContent(tabHomeContent);
+
             VBox fridgeContent = new VBox();
             fridgeContent.getChildren().addAll(tabFridge.defaultTabCreation());
             tabFridge.setContent(fridgeContent);
@@ -94,6 +101,7 @@ public class MainApp extends Application {
 
             primaryStage.setTitle("The CookBook");
             primaryStage.setScene(scene);
+            primaryStage.setMaximized(true);
             primaryStage.show();
     }
 
