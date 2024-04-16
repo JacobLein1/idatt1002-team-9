@@ -3,11 +3,17 @@ package no.ntnu.idatt1005.view;
 import javafx.application.Application;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.geometry.Insets;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
+import javafx.scene.text.Text;
+import javafx.scene.text.TextAlignment;
 import javafx.stage.Stage;
 
+import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.util.Arrays;
 import java.util.List;
@@ -31,11 +37,20 @@ public class MainApp extends Application {
             ShoppingCartTab tabShoppingCart = new ShoppingCartTab();
             FridgeTab tabFridge = new FridgeTab();
 
-            // Search field at the top
-            TextField searchField = new TextField();
-            searchField.setPromptText("Search");
+
             // Layout for the top bar (search field)
-            HBox topBar = new HBox(searchField);
+            FileInputStream inputStream = new FileInputStream("src/main/resources/cookbookLogo.jpeg");
+
+            ImageView logo = new ImageView(new Image(inputStream));
+            logo.setFitWidth(80);
+            logo.setFitHeight(80);
+            Text title = new Text("The CookBook");
+            title.setStyle("-fx-font-size: 30px; -fx-fill: white;");
+
+            HBox topBar = new HBox();
+            topBar.setAlignment(javafx.geometry.Pos.CENTER);
+
+            topBar.getChildren().addAll(logo,title);
             topBar.setStyle("-fx-background-color: #8D6E63;");
 
 
