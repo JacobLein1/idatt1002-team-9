@@ -19,6 +19,7 @@ public class HomeTab extends SuperTab {
      */
     @Override
     public VBox defaultTabCreation(){
+        this.setClosable(false);
         Text homeTitle = new Text("Home page");
         homeTitle.setFont(this.getTitleFont());
         Text homeUnderTitle = new Text("Welcome to the home page!");

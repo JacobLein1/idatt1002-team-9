@@ -39,7 +39,7 @@ public class MainApp extends Application {
             FridgeTab tabFridge = new FridgeTab();
 
 
-            // Layout for the top bar (search field)
+            // Layout for the top bar
             FileInputStream inputStream = new FileInputStream("src/main/resources/cookbookLogo.jpeg");
 
             ImageView logo = new ImageView(new Image(inputStream));
@@ -54,12 +54,6 @@ public class MainApp extends Application {
             topBar.getChildren().addAll(logo,title);
             topBar.setStyle("-fx-background-color: #8D6E63;");
 
-
-            // Prevent tabs from closing
-            tabHome.setClosable(false);
-            tabRecipe.setClosable(false);
-            tabShoppingCart.setClosable(false);
-            tabFridge.setClosable(false);
 
             // Add tabs to TabPane
             tabPane.getTabs().addAll(tabHome,tabRecipe, tabShoppingCart, tabFridge);
