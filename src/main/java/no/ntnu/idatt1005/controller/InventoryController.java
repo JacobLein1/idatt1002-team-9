@@ -1,4 +1,4 @@
-package no.ntnu.idatt1005.model;
+package no.ntnu.idatt1005.controller;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -6,7 +6,6 @@ import java.util.List;
 import no.ntnu.idatt1005.model.dao.DBConnectionProvider;
 import no.ntnu.idatt1005.model.dao.InventoryDAO;
 import no.ntnu.idatt1005.model.grocery.Grocery;
-import no.ntnu.idatt1005.model.grocery.GroceryController;
 import no.ntnu.idatt1005.model.inventory.Inventory;
 
 public class InventoryController {

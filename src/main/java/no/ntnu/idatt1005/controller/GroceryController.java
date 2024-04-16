@@ -1,9 +1,10 @@
-package no.ntnu.idatt1005.model.grocery;
+package no.ntnu.idatt1005.controller;
 
 import java.util.List;
 
 import no.ntnu.idatt1005.model.dao.DBConnectionProvider;
 import no.ntnu.idatt1005.model.dao.GroceryDAO;
+import no.ntnu.idatt1005.model.grocery.Grocery;
 
 public class GroceryController {
   GroceryDAO groceryDAO;

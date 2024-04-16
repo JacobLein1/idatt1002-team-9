@@ -1,11 +1,9 @@
-package no.ntnu.idatt1005.model;
+package no.ntnu.idatt1005.controller;
 
 import java.util.*;
 
 import no.ntnu.idatt1005.model.RecipeInfo.Ingredient;
-import no.ntnu.idatt1005.model.RecipeInfo.RecipeController;
 import no.ntnu.idatt1005.model.grocery.Grocery;
-import no.ntnu.idatt1005.model.grocery.GroceryController;
 
 public class BasketController {
   InventoryController inventoryController;
