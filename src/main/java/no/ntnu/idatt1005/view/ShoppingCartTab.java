@@ -27,7 +27,7 @@ public class ShoppingCartTab extends SuperTab {
     //Create a title for the shopping cart, need to use it for multiple methods
     private final Text shoppingCartTitle = new Text("Shopping Cart");
     //Create a basketController object to be able to add recipes to the basket
-    private final BasketController basketController = new BasketController();
+    private final BasketController basket = new BasketController();
     //Create a recipeController object to be able to get all recipes
     private final RecipeController recipeController = new RecipeController();
     private final InventoryController inventoryController = new InventoryController();
@@ -74,7 +74,7 @@ public class ShoppingCartTab extends SuperTab {
         }
 
         shoppingCartTitle.setFont(this.getTitleFont());
-        basketController.getShoppingListFromBasket((HashMap<String, Integer>) recipeAmountMap);
+        basket.getShoppingListFromBasket((HashMap<String, Integer>) recipeAmountMap);
 
 
         return shoppingCartContent;
@@ -197,7 +197,7 @@ public class ShoppingCartTab extends SuperTab {
         });
 
         //Iterate through the shopping list and add the groceries to the shopping list
-        basketController.getShoppingListFromBasket(
+        basket.getShoppingListFromBasket(
             (HashMap<String, Integer>) recipeAmountMap).forEach((groceryName, amountAndUnit) -> {
             Text groceryText = new Text(groceryName + ": " + amountAndUnit);
             shoppingList.getChildren().add(groceryText);
