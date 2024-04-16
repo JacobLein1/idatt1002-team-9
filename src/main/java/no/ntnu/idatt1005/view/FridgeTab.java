@@ -32,14 +32,15 @@ public class FridgeTab extends SuperTab {
         super("Fridge");
         this.inventoryController = new InventoryController();
         this.groceryItemsBox = new VBox(5);
-        initializeUI();
+        defaultTabCreation();
     }
 
     /**
      * Initializes the UI components for the FridgeTab. This method sets up the title, buttons for adding and removing grocery items,
      * and a scrollable area for displaying the grocery items. It also sets up event handlers for the buttons to add and remove grocery items.
      */
-    public VBox initializeUI() {
+    @Override
+    public VBox defaultTabCreation() {
         VBox contentBox = new VBox(10);
         contentBox.getStyleClass().add("vBox");
 
