@@ -2,6 +2,9 @@ package no.ntnu.idatt1005.view;
 
 import javafx.geometry.Insets;
 import javafx.scene.control.Button;
+import javafx.scene.control.ContentDisplay;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
@@ -11,6 +14,8 @@ import no.ntnu.idatt1005.controller.BasketController;
 import no.ntnu.idatt1005.controller.InventoryController;
 import no.ntnu.idatt1005.controller.RecipeController;
 
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -58,10 +63,16 @@ public class ShoppingCartTab extends SuperTab {
 
         HBox allRecipesBox = allRecipes();
 
-        Button finishShopping = createFinishShoppingButton();
+        try {
+            Button finishShopping = createFinishShoppingButton();
+            shoppingCartContent.getChildren().addAll(shoppingCartTitle, shoppingCartDescription,
+                    allRecipesBox, finishShopping);
+        }
+        catch (FileNotFoundException e) {
+            System.out.println("File not found");
+            e.printStackTrace();
+        }
 
-        shoppingCartContent.getChildren().addAll(shoppingCartTitle, shoppingCartDescription,
-            allRecipesBox, finishShopping);
         shoppingCartTitle.setFont(this.getTitleFont());
         basketController.getShoppingListFromBasket((HashMap<String, Integer>) recipeAmountMap);
 
@@ -126,13 +137,22 @@ public class ShoppingCartTab extends SuperTab {
      *
      * @return Button
      */
-    public Button createFinishShoppingButton(){
-        Button finishShoppingButton = new Button("Finish shopping ->");
+    public Button createFinishShoppingButton() throws FileNotFoundException {
+
+            FileInputStream inputStream = new FileInputStream("src/main/resources/shoppingCartIcon.png");
+            ImageView shoppingCartImage = new ImageView(new Image(inputStream));
+            shoppingCartImage.setFitHeight(20);
+            shoppingCartImage.setFitWidth(30);
+            Button finishShoppingButton = new Button("Finish shopping ");
+            finishShoppingButton.setGraphic(shoppingCartImage);
+            finishShoppingButton.setContentDisplay(ContentDisplay.LEFT);
+
+
         finishShoppingButton.setOnAction(e -> {
-            System.out.println(recipeAmountMap);
             StackPane finishShoppingTempPane = createFinishShoppingTempPane();
             this.setContent(finishShoppingTempPane);
         });
+
 
         return finishShoppingButton;
     }
