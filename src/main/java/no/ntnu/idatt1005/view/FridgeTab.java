@@ -41,6 +41,7 @@ public class FridgeTab extends SuperTab {
      */
     @Override
     public VBox defaultTabCreation() {
+        this.setClosable(false);
         VBox contentBox = new VBox(10);
         contentBox.getStyleClass().add("vBox");
 
