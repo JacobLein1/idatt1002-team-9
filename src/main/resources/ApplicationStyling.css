@@ -17,6 +17,15 @@
     -fx-background-color: #6ecb31;
 }
 
+.recipeText {
+    -fx-underline: true;
+    -fx-fill: #694b40;
+}
+
+.recipeText:hover{
+    -fx-fill: #8D6E63;
+}
+
 .tab:selected {
     -fx-padding: 5px;
     -fx-focus-color: transparent;

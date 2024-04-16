@@ -79,15 +79,22 @@ public class RecipeTab extends SuperTab {
 
 
     for (Recipe recipe : recipes) {
-      Button recipeLink = new Button(recipe.getRecipeName());
+      //Button recipeLink = new Button(recipe.getRecipeName());
+      Text recipeLink = new Text(recipe.getRecipeName());
+      recipeLink.getStyleClass().add("recipeText");
 
       recipeLinkBox.getChildren().add(recipeLink);
 
-      recipeLink.setOnAction(e -> {
+      recipeLink.setOnMouseClicked(e -> {
+        recipeLinkResult.getChildren().clear();
+        recipeLinkResult.getChildren().add(singleRecipeBox(recipe));
+      });
+
+      /*recipeLink.setOnAction(e -> {
         recipeLinkResult.getChildren().clear();
         recipeLinkResult.getChildren().add(singleRecipeBox(recipe));
 
-      });
+      });*/
 
     }
     return recipeLinkBox;
@@ -113,7 +120,7 @@ public class RecipeTab extends SuperTab {
     VBox ingredientBox = new VBox();
     ingredientBox.setSpacing(10);
 
-    List<Ingredient> ingredientList = recipeController.getIngredientsForRecipe(recipe.getRecipeID());
+    List<Ingredient> ingredientList = recipe.getIngredients();
 
     ingredientList.forEach(ingredient -> {
       ingredientBox.getChildren().add(new Text(ingredient.toString()));
