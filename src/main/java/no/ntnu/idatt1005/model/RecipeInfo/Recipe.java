@@ -9,7 +9,12 @@ public class Recipe {
   private final String instructions;
   private final int numberOfPeople;
 
-  public Recipe(String recipeID, String recipeName, List<Ingredient> ingredients,String instructions, int numberOfPeople) {
+  public Recipe(String recipeID, String recipeName, List<Ingredient> ingredients,
+                String instructions, int numberOfPeople) throws IllegalArgumentException {
+    if (recipeID == null || recipeName == null || ingredients.isEmpty() || instructions == null) {
+      throw new IllegalArgumentException("There was an attempt to create a recipe either with " +
+          "null-values or no ingredients.");
+    }
     this.ingredients = ingredients;
     this.instructions = instructions;
     this.numberOfPeople = numberOfPeople;

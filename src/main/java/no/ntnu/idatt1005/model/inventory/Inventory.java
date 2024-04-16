@@ -2,7 +2,6 @@ package no.ntnu.idatt1005.model.inventory;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 import no.ntnu.idatt1005.model.RecipeInfo.Ingredient;
 
 public class Inventory {

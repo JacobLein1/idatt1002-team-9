@@ -7,11 +7,27 @@ import no.ntnu.idatt1005.model.inventory.Inventory;
 
 import static no.ntnu.idatt1005.model.dao.DBConnectionProvider.close;
 
+/** Class for accessing data related to the table Inventory. This class contains methods for
+ * accessing all groceries in the inventory, adding, updating or deleting specific groceries, as
+ * well as getting the amount of a specific grocery in the inventory. It also creates an object of
+ * the GroceryDAO-class, letting this class gain access to relevant methods necessary for the
+ * methods of this class. The code in this class was inspired by Surya Kathayat and modified to fit
+ * the needs of the application. GitHub Copilot assisted with writing the code more quickly.
+ *
+ * @author Sigrid Hoel, Therese Synnøve Rondeel
+ * @see GroceryDAO
+ */
 public class InventoryDAO {
 
-    private DBConnectionProvider connectionProvider;
+    /**
+     * Object for help with creating a connection to the database.
+     */
+    private final DBConnectionProvider connectionProvider;
 
-    private GroceryDAO groceryDAO;
+    /**
+     * Object for creating an instance of GroceryDAO.
+     */
+    private final GroceryDAO groceryDAO;
 
     public InventoryDAO(DBConnectionProvider connectionProvider) {
         this.connectionProvider = connectionProvider;
@@ -34,8 +50,10 @@ public class InventoryDAO {
                 Grocery grocery = groceryDAO.getGroceryById(groceryID);
                 double amount = resultSet.getDouble("groceryAmount");
 
-                Ingredient invGrocery = new Ingredient(grocery, amount);
-                inventory.addGroceryToInventory(invGrocery);
+                if (grocery != null) {
+                    Ingredient invGrocery = new Ingredient(grocery, amount);
+                    inventory.addGroceryToInventory(invGrocery);
+                }
             }
         } catch (SQLException e) {
             e.printStackTrace();
