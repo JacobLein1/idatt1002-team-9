@@ -26,7 +26,7 @@ public class RecipeDAO {
     private DBConnectionProvider connectionProvider;
 
     /**
-     * Object for creating an instance of GroceryDAO.
+     * Field for creating an instance of a GroceryDAO-object.
      */
     private GroceryDAO groceryDAO;
 
