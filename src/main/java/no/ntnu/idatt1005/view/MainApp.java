@@ -22,6 +22,7 @@ public class MainApp extends Application {
 
     @Override
     public void start(Stage primaryStage) throws FileNotFoundException {
+
             // TabPane for Recipe, Shopping cart, and Fridge tabs
             TabPane tabPane = new TabPane();
 
@@ -47,11 +48,9 @@ public class MainApp extends Application {
             tabPane.getTabs().addAll(tabRecipe, tabShoppingCart, tabFridge);
             tabPane.getTabs().forEach(tab -> tab.getStyleClass().add("tab"));
 
-
-
-            // Set content for Fridge tab (Placeholder for actual content)
+            // Set content for each tab
             VBox fridgeContent = new VBox();
-            fridgeContent.getChildren().addAll(tabFridge.initializeUI());
+            fridgeContent.getChildren().addAll(tabFridge.defaultTabCreation());
             tabFridge.setContent(fridgeContent);
 
 
@@ -59,21 +58,15 @@ public class MainApp extends Application {
 
 
             VBox tabShoppingCartContent = new VBox();
+
+            // Add listener to tabPane to update shopping cart when tab is selected, to ensure reset of shopping cart tab when clicked
             tabPane.getSelectionModel().selectedItemProperty().addListener((obs, oldTab,newTab) -> {
                 if(newTab == tabShoppingCart){
                     tabShoppingCartContent.getChildren().clear();
-                    //tabShoppingCartContent.getChildren().addAll(tabShoppingCart.defaultTabCreation(),tabShoppingCart.allRecipes(),tabShoppingCart.createFinishShoppingButton());
-                    //tabShoppingCart.setContent(tabShoppingCartContent);
+
                   tabShoppingCart.setContent(tabShoppingCart.defaultTabCreation());
                 }
             } );
-
-            Button finishSHoppingButton = tabShoppingCart.createFinishShoppingButton();
-
-            //tabShoppingCartContent.getChildren().addAll(tabShoppingCart.defaultTabCreation(),tabShoppingCart.allRecipes(),finishSHoppingButton);
-
-
-            //tabShoppingCart.setContent(tabShoppingCartContent);
 
 
             // Main layout
@@ -89,14 +82,7 @@ public class MainApp extends Application {
             primaryStage.show();
     }
 
-    /*@Param - list: List<String[]>
-    * @return - ObservableList<String>
-    * This method takes a list of String arrays and converts it to an ObservableList
-    * */
-    public ObservableList<String> convertListToObservableList(List<String[]> list) {
-    return list.stream().flatMap(Arrays::stream)
-                .collect(Collectors.toCollection(FXCollections::observableArrayList));
-    }
+
     @Override
     public void init() throws Exception {
       DBConnectionProvider db = new DBConnectionProvider();
