@@ -14,7 +14,7 @@ import static no.ntnu.idatt1005.model.dao.DBConnectionProvider.close;
  * method for accessing all recipes. It also creates an object of the GroceryDAO-class, letting
  * this class gain access to relevant methods necessary for the methods of this class.
  * The code in this class was inspired by Surya Kathayat and modified to fit the needs of the
- * application. GitHub Copilot assisted with writing the code more quickly.
+ * application. GitHub Copilot assisted with writing the code more quickly as well as suggestions.
  *
  * @author Sigrid Hoel, Therese Synnøve Rondeel
  * @see GroceryDAO
@@ -44,7 +44,9 @@ public class RecipeDAO {
     /**
      * Method for getting a specific Recipe by its id from the database. It firstly gets a connection
      * to the database, then prepares a sqlite query and executes this. From the result set the
-     * requested Recipe-object is created. GitHub Copilot assisted with quickly writing the initial
+     * requested Recipe-object is created. GitHub Copilot helped with more quickly writing code, and
+     * sometimes coming with suggestions that were controlled and modified. The method has also
+     * been modified later to fit changes in relevant classes.
      *
      * @param id the id of the specific grocery
      * @return the requested Recipe-object, or null if it could not be found
@@ -84,10 +86,13 @@ public class RecipeDAO {
      * Method for getting the ingredients for a specific recipe by the recipe id. It firstly gets a
      * connection to the database, then prepares a sqlite query and executes this. After this,
      * it creates an ingredient, as long as the grocery retrieved from the GroceryDAO method
-     * 'getGroceryById' is not null.
+     * 'getGroceryById' is not null. GitHub Copilot helped with more quickly writing code, and
+     * sometimes coming with suggestions that were controlled and modified. The method has also
+     * been modified later to fit changes in relevant classes.
      *
      * @param id the id of the recipe
-     * @return a list of Ingredient-objects, or empty if errors or
+     * @return a list of Ingredient-objects, or an empty list if errors occur
+     * @see GroceryDAO#getGroceryById(int) 
      */
     private List<Ingredient> getIngredientsForRecipe(int id){
         Connection connection = null;
@@ -118,6 +123,15 @@ public class RecipeDAO {
         return ingredients;
     }
 
+    /**
+     * Method for getting all recipes in the database. It firstly gets connection to the database, 
+     * then prepares a sqlite query and executes this. After this, as long as there is another
+     * row retrieved from the database, a new recipe is created. The getIngredientsForRecipe is
+     * also used to get the specific ingredients needed.
+     * 
+     * @return a list of Recipe-objects, or an empty list if errors occur
+     * @see #getIngredientsForRecipe(int) 
+     */
     public List<Recipe> getAllRecipes() {
         Connection connection = null;
         PreparedStatement preparedStatement = null;
@@ -142,7 +156,6 @@ public class RecipeDAO {
                     e.printStackTrace();
                 }
             }
-
         } catch (SQLException e) {
             e.printStackTrace();
         } finally {
