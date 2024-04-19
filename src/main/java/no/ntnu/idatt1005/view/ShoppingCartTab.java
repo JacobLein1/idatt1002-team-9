@@ -32,7 +32,7 @@ public class ShoppingCartTab extends SuperTab {
     private final RecipeController recipeController = new RecipeController();
     private final InventoryController inventoryController = new InventoryController();
     //Create a map to store the recipes and the amount of each recipe
-    private Map<String,Integer> recipeAmountMap;
+    //private Map<String,Integer> recipeAmountMap;
 
 
     /**
@@ -41,7 +41,7 @@ public class ShoppingCartTab extends SuperTab {
     public ShoppingCartTab() {
 
         super("Shopping Cart");
-        this.recipeAmountMap = new HashMap<>();
+        //this.recipeAmountMap = new HashMap<>();
     }
 
     /**
@@ -74,7 +74,7 @@ public class ShoppingCartTab extends SuperTab {
         }
 
         shoppingCartTitle.setFont(this.getTitleFont());
-        basket.getShoppingListFromBasket((HashMap<String, Integer>) recipeAmountMap);
+        //basket.getShoppingListFromBasket((HashMap<String, Integer>) recipeAmountMap);
 
 
         return shoppingCartContent;
@@ -112,7 +112,8 @@ public class ShoppingCartTab extends SuperTab {
             increaseButton.setOnAction(e -> {
                 int currentAmount = Integer.parseInt(counterText.getText()) + 1;
                 counterText.setText(Integer.toString(currentAmount));
-                recipeAmountMap.put(recipe.getRecipeID(), currentAmount);
+                //recipeAmountMap.put(recipe.getRecipeID(), currentAmount);
+                basket.setAmountOfRecipeInBasket(recipe.getRecipeID(), currentAmount);
             });
 
             decreaseButton.setOnAction(e -> {
@@ -120,7 +121,8 @@ public class ShoppingCartTab extends SuperTab {
                 if (currentAmount > 0) {
                     currentAmount--;
                     counterText.setText(Integer.toString(currentAmount));
-                    recipeAmountMap.put(recipe.getRecipeID(), currentAmount);
+                    //recipeAmountMap.put(recipe.getRecipeID(), currentAmount);
+                    basket.setAmountOfRecipeInBasket(recipe.getRecipeID(), currentAmount);
                 }
             });
 
@@ -183,26 +185,23 @@ public class ShoppingCartTab extends SuperTab {
         usedRecipes.setSpacing(10);
         usedRecipes.getChildren().add(new Text("Recipes used:"));
 
-        //Iterate through the recipeAmountMap and add the recipes to the basket
-
-        recipeAmountMap.forEach((recipeId, amount) -> {
-            if (amount > 0) { //If the amount is greater than 0, the name will be printed out
-                if (recipeController.getRecipeById(recipeId) != null) {
-                    String recipeName = recipeController.getRecipeById(recipeId).getRecipeName();
-                    Text recipeText = new Text(recipeName + " x" + amount);
-                    usedRecipes.getChildren().add(recipeText);
-                }
-
-            }
+        //Iterate through the recipes in the basket to print out the amount of each recipe to the
+        //user
+        basket.getRecipesInBasket().forEach(recipe -> {
+            String recipeName = recipe.getRecipeName();
+            int amountOfRecipeInBasket = basket.getAmountOfRecipeInBasket(recipe.getRecipeID());
+            Text recipeText = new Text(recipeName + " x" + amountOfRecipeInBasket);
+            usedRecipes.getChildren().add(recipeText);
         });
 
-        //Iterate through the shopping list and add the groceries to the shopping list
-        basket.getShoppingListFromBasket(
-            (HashMap<String, Integer>) recipeAmountMap).forEach((groceryName, amountAndUnit) -> {
-            Text groceryText = new Text(groceryName + ": " + amountAndUnit);
+        //Iterate through the shopping list and print out each element in the shopping list
+        basket.getShoppingListFromBasket().forEach((grocery, amount) -> {
+            String groceryName = grocery.getName();
+            String amountAndUnit = amount + " " + grocery.getUnit().getUnit();
+            Text groceryText = new Text(groceryName +  ": " + amountAndUnit);
+
             shoppingList.getChildren().add(groceryText);
         });
-
 
         shoppinCartText.getChildren().addAll(shoppingCartTitle,shoppingListText);
         HBox listBox = new HBox();
