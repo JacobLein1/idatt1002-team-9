@@ -27,11 +27,11 @@ public class Recipe {
       throw new IllegalArgumentException("There was an attempt to create a recipe either with " +
           "null-values or no ingredients.");
     }
+    this.recipeID = recipeID;
+    this.recipeName = recipeName;
     this.ingredients = ingredients;
     this.instructions = instructions;
     this.numberOfPeople = numberOfPeople;
-    this.recipeID = recipeID;
-    this.recipeName = recipeName;
   }
 
   /**

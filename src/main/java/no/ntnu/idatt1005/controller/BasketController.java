@@ -3,6 +3,7 @@ package no.ntnu.idatt1005.controller;
 import java.util.*;
 
 import no.ntnu.idatt1005.model.RecipeInfo.Ingredient;
+import no.ntnu.idatt1005.model.RecipeInfo.Recipe;
 import no.ntnu.idatt1005.model.grocery.Grocery;
 
 /**
@@ -64,8 +65,8 @@ public class BasketController {
 
     for (Map.Entry<String, Integer> entry : recipeAmountMap.entrySet()) {
       String recipeId = entry.getKey();
-      List<Ingredient> ingredientsForRecipe =
-          recipeController.getIngredientsForRecipe(recipeId);
+      Recipe recipe = recipeController.getRecipeById(recipeId);
+      List<Ingredient> ingredientsForRecipe = recipe.getIngredients();
 
       for (Ingredient ingredient : ingredientsForRecipe) {
         String groceryId = ingredient.getGrocery().getId();

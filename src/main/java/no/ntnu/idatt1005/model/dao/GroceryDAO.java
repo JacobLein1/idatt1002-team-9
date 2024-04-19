@@ -13,7 +13,7 @@ import static no.ntnu.idatt1005.model.dao.DBConnectionProvider.close;
  * accessing specific groceries by its id, all groceries or adding a grocery to the GroceryRegister.
  * As per this version of the application, the addGrocery-method is not used.
  * The code in this class was inspired by Surya Kathayat and modified to fit the needs of the
- * application. GitHub Copilot assisted with writing the code more quickly.
+ * application. GitHub Copilot assisted with writing some of the code more quickly.
  *
  * @author Sigrid Hoel, Therese Synnøve Rondeel
  */
