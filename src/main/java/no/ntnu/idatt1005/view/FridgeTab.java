@@ -71,8 +71,10 @@ public class FridgeTab extends SuperTab {
     }
 
     /**
-     * Adds a new grocery item to the inventory. This method prompts the user to enter the ID and quantity of the grocery item they wish to add.
-     * If the user enters invalid input, an error message is displayed. Otherwise, the grocery item is added to the inventory and the list of grocery items is refreshed.
+     * Adds a new grocery item to the inventory. This method prompts the user to enter the name and quantity of the grocery item they wish to add.
+     * If the user enters invalid input, or an error occurs, an error message is displayed.
+     * Otherwise, the grocery item is added to the inventory, the list of grocery items is refreshed
+     * and the user is notified.
      */
     private void addOrUpdateGrocery() {
         TextInputDialog idDialog = new TextInputDialog();
@@ -108,6 +110,13 @@ public class FridgeTab extends SuperTab {
         refreshGroceryItemsBox();
     }
 
+    /**
+     * Method for creating and showing an alert.
+     *
+     * @param title The title of the alert
+     * @param content The information-content for the alert
+     * @param type The type of alert
+     */
     private void showAlert(String title, String content, Alert.AlertType type) {
         Alert alert = new Alert(type);
         alert.setTitle(title);
@@ -117,22 +126,34 @@ public class FridgeTab extends SuperTab {
 
 
     /**
-     * Creates a label for a grocery item. This method takes an array of strings representing the details of a grocery item and returns a label
-     * that displays the ID, name, and quantity of the grocery item.
+     * Creates a label for a grocery item. This method takes an Ingredient-item, representing the
+     * details of a grocery item with its amount in the inventory/fridge and returns a label that
+     * contains the name, quantity and unit of the item.
+     *
+     * @param item the item representing the grocery and its amount in the inventory
+     * @return a label that contains the name, quantity and unit of the item
      */
     private Label createInventoryItem(Ingredient item) {
         return new Label(item.getGrocery().getName()
             + "  " + item.getAmount() + " " + item.getGrocery().getUnit().getUnit());
     }
 
+    /**
+     * Method for creating a label for a grocery that is not in the inventory. The label contains
+     * the name and the unit of the grocery
+     *
+     * @param grocery the grocery to create a label for
+     * @return a label that contains the name and unit of the grocery
+     */
     private Label createGroceryItem(Grocery grocery) {
         return new Label(grocery.getName() + ", unit: " +
             grocery.getUnit().getUnit());
     }
 
     /**
-     * Refreshes the list of grocery items displayed in the user interface. This method retrieves the list of grocery items from the inventory controller
-     * and creates a label for each item. The labels are then added to the groceryItemsBox layout.
+     * Refreshes the list of grocery items displayed in the user interface. This method retrieves
+     * the list of grocery items from the inventory controller and creates a label for each item.
+     * The labels are then added to the groceryItemsBox layout.
      */
     private void refreshGroceryItemsBox() {
         Platform.runLater(() -> {
@@ -155,8 +176,10 @@ public class FridgeTab extends SuperTab {
     }
 
     /**
-     * Removes a grocery item from the inventory. This method prompts the user to enter the ID of the grocery item they wish to remove.
-     * If the user enters invalid input, an error message is displayed. If not, the grocery item is removed from the inventory and the list of grocery items is refreshed.
+     * Removes a grocery item from the inventory. This method prompts the user to enter the name of the grocery item they wish to remove.
+     * If the user enters invalid input, or an error occurs, an error message is displayed.
+     * If not, the grocery item is removed from the inventory, the list of grocery items is refreshed
+     * and the user is notified.
      */
     private void removeGrocery() {
         TextInputDialog idDialog = new TextInputDialog();
