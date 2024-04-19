@@ -89,13 +89,6 @@ public class RecipeTab extends SuperTab {
         recipeLinkResult.getChildren().clear();
         recipeLinkResult.getChildren().add(singleRecipeBox(recipe));
       });
-
-      /*recipeLink.setOnAction(e -> {
-        recipeLinkResult.getChildren().clear();
-        recipeLinkResult.getChildren().add(singleRecipeBox(recipe));
-
-      });*/
-
     }
     return recipeLinkBox;
   }
@@ -113,6 +106,8 @@ public class RecipeTab extends SuperTab {
     Text recipeTitle = new Text(recipe.getRecipeName());
     recipeTitle.setFont(this.getUnderTitleFont());
 
+    Text amountOfPeople = new Text("For: " + recipe.getNumberOfPeople() + " people");
+
     //Add the list of ingredients to the single recipe box
     Text recipeIngredientsIntro = new Text("Ingredients:");
     recipeIngredientsIntro.setFont(this.getBoldDescriptionFont());
@@ -126,15 +121,13 @@ public class RecipeTab extends SuperTab {
       ingredientBox.getChildren().add(new Text(ingredient.toString()));
     });
 
-
-    singleRecipeBox.getChildren().addAll(recipeTitle,recipeIngredientsIntro,ingredientBox);
-
     Text recipeInstructionsIntro = new Text("Instructions:");
     recipeInstructionsIntro.setFont(this.getBoldDescriptionFont());
     Text recipeInstructions = new Text(recipe.getInstructions());
 
-    singleRecipeBox.getChildren().addAll(recipeInstructionsIntro,recipeInstructions);
-    
+    singleRecipeBox.getChildren().addAll(recipeTitle, amountOfPeople, recipeIngredientsIntro,
+        ingredientBox, recipeInstructionsIntro, recipeInstructions);
+
     return singleRecipeBox;
   }
 }
