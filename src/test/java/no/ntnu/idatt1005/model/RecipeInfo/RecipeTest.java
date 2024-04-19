@@ -1,8 +1,14 @@
 package no.ntnu.idatt1005.model.RecipeInfo;
 
+import no.ntnu.idatt1005.model.grocery.Grocery;
+import no.ntnu.idatt1005.unit.UnitsE;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -13,18 +19,20 @@ import static org.junit.jupiter.api.Assertions.*;
 class RecipeTest {
 
   Recipe recipe;
+  List<Ingredient> ingredients;
   @BeforeEach
   void setUp() {
-    recipe = new Recipe("1", "Test", null, "Test", 1);
+    ingredients = List.of(new Ingredient(new Grocery("test",null,"1", UnitsE.ARTICLE), 1));
+    recipe = new Recipe("1", "Test", ingredients, "Test", 1);
   }
 
   @Test
   @DisplayName("Test exceptions in constructor")
   void constructor() {
-    assertThrows(IllegalArgumentException.class, () -> new Recipe(null, "Test", null, "Test", 1));
-    assertThrows(IllegalArgumentException.class, () -> new Recipe("1", null, null, "Test", 1));
-    assertThrows(IllegalArgumentException.class, () -> new Recipe("1", "Test", null, null, 1));
-    assertThrows(IllegalArgumentException.class, () -> new Recipe("1", "Test", null, "Test", 0));
+    assertThrows(IllegalArgumentException.class, () -> new Recipe(null, "Test", ingredients, "Test", 1));
+    assertThrows(IllegalArgumentException.class, () -> new Recipe("1", null, ingredients, "Test", 1));
+    assertThrows(IllegalArgumentException.class, () -> new Recipe("1", "Test", new ArrayList<>(), "test", 1));
+    assertThrows(IllegalArgumentException.class, () -> new Recipe("1", "Test", ingredients, null, 1));
   }
 
   @Test
@@ -42,7 +50,7 @@ class RecipeTest {
   @Test
   @DisplayName("Test getIngredients() method")
   void getIngredients() {
-    assertNull(recipe.getIngredients());
+    assertEquals(ingredients, recipe.getIngredients());
   }
 
   @Test
