@@ -15,7 +15,7 @@ import no.ntnu.idatt1005.model.grocery.Grocery;
  */
 public class GroceryController {
   /**
-   * Field for creating an instance of an InventoryDAO-object.
+   * Field for creating an instance of a GroceryDAO-object.
    */
   GroceryDAO groceryDAO;
 
@@ -41,7 +41,7 @@ public class GroceryController {
    * before attempting to retrieve the grocery.
    *
    * @param id the id of the grocery
-   * @return the requested grocery if found, null if not due to the method that is called upon
+   * @return the requested grocery if found, null if not
    * @see GroceryDAO#getGroceryById(int) 
    */
   public Grocery getGroceryById(String id) {
