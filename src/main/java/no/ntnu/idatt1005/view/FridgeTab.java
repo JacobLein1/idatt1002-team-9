@@ -6,6 +6,8 @@ import javafx.application.Platform;
 import javafx.scene.control.*;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+import javafx.scene.text.Font;
+import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
 import no.ntnu.idatt1005.controller.InventoryController;
 
@@ -134,8 +136,10 @@ public class FridgeTab extends SuperTab {
      * @return a label that contains the name, quantity and unit of the item
      */
     private Label createInventoryItem(Ingredient item) {
-        return new Label(item.getGrocery().getName()
-            + "  " + item.getAmount() + " " + item.getGrocery().getUnit().getUnit());
+        Label result = new Label(item.getGrocery().getName()
+                + "  " + item.getAmount() + " " + item.getGrocery().getUnit().getUnit());
+        result.setFont(Font.font("Arial", 15));
+        return result;
     }
 
     /**
@@ -146,8 +150,11 @@ public class FridgeTab extends SuperTab {
      * @return a label that contains the name and unit of the grocery
      */
     private Label createGroceryItem(Grocery grocery) {
-        return new Label(grocery.getName() + ", unit: " +
-            grocery.getUnit().getUnit());
+        Label result = new Label(grocery.getName() + ", unit: " +
+                grocery.getUnit().getUnit());
+        result.setFont(Font.font("Arial", 15));
+
+        return result;
     }
 
     /**
@@ -165,7 +172,9 @@ public class FridgeTab extends SuperTab {
                     groceryItemsBox.getChildren().addAll(groceryLabel);
                 }
             }
-            groceryItemsBox.getChildren().add(new Text("\nGroceries not in inventory"));
+            Text noItems = new Text("\nGroceries not in inventory");
+            noItems.setFont(Font.font("Arial", FontWeight.BOLD, 17));
+            groceryItemsBox.getChildren().add(noItems);
             var itemsNotInInventory = inventoryController.getGroceriesNotInInventory();
             for (Grocery grocery : itemsNotInInventory) {
                 Label groceryLabel = createGroceryItem(grocery);
