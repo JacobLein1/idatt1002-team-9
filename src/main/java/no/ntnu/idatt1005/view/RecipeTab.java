@@ -3,6 +3,7 @@ package no.ntnu.idatt1005.view;
 import javafx.scene.control.Button;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import no.ntnu.idatt1005.model.RecipeInfo.Ingredient;
 import no.ntnu.idatt1005.model.RecipeInfo.Recipe;
@@ -81,6 +82,7 @@ public class RecipeTab extends SuperTab {
     for (Recipe recipe : recipes) {
       //Button recipeLink = new Button(recipe.getRecipeName());
       Text recipeLink = new Text(recipe.getRecipeName());
+      recipeLink.setFont(new Font("Arial", 15));
       recipeLink.getStyleClass().add("recipeText");
 
       recipeLinkBox.getChildren().add(recipeLink);

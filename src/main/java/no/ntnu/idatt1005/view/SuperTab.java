@@ -9,10 +9,10 @@ import javafx.scene.text.FontWeight;
  * Class for creating a tab with custom general fonts
  */
 public abstract class SuperTab extends Tab {
-    private final Font titleFont = Font.font("Arial", FontWeight.BOLD, 20);
-    private final Font underTitleFont = Font.font("Arial", FontWeight.BOLD, 15);
-    private final Font descriptionFont = Font.font("Arial", FontWeight.NORMAL, 12);
-    private final Font boldDescriptionFont = Font.font("Arial", FontWeight.BOLD, 12);
+    private final Font titleFont = Font.font("Arial", FontWeight.BOLD, 35);
+    private final Font underTitleFont = Font.font("Arial", FontWeight.BOLD, 25);
+    private final Font descriptionFont = Font.font("Arial", FontWeight.NORMAL, 18);
+    private final Font boldDescriptionFont = Font.font("Arial", FontWeight.BOLD, 17);
 
     public SuperTab(String title) {
         super(title);
