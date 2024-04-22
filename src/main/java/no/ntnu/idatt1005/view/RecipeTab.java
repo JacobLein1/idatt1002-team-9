@@ -64,7 +64,7 @@ public class RecipeTab extends SuperTab {
     for (Recipe recipe : recipes) {
       //Button recipeLink = new Button(recipe.getRecipeName());
       Text recipeLink = new Text(recipe.getRecipeName());
-      recipeLink.setFont(new Font("Arial", 15));
+      recipeLink.setFont(getSmallTextFont());
       recipeLink.getStyleClass().add("recipeText");
 
       recipeLinkBox.getChildren().add(recipeLink);
@@ -91,6 +91,7 @@ public class RecipeTab extends SuperTab {
     recipeTitle.setFont(this.getUnderTitleFont());
 
     Text amountOfPeople = new Text("For: " + recipe.getNumberOfPeople() + " people");
+    amountOfPeople.setFont(getSmallTextFont());
 
     //Add the list of ingredients to the single recipe box
     Text recipeIngredientsIntro = new Text("Ingredients:");
@@ -102,7 +103,9 @@ public class RecipeTab extends SuperTab {
     List<Ingredient> ingredientList = recipe.getIngredients();
 
     ingredientList.forEach(ingredient -> {
-      ingredientBox.getChildren().add(new Text(ingredient.toString()));
+      Text currentIngredientText = new Text(ingredient.toString());
+      currentIngredientText.setFont(getSmallTextFont());
+      ingredientBox.getChildren().add(currentIngredientText);
     });
 
     Text recipeInstructionsIntro = new Text("Instructions:");

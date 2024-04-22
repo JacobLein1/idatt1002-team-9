@@ -13,6 +13,7 @@ public abstract class SuperTab extends Tab {
     private final Font underTitleFont = Font.font("Arial", FontWeight.BOLD, 25);
     private final Font descriptionFont = Font.font("Arial", FontWeight.NORMAL, 18);
     private final Font boldDescriptionFont = Font.font("Arial", FontWeight.BOLD, 17);
+    private final Font smallTextFont = Font.font("Arial", FontWeight.NORMAL, 15);
 
     public SuperTab(String title) {
         super(title);
@@ -30,6 +31,9 @@ public abstract class SuperTab extends Tab {
 
     public Font getBoldDescriptionFont() {
         return boldDescriptionFont;
+    }
+    public Font getSmallTextFont() {
+        return smallTextFont;
     }
 
     public abstract VBox defaultTabCreation();

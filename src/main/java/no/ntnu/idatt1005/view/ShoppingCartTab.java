@@ -8,6 +8,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
+import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import no.ntnu.idatt1005.model.RecipeInfo.Recipe;
 import no.ntnu.idatt1005.controller.BasketController;
@@ -175,15 +176,19 @@ public class ShoppingCartTab extends SuperTab {
         finishShoppingContent.getStyleClass().add("vBox");
         finishShoppingContent.setSpacing(10);
         Text shoppingListText = new Text("Shopping List:");
+        shoppingListText.setFont(this.getUnderTitleFont());
 
         //Box for the shopping list
         VBox shoppingList = new VBox();
+        shoppingList.getChildren().add(shoppingListText);
         shoppingList.setSpacing(10);
 
         //Box for the used recipes
         VBox usedRecipes = new VBox();
         usedRecipes.setSpacing(10);
-        usedRecipes.getChildren().add(new Text("Recipes used:"));
+        Text recipeUsed = new Text("Recipes used:");
+        recipeUsed.setFont(this.getUnderTitleFont());
+        usedRecipes.getChildren().add(recipeUsed);
 
         //Iterate through the recipes in the basket to print out the amount of each recipe to the
         //user
@@ -191,19 +196,21 @@ public class ShoppingCartTab extends SuperTab {
             String recipeName = recipe.getRecipeName();
             int amountOfRecipeInBasket = basket.getAmountOfRecipeInBasket(recipe.getRecipeID());
             Text recipeText = new Text(recipeName + " x" + amountOfRecipeInBasket);
+            recipeText.setFont(getSmallTextFont());
             usedRecipes.getChildren().add(recipeText);
         });
+
 
         //Iterate through the shopping list and print out each element in the shopping list
         basket.getShoppingListFromBasket().forEach((grocery, amount) -> {
             String groceryName = grocery.getName();
             String amountAndUnit = amount + " " + grocery.getUnit().getUnit();
             Text groceryText = new Text(groceryName +  ": " + amountAndUnit);
-
+            groceryText.setFont(getSmallTextFont());
             shoppingList.getChildren().add(groceryText);
         });
 
-        shoppinCartText.getChildren().addAll(shoppingCartTitle,shoppingListText);
+        shoppinCartText.getChildren().add(shoppingCartTitle);
         HBox listBox = new HBox();
         listBox.setSpacing(30);
         listBox.getChildren().addAll(shoppingList, usedRecipes);

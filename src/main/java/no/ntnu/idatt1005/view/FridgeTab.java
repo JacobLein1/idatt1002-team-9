@@ -138,7 +138,7 @@ public class FridgeTab extends SuperTab {
     private Label createInventoryItem(Ingredient item) {
         Label result = new Label(item.getGrocery().getName()
                 + "  " + item.getAmount() + " " + item.getGrocery().getUnit().getUnit());
-        result.setFont(Font.font("Arial", 15));
+        result.setFont(getSmallTextFont());
         return result;
     }
 
@@ -152,7 +152,7 @@ public class FridgeTab extends SuperTab {
     private Label createGroceryItem(Grocery grocery) {
         Label result = new Label(grocery.getName() + ", unit: " +
                 grocery.getUnit().getUnit());
-        result.setFont(Font.font("Arial", 15));
+        result.setFont(getSmallTextFont());
 
         return result;
     }
