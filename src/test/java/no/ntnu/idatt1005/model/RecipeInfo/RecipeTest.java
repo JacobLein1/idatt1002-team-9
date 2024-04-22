@@ -1,13 +1,12 @@
 package no.ntnu.idatt1005.model.RecipeInfo;
 
 import no.ntnu.idatt1005.model.grocery.Grocery;
-import no.ntnu.idatt1005.unit.UnitsE;
+import no.ntnu.idatt1005.model.unit.UnitsE;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;

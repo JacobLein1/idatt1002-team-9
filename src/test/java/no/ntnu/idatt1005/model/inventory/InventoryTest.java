@@ -2,8 +2,7 @@ package no.ntnu.idatt1005.model.inventory;
 
 import no.ntnu.idatt1005.model.RecipeInfo.Ingredient;
 import no.ntnu.idatt1005.model.grocery.Grocery;
-import no.ntnu.idatt1005.unit.UnitsE;
-import org.junit.jupiter.api.BeforeEach;
+import no.ntnu.idatt1005.model.unit.UnitsE;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 

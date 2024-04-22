@@ -1,6 +1,6 @@
 package no.ntnu.idatt1005.model.grocery;
 
-import no.ntnu.idatt1005.unit.UnitsE;
+import no.ntnu.idatt1005.model.unit.UnitsE;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;

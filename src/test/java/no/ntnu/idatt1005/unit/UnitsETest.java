@@ -1,5 +1,6 @@
 package no.ntnu.idatt1005.unit;
 
+import no.ntnu.idatt1005.model.unit.UnitsE;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 

@@ -1,10 +1,9 @@
 package no.ntnu.idatt1005.model.RecipeInfo;
 
 import no.ntnu.idatt1005.model.grocery.Grocery;
-import no.ntnu.idatt1005.unit.UnitsE;
+import no.ntnu.idatt1005.model.unit.UnitsE;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import org.testcontainers.shaded.org.bouncycastle.its.ITSValidityPeriod;
 
 import static org.junit.jupiter.api.Assertions.*;
 
