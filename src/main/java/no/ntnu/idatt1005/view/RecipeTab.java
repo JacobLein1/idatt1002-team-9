@@ -111,6 +111,7 @@ public class RecipeTab extends SuperTab {
     Text recipeInstructionsIntro = new Text("Instructions:");
     recipeInstructionsIntro.setFont(this.getBoldDescriptionFont());
     Text recipeInstructions = new Text(recipe.getInstructions());
+    recipeInstructions.setFont(getSmallTextFont());
 
     singleRecipeBox.getChildren().addAll(recipeTitle, amountOfPeople, recipeIngredientsIntro,
         ingredientBox, recipeInstructionsIntro, recipeInstructions);
