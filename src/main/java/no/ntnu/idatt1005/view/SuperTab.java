@@ -36,5 +36,9 @@ public abstract class SuperTab extends Tab {
         return smallTextFont;
     }
 
+    /**
+     * Method for creating a default tab, each subclass must implement this method
+     * @return VBox
+     */
     public abstract VBox defaultTabCreation();
 }
