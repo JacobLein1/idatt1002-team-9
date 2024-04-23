@@ -8,10 +8,13 @@ System Development is a course that follows the Computer Engineering study progr
 
 ## Project Structure
 
-
 [Repository] https://gitlab.stud.idi.ntnu.no/sanderrb/idatt1002-team-9 
 
-## How to run the project 
+## How To Install the Project
+
+[Installation manual] https://gitlab.stud.idi.ntnu.no/sanderrb/idatt1002-team-9/-/wikis/Home/System/Installation-manual 
+
+## How To Run the Project 
 
 [User Manual] 
 
