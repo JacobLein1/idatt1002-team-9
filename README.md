@@ -1,6 +1,14 @@
 # IDATT1002 Team 9
+Team members - 
+[Mikael Stray] - https://gitlab.stud.idi.ntnu.no/sanderrb/idatt1002-team-9/-/wikis/Team/Mikael-Stray-Fr%C3%B8yshov 
 
+[Sigrid Hoel] - https://gitlab.stud.idi.ntnu.no/sanderrb/idatt1002-team-9/-/wikis/Team/Sigrid-Hoel 
 
+[Sander Berge] - https://gitlab.stud.idi.ntnu.no/sanderrb/idatt1002-team-9/-/wikis/Team/Sander-Rusten-Berge 
+
+[Therese Rondeel] - https://gitlab.stud.idi.ntnu.no/sanderrb/idatt1002-team-9/-/wikis/Team/Therese-Synn%C3%B8ve-Rondeel 
+
+[Jacob Lein] - https://gitlab.stud.idi.ntnu.no/sanderrb/idatt1002-team-9/-/wikis/Team/Jacob-Lein 
 
 ## Project Description
 
@@ -10,7 +18,7 @@ System Development is a course that follows the Computer Engineering study progr
 
 [Repository] https://gitlab.stud.idi.ntnu.no/sanderrb/idatt1002-team-9
 
-[Project Structure Description] 
+[Project Structure Description] https://gitlab.stud.idi.ntnu.no/sanderrb/idatt1002-team-9/-/wikis/Home/System/Project-structure 
 
 ## How To Install the Project
 
