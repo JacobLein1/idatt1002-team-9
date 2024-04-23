@@ -41,6 +41,7 @@ public class RecipeTab extends SuperTab {
     recipeContent.setSpacing(10);
     recipeContent.getChildren().add(recipeUnderTitle);
     HBox recipeContentBox = new HBox();
+    recipeContentBox.setSpacing(40);
 
     recipeContentBox.getChildren().addAll(recipesLinkBox(),recipeLinkResult);
     recipeContent.getChildren().add(recipeContentBox);
@@ -49,14 +50,13 @@ public class RecipeTab extends SuperTab {
     return recipeContent;
   }
 
-
   /**
    * Creates HBox with all recipes as buttons. Each button will display the recipe when clicked.
    *
    * @return HBox with all recipes
    */
-  public HBox recipesLinkBox(){
-    HBox recipeLinkBox = new HBox();
+  public VBox recipesLinkBox(){
+    VBox recipeLinkBox = new VBox();
     recipeLinkBox.setSpacing(10);
     List<Recipe> recipes = recipeController.getAllRecipes();
 

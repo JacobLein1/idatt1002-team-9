@@ -22,8 +22,8 @@ import no.ntnu.idatt1005.model.grocery.Grocery;
  * @author Sander Berge, Therese Synnøve Rondeel
  */
 public class FridgeTab extends SuperTab {
-    private InventoryController inventoryController;
-    private VBox groceryItemsBox;
+    private final InventoryController inventoryController;
+    private final VBox groceryItemsBox;
 
 
     /**
@@ -84,7 +84,7 @@ public class FridgeTab extends SuperTab {
         idDialog.setHeaderText("Add or update grocery");
         idDialog.setContentText("Please enter the name of the grocery:");
         Optional<String> idResult = idDialog.showAndWait();
-        if (!idResult.isPresent()) {
+        if (idResult.isEmpty()) {
             showAlert("Invalid amount",
                 "The input was empty", Alert.AlertType.ERROR);
             return;
