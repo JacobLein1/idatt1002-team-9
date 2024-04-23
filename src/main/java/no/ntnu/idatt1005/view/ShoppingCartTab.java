@@ -31,18 +31,14 @@ public class ShoppingCartTab extends SuperTab {
     private final BasketController basket = new BasketController();
     //Create a recipeController object to be able to get all recipes
     private final RecipeController recipeController = new RecipeController();
-    private final InventoryController inventoryController = new InventoryController();
-    //Create a map to store the recipes and the amount of each recipe
-    //private Map<String,Integer> recipeAmountMap;
+
 
 
     /**
      * Instantiates a new Shopping cart tab.
      */
     public ShoppingCartTab() {
-
         super("Shopping Cart");
-        //this.recipeAmountMap = new HashMap<>();
     }
 
     /**
@@ -75,8 +71,6 @@ public class ShoppingCartTab extends SuperTab {
         }
 
         shoppingCartTitle.setFont(this.getTitleFont());
-        //basket.getShoppingListFromBasket((HashMap<String, Integer>) recipeAmountMap);
-
 
         return shoppingCartContent;
     }
@@ -113,7 +107,6 @@ public class ShoppingCartTab extends SuperTab {
             increaseButton.setOnAction(e -> {
                 int currentAmount = Integer.parseInt(counterText.getText()) + 1;
                 counterText.setText(Integer.toString(currentAmount));
-                //recipeAmountMap.put(recipe.getRecipeID(), currentAmount);
                 basket.setAmountOfRecipeInBasket(recipe.getRecipeID(), currentAmount);
             });
 
@@ -122,7 +115,6 @@ public class ShoppingCartTab extends SuperTab {
                 if (currentAmount > 0) {
                     currentAmount--;
                     counterText.setText(Integer.toString(currentAmount));
-                    //recipeAmountMap.put(recipe.getRecipeID(), currentAmount);
                     basket.setAmountOfRecipeInBasket(recipe.getRecipeID(), currentAmount);
                 }
             });
