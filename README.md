@@ -31,7 +31,7 @@ System Development is a course that follows the Computer Engineering study progr
 
 ## How To Run the Project 
 
-[User Manual] 
+[User Manual] https://gitlab.stud.idi.ntnu.no/sanderrb/idatt1002-team-9/-/wikis/Home/System/User-manual 
 
 
 ## How To Run The Tests 
