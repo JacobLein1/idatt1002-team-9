@@ -2,20 +2,28 @@ package no.ntnu.idatt1005.view;
 
 import javafx.geometry.Insets;
 import javafx.scene.control.Button;
+import javafx.scene.control.ContentDisplay;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
+import javafx.scene.text.Font;
 import javafx.scene.text.Text;
-import no.ntnu.idatt1005.RecipeInfo.Recipe;
+import no.ntnu.idatt1005.model.RecipeInfo.Recipe;
 import no.ntnu.idatt1005.controller.BasketController;
 import no.ntnu.idatt1005.controller.InventoryController;
 import no.ntnu.idatt1005.controller.RecipeController;
 
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
-//This class is used to create and update the shopping cart tab
+/**
+ * ShoppingCartTab class represents a tab within a user interface that allows users to view recipes and add them to a shopping cart
+ * and generate a shopping list based on the recipes added to the shopping cart.
+ */
 public class ShoppingCartTab extends SuperTab {
     //Create a title for the shopping cart, need to use it for multiple methods
     private final Text shoppingCartTitle = new Text("Shopping Cart");
@@ -23,37 +31,56 @@ public class ShoppingCartTab extends SuperTab {
     private final BasketController basketController = new BasketController();
     //Create a recipeController object to be able to get all recipes
     private final RecipeController recipeController = new RecipeController();
-    private final InventoryController inventoryController = new InventoryController();
-    //Create a recipeBox to hold all the recipes
-    private final HBox recipeBox = allRecipes();
-    private Map<String,Integer> recipeAmountMap;
 
 
+
+    /**
+     * Instantiates a new Shopping cart tab.
+     */
     public ShoppingCartTab() {
-
         super("Shopping Cart");
-        this.recipeAmountMap = new HashMap<>();
     }
+
+    /**
+     * Default tab creation for shopping cart tab.
+     *
+     * @return the v box
+     */
+    @Override
     public VBox defaultTabCreation() {
 
         this.setClosable(false);
 
+        //Create VBox for the shopping cart content
         VBox shoppingCartContent = new VBox();
         shoppingCartContent.setSpacing(10);
+        shoppingCartContent.getStyleClass().add("vBox");
 
-        //Kan vurdere å legge til i superklassen
-        shoppingCartContent.setPadding(new Insets(30));
         Text shoppingCartDescription = new Text("Please click on the desired recipes to add it to your shopping cart. The required goods to buy will be calculated later.");
         shoppingCartDescription.setFont(this.getDescriptionFont());
 
-        shoppingCartContent.getChildren().addAll(shoppingCartTitle, shoppingCartDescription);
-        shoppingCartTitle.setFont(this.getTitleFont());
-        basketController.getShoppingListFromBasket((HashMap<String, Integer>) recipeAmountMap);
+        HBox allRecipesBox = allRecipes();
 
+        try {
+            Button finishShopping = createFinishShoppingButton();
+            shoppingCartContent.getChildren().addAll(shoppingCartTitle, shoppingCartDescription,
+                    allRecipesBox, finishShopping);
+        }
+        catch (FileNotFoundException e) {
+            System.out.println("File not found");
+            e.printStackTrace();
+        }
+
+        shoppingCartTitle.setFont(this.getTitleFont());
 
         return shoppingCartContent;
     }
 
+    /**
+     * Creates a HBox with all recipes and complete counter box for adding and removing recipes including action responses.
+     *
+     * @return HBox
+     */
     public HBox allRecipes(){
 
         HBox recipeBox = new HBox();
@@ -74,11 +101,14 @@ public class ShoppingCartTab extends SuperTab {
             Button decreaseButton = new Button("-");
             Button increaseButton = new Button("+");
 
+            decreaseButton.getStyleClass().add("negativeButton");
+            increaseButton.getStyleClass().add("positiveButton");
+
             //Add responses to the buttons
             increaseButton.setOnAction(e -> {
                 int currentAmount = Integer.parseInt(counterText.getText()) + 1;
                 counterText.setText(Integer.toString(currentAmount));
-                recipeAmountMap.put(recipe.getRecipeID(), currentAmount);
+                basketController.setAmountOfRecipeInBasket(recipe.getRecipeID(), currentAmount);
             });
 
             decreaseButton.setOnAction(e -> {
@@ -86,7 +116,7 @@ public class ShoppingCartTab extends SuperTab {
                 if (currentAmount > 0) {
                     currentAmount--;
                     counterText.setText(Integer.toString(currentAmount));
-                    recipeAmountMap.put(recipe.getRecipeID(), currentAmount);
+                    basketController.setAmountOfRecipeInBasket(recipe.getRecipeID(), currentAmount);
                 }
             });
 
@@ -98,72 +128,88 @@ public class ShoppingCartTab extends SuperTab {
         return recipeBox;
     }
 
-    public Button createFinishShoppingButton(){
-        Button finishShoppingButton = new Button("Finish shopping ->");
+    /**
+     * Create finish shopping button with action response.
+     *
+     * @return Button
+     */
+    public Button createFinishShoppingButton() throws FileNotFoundException {
+
+            FileInputStream inputStream = new FileInputStream("src/main/resources/shoppingCartIcon.png");
+            ImageView shoppingCartImage = new ImageView(new Image(inputStream));
+            shoppingCartImage.setFitHeight(20);
+            shoppingCartImage.setFitWidth(30);
+            Button finishShoppingButton = new Button("Finish shopping ");
+            finishShoppingButton.setGraphic(shoppingCartImage);
+            finishShoppingButton.setContentDisplay(ContentDisplay.LEFT);
+
+
         finishShoppingButton.setOnAction(e -> {
-            System.out.println(recipeAmountMap);
             StackPane finishShoppingTempPane = createFinishShoppingTempPane();
             this.setContent(finishShoppingTempPane);
         });
 
+
         return finishShoppingButton;
     }
 
-    //Lager midlertidig finishShoppingPane som skal vise hva som skal handles og hvilke retter dette kommer fra
+    /**
+     * Create temporary finish shopping temp pane.
+     *
+     * @return StackPane
+     */
     public StackPane createFinishShoppingTempPane(){
         //Create a new stackpane
         StackPane finishShoppingTempPane = new StackPane();
         //Box only for the text
         VBox shoppinCartText = new VBox();
-        //Box to hold the shopping list and used recipes
+        shoppinCartText.getStyleClass().add("vBox");
+        //Box to hold both shopping list and used recipes
         VBox finishShoppingContent = new VBox();
+
+        finishShoppingContent.getStyleClass().add("vBox");
         finishShoppingContent.setSpacing(10);
+
         Text shoppingListText = new Text("Shopping List:");
-        //Box for the shopping list
+        shoppingListText.setFont(this.getUnderTitleFont());
+
+        //Box for the calculated shopping list
         VBox shoppingList = new VBox();
+        shoppingList.getChildren().add(shoppingListText);
         shoppingList.setSpacing(10);
+
         //Box for the used recipes
         VBox usedRecipes = new VBox();
         usedRecipes.setSpacing(10);
-        usedRecipes.getChildren().add(new Text("Recipes used:"));
+        Text recipeUsed = new Text("Recipes used:");
+        recipeUsed.setFont(this.getUnderTitleFont());
+        usedRecipes.getChildren().add(recipeUsed);
 
-        //Iterate through the recipeAmountMap and add the recipes to the basket
-        //HashMap<String, String> shoppingListMap = basketController.getShoppingListFromBasket(
-        //(HashMap<String, Integer>) recipeAmountMap);
-        recipeAmountMap.forEach((recipeId, amount) -> {
-            if (amount > 0) { //If the amount is greater than 0, the name will be printed out
-                if (recipeController.getRecipeById(recipeId) != null) {
-                    String recipeName = recipeController.getRecipeById(recipeId).getRecipeName();
-                    Text recipeText = new Text(recipeName + " x" + amount);
-                    usedRecipes.getChildren().add(recipeText);
-                }
-
-                //Add the recipe to the basket, as many times as the amount
-                /*for (int i = 0; i < amount; i++) {
-                    recipeController.getAllRecipes().forEach(recipe -> {
-                        if (recipe.getRecipeName().equals(recipeName)) {
-                            basketController.addRecipeToBasket(recipe);
-                        }
-                    });
-                }*/
-            }
+        /*Iterate through the recipes in the basket to add name of
+        * recipe and the amount of each recipe to the usedRecipes VBox
+        */
+        basketController.getRecipesInBasket().forEach(recipe -> {
+            String recipeName = recipe.getRecipeName();
+            int amountOfRecipeInBasket = basketController.getAmountOfRecipeInBasket(recipe.getRecipeID());
+            Text recipeText = new Text(recipeName + " x" + amountOfRecipeInBasket);
+            recipeText.setFont(getSmallTextFont());
+            usedRecipes.getChildren().add(recipeText);
         });
-        //Returnerer arraylist av recipes
-        //Denne er litt rar...
-        HashMap<String,String> shoppingListHashMap = new HashMap<>();
 
-        /*basketController.getBasketOfRecipes().stream().forEach(recipe ->{
-            testList.put(recipe.getRecipeID(),1);
-        });*/
 
-        basketController.getShoppingListFromBasket(
-            (HashMap<String, Integer>) recipeAmountMap).forEach((groceryName, amountAndUnit) -> {
-            Text groceryText = new Text(groceryName + ": " + amountAndUnit);
+        /*Iterate through the shopping list and add the name of the grocery and
+        * the amount of each grocery to the shoppingList VBox
+         */
+        basketController.getShoppingListFromBasket().forEach((grocery, amount) -> {
+            String groceryName = grocery.getName();
+            String amountAndUnit = amount + " " + grocery.getUnit().getUnit();
+            Text groceryText = new Text(groceryName +  ": " + amountAndUnit);
+            groceryText.setFont(getSmallTextFont());
             shoppingList.getChildren().add(groceryText);
         });
 
-
-        shoppinCartText.getChildren().addAll(shoppingCartTitle,shoppingListText);
+        //Add the shopping list and used recipes to the finishShoppingContent VBox
+        shoppinCartText.getChildren().add(shoppingCartTitle);
         HBox listBox = new HBox();
         listBox.setSpacing(30);
         listBox.getChildren().addAll(shoppingList, usedRecipes);
@@ -172,13 +218,4 @@ public class ShoppingCartTab extends SuperTab {
         finishShoppingTempPane.getChildren().add(finishShoppingContent);
         return finishShoppingTempPane;
     }
-
-    public Map<String, Integer> getRecipeAmountMap() {
-        return recipeAmountMap;
-    }
-    public VBox getNeededGoods(){
-
-        return null;
-    }
-
 }

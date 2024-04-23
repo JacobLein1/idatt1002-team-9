@@ -1,4 +1,4 @@
-package no.ntnu.idatt1005.dao;
+package no.ntnu.idatt1005.model.dao;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
@@ -9,7 +9,7 @@ import java.nio.file.Paths;
 import java.sql.*;
 
 /** Class for getting a connection to the database for the application. This class was originally
- * made by lecturer Surya Kathayat and modified to fit this applications' specific requirements,
+ * made by lecturer Surya Kathayat and modified to fit these applications' specific requirements,
  * such as filepath.
  *
  * @author Therese Synnøve Rondeel, Sigrid Hoel
