@@ -28,7 +28,7 @@ public class ShoppingCartTab extends SuperTab {
     //Create a title for the shopping cart, need to use it for multiple methods
     private final Text shoppingCartTitle = new Text("Shopping Cart");
     //Create a basketController object to be able to add recipes to the basket
-    private final BasketController basket = new BasketController();
+    private final BasketController basketController = new BasketController();
     //Create a recipeController object to be able to get all recipes
     private final RecipeController recipeController = new RecipeController();
 
@@ -42,7 +42,7 @@ public class ShoppingCartTab extends SuperTab {
     }
 
     /**
-     * Default tab creation v box.
+     * Default tab creation for shopping cart tab.
      *
      * @return the v box
      */
@@ -51,6 +51,7 @@ public class ShoppingCartTab extends SuperTab {
 
         this.setClosable(false);
 
+        //Create VBox for the shopping cart content
         VBox shoppingCartContent = new VBox();
         shoppingCartContent.setSpacing(10);
         shoppingCartContent.getStyleClass().add("vBox");
@@ -76,7 +77,7 @@ public class ShoppingCartTab extends SuperTab {
     }
 
     /**
-     * All recipes, amount of each recipe and buttons for increasing and decreasing the amount
+     * Creates a HBox with all recipes and complete counter box for adding and removing recipes including action responses.
      *
      * @return HBox
      */
@@ -107,7 +108,7 @@ public class ShoppingCartTab extends SuperTab {
             increaseButton.setOnAction(e -> {
                 int currentAmount = Integer.parseInt(counterText.getText()) + 1;
                 counterText.setText(Integer.toString(currentAmount));
-                basket.setAmountOfRecipeInBasket(recipe.getRecipeID(), currentAmount);
+                basketController.setAmountOfRecipeInBasket(recipe.getRecipeID(), currentAmount);
             });
 
             decreaseButton.setOnAction(e -> {
@@ -115,7 +116,7 @@ public class ShoppingCartTab extends SuperTab {
                 if (currentAmount > 0) {
                     currentAmount--;
                     counterText.setText(Integer.toString(currentAmount));
-                    basket.setAmountOfRecipeInBasket(recipe.getRecipeID(), currentAmount);
+                    basketController.setAmountOfRecipeInBasket(recipe.getRecipeID(), currentAmount);
                 }
             });
 
@@ -128,7 +129,7 @@ public class ShoppingCartTab extends SuperTab {
     }
 
     /**
-     * Create finish shopping button.
+     * Create finish shopping button with action response.
      *
      * @return Button
      */
@@ -163,14 +164,16 @@ public class ShoppingCartTab extends SuperTab {
         //Box only for the text
         VBox shoppinCartText = new VBox();
         shoppinCartText.getStyleClass().add("vBox");
-        //Box to hold the shopping list and used recipes
+        //Box to hold both shopping list and used recipes
         VBox finishShoppingContent = new VBox();
+
         finishShoppingContent.getStyleClass().add("vBox");
         finishShoppingContent.setSpacing(10);
+
         Text shoppingListText = new Text("Shopping List:");
         shoppingListText.setFont(this.getUnderTitleFont());
 
-        //Box for the shopping list
+        //Box for the calculated shopping list
         VBox shoppingList = new VBox();
         shoppingList.getChildren().add(shoppingListText);
         shoppingList.setSpacing(10);
@@ -182,19 +185,22 @@ public class ShoppingCartTab extends SuperTab {
         recipeUsed.setFont(this.getUnderTitleFont());
         usedRecipes.getChildren().add(recipeUsed);
 
-        //Iterate through the recipes in the basket to print out the amount of each recipe to the
-        //user
-        basket.getRecipesInBasket().forEach(recipe -> {
+        /*Iterate through the recipes in the basket to add name of
+        * recipe and the amount of each recipe to the usedRecipes VBox
+        */
+        basketController.getRecipesInBasket().forEach(recipe -> {
             String recipeName = recipe.getRecipeName();
-            int amountOfRecipeInBasket = basket.getAmountOfRecipeInBasket(recipe.getRecipeID());
+            int amountOfRecipeInBasket = basketController.getAmountOfRecipeInBasket(recipe.getRecipeID());
             Text recipeText = new Text(recipeName + " x" + amountOfRecipeInBasket);
             recipeText.setFont(getSmallTextFont());
             usedRecipes.getChildren().add(recipeText);
         });
 
 
-        //Iterate through the shopping list and print out each element in the shopping list
-        basket.getShoppingListFromBasket().forEach((grocery, amount) -> {
+        /*Iterate through the shopping list and add the name of the grocery and
+        * the amount of each grocery to the shoppingList VBox
+         */
+        basketController.getShoppingListFromBasket().forEach((grocery, amount) -> {
             String groceryName = grocery.getName();
             String amountAndUnit = amount + " " + grocery.getUnit().getUnit();
             Text groceryText = new Text(groceryName +  ": " + amountAndUnit);
@@ -202,6 +208,7 @@ public class ShoppingCartTab extends SuperTab {
             shoppingList.getChildren().add(groceryText);
         });
 
+        //Add the shopping list and used recipes to the finishShoppingContent VBox
         shoppinCartText.getChildren().add(shoppingCartTitle);
         HBox listBox = new HBox();
         listBox.setSpacing(30);

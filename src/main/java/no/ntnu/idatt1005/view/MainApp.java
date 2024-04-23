@@ -26,6 +26,11 @@ public class MainApp extends Application {
         launch(args);
     }
 
+    /**
+     * Method for starting the application, setting up the primary stage and creating ground structure of the GUI. (the tabs for the application)
+     * @param primaryStage the primary stage
+     * @throws FileNotFoundException if the file is not found in the specified path
+     */
     @Override
     public void start(Stage primaryStage) throws FileNotFoundException {
 
@@ -68,7 +73,6 @@ public class MainApp extends Application {
             VBox fridgeContent = new VBox();
             fridgeContent.getChildren().addAll(tabFridge.defaultTabCreation());
             tabFridge.setContent(fridgeContent);
-
 
             tabRecipe.setContent(tabRecipe.defaultTabCreation());
 

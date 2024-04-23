@@ -51,8 +51,7 @@ public class RecipeTab extends SuperTab {
   }
 
   /**
-   * Creates HBox with all recipes as buttons. Each button will display the recipe when clicked.
-   *
+   * Creates HBox with all recipes as buttons. Each button has action response and will display the recipe when clicked.
    * @return HBox with all recipes
    */
   public VBox recipesLinkBox(){
@@ -81,7 +80,7 @@ public class RecipeTab extends SuperTab {
   /**
    * Creates a VBox with a single recipe visualized in UI components. Including the recipe name, ingredients, and instructions.
    *
-   * @param recipe the recipe
+   * @param recipe the recipe to be visualized
    * @return VBox with a single recipe visualized in UI components
    */
   public VBox singleRecipeBox(Recipe recipe){
