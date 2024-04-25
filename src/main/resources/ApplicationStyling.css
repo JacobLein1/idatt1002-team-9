@@ -1,0 +1,42 @@
+.negativeButton{
+    -fx-background-color: #ff6363;
+    -fx-font-weight: bold;
+    -fx-font-size: 18px;
+}
+.negativeButton:hover {
+    -fx-background-color: #cc3636;
+}
+
+.positiveButton {
+    -fx-background-color: #a9ff63;
+    -fx-font-weight: bold;
+    -fx-font-size: 18px;
+}
+
+.positiveButton:hover {
+    -fx-background-color: #6ecb31;
+}
+
+.recipeText {
+    -fx-underline: true;
+    -fx-fill: #694b40;
+}
+
+.recipeText:hover{
+    -fx-fill: #8D6E63;
+}
+
+.tab:selected {
+    -fx-padding: 5px;
+    -fx-focus-color: transparent;
+    -fx-faint-focus-color: transparent;
+}
+
+.tab {
+    -fx-background-color: #AED581;
+    -fx-font-size: 18px;
+}
+
+.vBox {
+    -fx-padding: 10px;
+}
