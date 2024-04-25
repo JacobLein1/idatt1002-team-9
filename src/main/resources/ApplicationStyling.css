@@ -1,7 +1,7 @@
 .negativeButton{
     -fx-background-color: #ff6363;
     -fx-font-weight: bold;
-    -fx-font-size: 13px;
+    -fx-font-size: 18px;
 }
 .negativeButton:hover {
     -fx-background-color: #cc3636;
@@ -10,7 +10,7 @@
 .positiveButton {
     -fx-background-color: #a9ff63;
     -fx-font-weight: bold;
-    -fx-font-size: 13px;
+    -fx-font-size: 18px;
 }
 
 .positiveButton:hover {
@@ -34,7 +34,7 @@
 
 .tab {
     -fx-background-color: #AED581;
-    -fx-font-size: 15px;
+    -fx-font-size: 18px;
 }
 
 .vBox {
