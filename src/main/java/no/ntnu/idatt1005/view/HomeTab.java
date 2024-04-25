@@ -1,11 +1,14 @@
 package no.ntnu.idatt1005.view;
 
 import javafx.geometry.Insets;
+import javafx.geometry.Pos;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
+import javafx.scene.text.TextAlignment;
 
 
 public class HomeTab extends SuperTab {
@@ -27,6 +30,7 @@ public class HomeTab extends SuperTab {
         homeUnderTitle.setFont(this.getUnderTitleFont());
 
         Text homeDescription = new Text("The cookbook is a digital cookbook that allows you to view recipes and add them to your shopping cart. You can also manage your fridge and add groceries to it. Enjoy your stay!");
+        homeDescription.setWrappingWidth(1250);
         homeDescription.setFont(this.getDescriptionFont());
 
         HBox recipeTab = new HBox();
