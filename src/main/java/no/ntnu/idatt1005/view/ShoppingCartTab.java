@@ -98,6 +98,7 @@ public class ShoppingCartTab extends SuperTab {
             recipeName.setFont(this.getUnderTitleFont());
 
             Text counterText = new Text("0");
+            counterText.setFont(getDescriptionFont());
             Button decreaseButton = new Button("-");
             Button increaseButton = new Button("+");
 
